@@ -1,0 +1,88 @@
+# Generators
+
+A **generator** injects a *dispatchable* power at a bus — active and reactive power
+lie within bounds rather than being fixed (a fixed injection is modelled as a negative
+load). It shares the load's bilinear power form.
+Symbols are defined in [Notation](notation.md).
+
+## 1. Data model
+
+A generator is an entry of the top-level `generator` object, keyed by its string ID $g$.
+
+| Field | Type | Unit | Req. | Description |
+|-------|------|:----:|:----:|-------------|
+| `bus` | string | – | ✔ | Host bus ID $i$ |
+| `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{g}}$ |
+| `configuration` | string | – | ✔ | `WYE` (only supported configuration) |
+| `p_min`, `p_max` | number[] | W | | Per-phase active-power bounds |
+| `q_min`, `q_max` | number[] | var | | Per-phase reactive-power bounds |
+| `s_max` | number[] | VA | | Per-phase apparent-power rating |
+| `i_max` | number[] | A | | Per-conductor current-magnitude limit (incl. optional neutral entry) |
+| `cost` | number[] | \$/kWh | | Per-phase linear generation cost |
+
+Only the `WYE` configuration is supported for generators. Delta and single-phase
+generation should be modelled another way — e.g. as separate wye or single-phase
+injections via loads (negative loads).
+
+## 2. Input symbols
+
+| Field | Symbol | Notes |
+|-------|:------:|-------|
+| `p_min`, `p_max` | $\textcolor{red}{P^{\min}_{g}},\ \textcolor{red}{P^{\max}_{g}}$ | per phase |
+| `q_min`, `q_max` | $\textcolor{red}{Q^{\min}_{g}},\ \textcolor{red}{Q^{\max}_{g}}$ | per phase |
+| `s_max` | $\textcolor{red}{\mathbf{S}^{\max}_{g}}$ | per phase |
+| `i_max` | $\textcolor{red}{\mathbf{I}^{\max}_{g}}$ | per conductor (last entry may bound the neutral return) |
+| `cost` | $\textcolor{red}{\mathbf{c}_{g}}$ | per phase |
+
+## 3. Variables
+
+Each phase conductor $k$ injects a complex current $\textcolor{blue}{I_{g,k}}$ (the
+current sent *to* the bus, opposite sign to a load), stacked into
+$\textcolor{blue}{\mathbf{I}_{g}}$. The neutral return is implicit in KCL.
+
+## 4. Equality constraints
+
+With $\Delta\textcolor{blue}{U_{g,k}}$ the sub-generator voltage (phase-to-neutral for
+the `WYE` configuration), the injected complex power is
+
+```math
+\textcolor{blue}{S_{g,k}} = \Delta\textcolor{blue}{U_{g,k}}\,(\textcolor{blue}{I_{g,k}})^{*}
+= P_{g,k} + \textcolor{brown}{j}\,Q_{g,k}.
+```
+
+Current conservation over the generator's terminals gives its KCL contribution
+(injection positive at the phase terminal, return at the neutral).
+
+## 5. Inequality constraints
+
+### Cartesian variable bounds
+
+When `i_max` is present, a **box** on the current components
+$|\mathfrak{R}(\textcolor{blue}{I_{g,k}})|,\,|\mathfrak{I}(\textcolor{blue}{I_{g,k}})|\le\textcolor{red}{I^{\max}_{g,k}}$
+bounds the search; implied by the current circle below.
+
+### Engineering bounds
+
+**Active/reactive power box** (the dispatch range):
+
+```math
+\textcolor{red}{P^{\min}_{g,k}} \le P_{g,k} \le \textcolor{red}{P^{\max}_{g,k}},
+\qquad
+\textcolor{red}{Q^{\min}_{g,k}} \le Q_{g,k} \le \textcolor{red}{Q^{\max}_{g,k}}.
+```
+
+**Apparent-power circle** (optional):
+
+```math
+P_{g,k}^2 + Q_{g,k}^2 \le (\textcolor{red}{S^{\max}_{g,k}})^2.
+```
+
+**Current-magnitude circle** (optional), per conductor:
+
+```math
+\textcolor{blue}{I_{g,k}}(\textcolor{blue}{I_{g,k}})^{*} \le (\textcolor{red}{I^{\max}_{g,k}})^2.
+```
+
+For a star-connected generator whose `i_max` carries a trailing neutral entry, the
+neutral return current $-\mathbf{1}^{\text{T}}\textcolor{blue}{\mathbf{I}_{g}}[\mathcal{P}]$
+is additionally bounded by that entry.

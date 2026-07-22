@@ -1,0 +1,14 @@
+# Documenter build output
+docs/build/
+docs/site/
+
+# LaTeX/PDF build intermediates
+docs/latex_src/
+docs/latex_build/
+
+# Julia
+Manifest.toml
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+.DS_Store

@@ -1,0 +1,8 @@
+[deps]
+Cairo = "159f3aea-2a34-519c-b102-8c37f9878175"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Rsvg = "c4c386cf-5103-5370-be45-f3a111cca3b8"
+tectonic_jll = "d7dd28d6-a5e6-559c-9131-7eb760cdacc5"
+
+[compat]
+Documenter = "1"

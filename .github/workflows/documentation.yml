@@ -1,0 +1,49 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+    tags: ['v*']   # spec releases only; schema-v* tags do not deploy docs
+  pull_request:
+  workflow_dispatch:
+
+# Allow one concurrent deployment per ref; cancel superseded runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & deploy docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # push to the gh-pages branch
+      pull-requests: write # post/refresh PR preview links
+      statuses: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # PDF build (Documenter LaTeX backend via tectonic) needs the DejaVu
+      # fonts the Documenter template selects, plus Pygments for `minted`
+      # code highlighting. tectonic itself ships as a Julia artifact.
+      - name: Install PDF build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-dejavu fonts-dejavu-extra python3-pygments
+
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+
+      - uses: julia-actions/cache@v2
+
+      - name: Install documentation dependencies
+        run: julia --project=docs -e 'using Pkg; Pkg.instantiate()'
+
+      - name: Build and deploy
+        run: julia --project=docs docs/make.jl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+          JULIA_DEBUG: Documenter

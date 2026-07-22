@@ -1,0 +1,56 @@
+# Distribution System Model & Data Specification
+
+Welcome to the specification of a four-wire distribution-system optimal power
+flow (OPF) model and its accompanying data model. This site is the canonical,
+version-controlled home of the specification: every page is plain Markdown that
+evolves through pull requests rather than by editing a PDF.
+
+It is the version-controlled successor to the LaTeX/PDF *Mathematical Model and
+Data Model* document, developed by the IEEE PES Task Force on Benchmarking
+Multiconductor OPF (BMOPF) for Distribution Systems.
+
+!!! tip "Download as PDF"
+    The complete specification is also available as a single, print-ready
+    document: [**DistributionSystemModelSpecification.pdf**](DistributionSystemModelSpecification.pdf).
+
+## New here? Start with the [Overview](spec/index.md)
+
+Then work through the foundations before diving into individual components.
+
+## Foundations
+
+The shared model that every component page builds on.
+
+- [Overview](spec/index.md) — scope and structure of the specification
+- [Background & scope](spec/scope.md) — what is (and isn't) modelled, and why
+- [Notation](spec/notation.md) — symbols and mathematical conventions
+- [Data input formatting](spec/data-format.md) — how a case is described
+- [Grounding](spec/grounding.md) — neutral, earth, and return paths
+- [Worked example](spec/example.md) — a small four-bus network end to end
+- [Document metadata](spec/metadata.md) — provenance and versioning fields
+
+## Components
+
+Per-element data models and equations.
+
+- [Buses](spec/bus.md) · [Lines](spec/line.md) · [Switches](spec/switch.md)
+- [Loads](spec/load.md) · [Generators](spec/generator.md) · [Shunts](spec/shunt.md) · [Capacitors](spec/capacitor.md)
+- [Voltage sources](spec/source.md) · [Transformers](spec/transformer.md)
+
+## Optimisation
+
+- [Objective & feasibility](spec/objective.md)
+
+## Reference
+
+- [Modelling notes & FAQ](spec/faq.md)
+- [Nomenclature](spec/nomenclature.md)
+- [References & further reading](spec/references.md)
+- [Glossary](glossary.md)
+
+## Contributing
+
+Corrections and refinements are welcome — see the [Contributing](contributing.md)
+guide. The "Edit on GitHub" link on any page takes you to its source file, and
+every push to `main` rebuilds and publishes this site automatically. Notable
+changes are recorded in the [Changelog](changelog.md).

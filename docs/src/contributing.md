@@ -193,6 +193,9 @@ alternatives, and to keep it faithful to real distribution-system physics.
 4. Open a pull request. CI builds the docs (and a preview) on every PR.
 5. Once merged to `main`, the site rebuilds and redeploys automatically.
 
+A [pull request template](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+is available to help you structure your PR.
+
 ## Versioning and releases
 
 Changes are staged on the `main` branch, and the documentation built from `main`
@@ -230,16 +233,16 @@ The following aspects are necessary.
 - A commitment to state interests to avoid potential for conflict of interest
   (i.e., the maintainer must state their employer or any relevant interests)
 
-Plus, a minimum of three of the following,
+Plus, a minimum of three of the following:
 
 - contribution of network models that become accepted as benchmark test cases
 - contributing to identifying and addressing specification issues (opened as well-scoped issues)
 - completion of PRs to improve the specification, schema, or corresponding documentation
 - review of others' PRs against the present specification, schema, or documentation
 - a track record of development in the field of multiconductor distribution network modelling and analysis (publications, prior standards work, industry deployment)
-- have developed open-source tools demonstrating and building on BMOPF outputs
-(solvers, parsers, visualization, validation etc)
-- Presented BMOPF-related work at a conference or workshop
+- development of open-source tools demonstrating and building on BMOPF outputs
+  (solvers, parsers, visualization, validation, etc.)
+- presentation of BMOPF-related work at a conference or workshop
 
 ### Maintainer application process
 
@@ -247,19 +250,19 @@ To nominate yourself to become a maintainer, please contact Task Force
 leadership, who will **acknowledge your response within one week**.
 
 - If existing maintainers are unanimous in agreeing the necessary criteria
-are met without reservation, you will be appointed within **one calendar month**
-from your initial contact.
+  are met without reservation, you will be appointed within **one calendar month**
+  from your initial contact.
 
 - If existing maintainers have reservations, the Task Force leadership will
-provide these reservations to the candidate maintainer within the same
-**one calendar month** of the initial contact. An opportunity to respond to
-address those gaps (if appropriate, through an online meeting with existing
-maintainers) will be given.
+  provide these reservations to the candidate maintainer within the same
+  **one calendar month** of the initial contact. An opportunity to respond to
+  address those gaps (if appropriate, through an online meeting with existing
+  maintainers) will be given.
 
 - If existing maintainers consider the candidate maintainer's credentials
-do not meet the requirements to an appropriate standard, but that the candidate
-still wishes to become a maintainer, a vote will be held at the subsequent Task
-Force meeting where the candidate can put forward their position. To be
-appointed, the maintainer should have a 2-1 in-favor vote share; with email
-voting permitted by members who are unable to attend at the corresponding time
-(based on a transcript of the candidate's case).
+  do not meet the requirements to an appropriate standard, but that the candidate
+  still wishes to become a maintainer, a vote will be held at the subsequent Task
+  Force meeting where the candidate can put forward their position. To be
+  appointed, the maintainer should have a 2-1 in-favor vote share; with email
+  voting permitted by members who are unable to attend at the corresponding time
+  (based on a transcript of the candidate's case).

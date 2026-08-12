@@ -1,6 +1,7 @@
 # Contributing
 
-This specification evolves through pull requests rather than by editing a PDF.
+The specification is implemented in markdown, and is designed to evolve naturally
+through pull requests.
 Corrections, clarifications, and new content are all welcome.
 
 !!! note "Licensing of contributions"
@@ -12,15 +13,20 @@ Corrections, clarifications, and new content are all welcome.
 ## Governance
 
 The specification is maintained by **project maintainers** — members of the
-IEEE PES BMOPF Task Force who review pull requests and hold merge rights. Anyone
-may open issues, join the discussion, and propose changes: the goal is for the
+IEEE PES BMOPF Task Force who review pull requests and hold merge rights.
+
+Anyone may open issues, join the discussion, and propose changes: the goal is for the
 community to drive the specification's direction, with maintainers reviewing,
 ratifying, and merging.
 
 Maintainers aim to give an **initial response within about 48 hours** — a review
-comment, a question, or a merge, not necessarily a final decision. Larger
-normative changes usually take longer to reach consensus (see the review tiers
-below).
+comment, a question, or a merge, not necessarily a final decision.
+
+Larger normative changes usually take longer to reach consensus (see the review
+tiers below).
+
+Anyone can apply to become a maintainer; requirements for the role are [outlined
+below](#Become-a-Maintainer).
 
 ## Editing a page
 
@@ -49,25 +55,28 @@ for the two system tools that requires).
 
 Not all contributions carry the same weight. This specification is developed by
 the IEEE PES Task Force on Benchmarking Multiconductor OPF (BMOPF) for
-Distribution Systems, and parts of it are **normative**: the data model field
-names, the mathematical constraints, and the accompanying **JSON Schema** define
-a contract that datasets and tools depend on. The review a pull request receives
-scales with how much of that contract it touches.
+Distribution Systems, and parts of it are **normative**:
+- the data model field names,
+- the mathematical constraints,
+- and the accompanying **JSON Schema**;
+
+together these define a contract that datasets and tools depend on.
+
+The review a pull request receives scales with how much of that contract it
+affects.
 
 ### Editorial / minor changes — fast track
 
 Typo fixes, wording and grammar, formatting, broken links, clearer phrasing that
 preserves meaning, and new illustrative examples or FAQ entries that do not
-change the model. These can be reviewed and merged quickly, typically by a single
-maintainer. Open a pull request directly — no prior discussion is needed.
+change the model. These can be reviewed and merged quickly. Open a pull request
+directly — no prior discussion is needed.
 
 ### Explanatory / non-normative changes — standard review
 
 New tutorials, expanded derivations, restructured sections, added figures, and
 notation clarifications that **do not alter any field name, equation, bound, or
-schema constraint**. These get a normal maintainer review. It is generally fine
-for the Documenter site to carry *more* explanatory detail than the baseline
-document, provided the normative content stays consistent.
+schema constraint**.
 
 ### Normative / major changes — Task Force review
 
@@ -114,17 +123,17 @@ alternatives, and to keep it faithful to real distribution-system physics.
   (zero-impedance) transformer, an ungrounded or floating neutral, and
   single-phase / triplex connections must all have a defined meaning.
 
-- **No hard-coded grounding assumptions.** Grounding is always explicit and
+- **Grounding assumptions made explicit.** Grounding is always explicit and
   general — perfect, through an impedance, or ungrounded — and never assumed.
-  Neutral and earth conductors stay explicit; no scheme silently Kron-reduces
-  them away.
+  Neutral and earth conductors stay explicit without Kron reduction.
 
-- **Respect object semantics.** Each object means one thing. A shunt can be
-  numerically parameterised to behave like a capacitor, but a capacitor bank must
-  be modelled as a `capacitor`. Do not overload one object to stand in for
-  another; add or use the semantically correct element instead.
+- **Respect object semantics.** It is preferred for each object to mean one
+  thing. A shunt can be numerically parameterised to behave like a capacitor,
+  but a capacitor bank should be modelled as a `capacitor`. Overload of one
+  object as a stand in for another should be avoided and a semantically correct
+  element used instead.
 
-- **One canonical model, not a model zoo.** The specification defines a single
+- **One canonical model per element.** The specification defines a single
   reference formulation per element, not a menu of competing modelling
   approaches. Where several mathematically equivalent representations exist,
   choose one (a continuously differentiable form is preferred) and document it;
@@ -164,6 +173,14 @@ alternatives, and to keep it faithful to real distribution-system physics.
   terms to the [Glossary](glossary.md).
 - Keep pages self-contained — this repository is the canonical home of the
   specification and should not depend on external manuals.
+- [References](spec/references.md) should be added carefully, with a high
+  threshold for direct inclusion within the specification; references enable due
+  credit to foundational works and the sharing of community-accepted resources.
+  More general resources and tutorials can be shared elsewhere in the BMOPF
+  ecosystem.
+- A factual, dispassionate style is preferred; the goal is clarity and so
+  subjective language should be avoided. Where an opinion or preference is
+  given, explicitly flag this as being the case.
 - Figures live in `docs/src/spec/assets/` as SVG; they are rasterised
   automatically for the PDF build.
 
@@ -200,3 +217,49 @@ and pushing one publishes that version of the site. JSON Schema releases use a
 distinct `schema-vMAJOR.MINOR.PATCH` prefix (e.g. `schema-v1.0.0`), so a schema
 bump neither collides with nor masquerades as a specification documentation
 version. Only `v*` tags trigger a documentation deployment.
+
+## Become a Maintainer
+
+The Task Force accepts nominations to become a maintainer.
+
+The following aspects are necessary.
+
+- Attended a minimum of 2 of the past 4 task force meetings in the relevant time
+  zone (either in-person or online)
+- A commitment to a minimum of 12 months supporting the task force activities
+- A commitment to state interests to avoid potential for conflict of interest
+  (i.e., the maintainer must state their employer or any relevant interests)
+
+Plus, a minimum of three of the following,
+
+- contribution of network models that become accepted as benchmark test cases
+- contributing to identifying and addressing specification issues (opened as well-scoped issues)
+- completion of PRs to improve the specification, schema, or corresponding documentation
+- review of others' PRs against the present specification, schema, or documentation
+- a track record of development in the field of multiconductor distribution network modelling and analysis (publications, prior standards work, industry deployment)
+- have developed open-source tools demonstrating and building on BMOPF outputs
+(solvers, parsers, visualization, validation etc)
+- Presented BMOPF-related work at a conference or workshop
+
+### Maintainer application process
+
+To nominate yourself to become a maintainer, please contact Task Force
+leadership, who will **acknowledge your response within one week**.
+
+- If existing maintainers are unanimous in agreeing the necessary criteria
+are met without reservation, you will be appointed within **one calendar month**
+from your initial contact.
+
+- If existing maintainers have reservations, the Task Force leadership will
+provide these reservations to the candidate maintainer within the same
+**one calendar month** of the initial contact. An opportunity to respond to
+address those gaps (if appropriate, through an online meeting with existing
+maintainers) will be given.
+
+- If existing maintainers consider the candidate maintainer's credentials
+do not meet the requirements to an appropriate standard, but that the candidate
+still wishes to become a maintainer, a vote will be held at the subsequent Task
+Force meeting where the candidate can put forward their position. To be
+appointed, the maintainer should have a 2-1 in-favor vote share; with email
+voting permitted by members who are unable to attend at the corresponding time
+(based on a transcript of the candidate's case).

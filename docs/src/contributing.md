@@ -12,6 +12,11 @@ Corrections, clarifications, and new content are all welcome.
 
 ## Governance
 
+!!! note "Governance"
+    Governance has been designed to be lightweight to encourage contributions
+    and community-building. It is expected governance arrangements will evolve
+    in future as community needs change.
+
 The specification is maintained by **project maintainers** — members of the
 IEEE PES BMOPF Task Force who review pull requests and hold merge rights.
 
@@ -133,8 +138,8 @@ alternatives, and to keep it faithful to real distribution-system physics.
   object as a stand in for another should be avoided and a semantically correct
   element used instead.
 
-- **One canonical model per element.** The specification defines a single
-  reference formulation per element, not a menu of competing modelling
+- **One canonical model per component.** The specification defines a single
+  reference formulation per component, not a menu of competing modelling
   approaches. Where several mathematically equivalent representations exist,
   choose one (a continuously differentiable form is preferred) and document it;
   alternatives may be *mentioned* but are not normative.
@@ -161,7 +166,7 @@ alternatives, and to keep it faithful to real distribution-system physics.
   numbers, lists buses and terminals explicitly, and identifies elements by
   unique string IDs. New fields should follow these conventions.
 
-- **Compose from primitives.** Prefer building richer elements from documented
+- **Compose from primitives.** Prefer building richer components from documented
   primitives (for example, transformers as idealised winding pairs plus series
   impedance) over introducing bespoke, monolithic models.
 
@@ -179,8 +184,12 @@ alternatives, and to keep it faithful to real distribution-system physics.
   More general resources and tutorials can be shared elsewhere in the BMOPF
   ecosystem.
 - A factual, dispassionate style is preferred; the goal is clarity and so
-  subjective language should be avoided. Where an opinion or preference is
-  given, explicitly flag this as being the case.
+  subjective language should be avoided. For strong opinions or known insights:
+  these can be written but explicitly flagged as suggestions. (E.g., rather than
+  "voltage bounds should be provided; they improve the performance of the
+  optimization problem"; instead, "Suggestion: Include engineering voltage
+  bounds in the data model as it may improve the performance of the underlying
+  optimization problem.")
 - Figures live in `docs/src/spec/assets/` as SVG; they are rasterised
   automatically for the PDF build.
 
@@ -239,7 +248,8 @@ Plus, a minimum of three of the following:
 - contributing to identifying and addressing specification issues (opened as well-scoped issues)
 - completion of PRs to improve the specification, schema, or corresponding documentation
 - review of others' PRs against the present specification, schema, or documentation
-- a track record of development in the field of multiconductor distribution network modelling and analysis (publications, prior standards work, industry deployment)
+- a track record of development in the field of multiconductor distribution network
+  modelling and analysis (publications, prior standards work, industry deployment)
 - development of open-source tools demonstrating and building on BMOPF outputs
   (solvers, parsers, visualization, validation, etc.)
 - presentation of BMOPF-related work at a conference or workshop
@@ -266,3 +276,5 @@ leadership, who will **acknowledge your response within one week**.
   appointed, the maintainer should have a 2-1 in-favor vote share; with email
   voting permitted by members who are unable to attend at the corresponding time
   (based on a transcript of the candidate's case).
+
+The active list of maintainers is available [here](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/MAINTAINERS.md).

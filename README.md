@@ -21,16 +21,36 @@ Multiconductor OPF for Distribution Systems and published as a
 The specification source lives as plain Markdown under [`docs/src/spec/`](docs/src/spec)
 and evolves through pull requests rather than by editing a PDF.
 
-## IEEE PES Task Force
+## IEEE PES Task Force Scope and Maintainers
 
 This specification is developed by the IEEE PES Task Force on **Benchmarking
 Multiconductor OPF (BMOPF) for Distribution Systems**.
 
-| Role | Name | Affiliation |
-|------|------|-------------|
-| Chair | Matthew Deakin | Newcastle University, UK |
-| Co-chair | Frederik Geth | University of Queensland, Australia |
-| Secretary | Amritanshu Pandey | University of Vermont, USA |
+The Task Force maintains two outputs:
+- The **BMOPF data specification**. This defines the basic specification which must be
+  met for a given dataset to be considered a network case.
+- The **BMOPF network cases**. These are data instances which conform to the
+  BMOPF data specification. Network cases are presently work-in-progress.
+
+This repo is the home of the data specification. The overall data specification
+includes:
+- The **[data schema](https://github.com/distribution-system-opt/dsopt-schema)**.
+  The schema defines the basic structure of a JSON instance, including field
+  names and some basic data contracts. All Task Force data instances adhere to
+  the schema.
+- **Data semantics and math model**. This data dictionary defines the semantics
+  (meaning) of all fields within the data schema and (where applicable) the
+  corresponding math, as well as how these are combined to define a complete
+  OPF problem. This section consists of foundations, components and optimisation
+  aspects.
+- **Further information**, covering aspects including (amongst others)
+  governance and contribution guidelines, an FAQ, and foundational references.
+
+The _data semantics and math model_ and _further information_ are available from
+the [corresponding documenter site](https://distribution-system-opt.github.io/math-and-data-model-specifications/)
+for this repo.
+
+The list of active maintainers of the data specification is available [here](MAINTAINERS.md).
 
 ## Motivation
 
@@ -41,16 +61,17 @@ open benchmark format. Transmission-oriented libraries such as
 carry over to unbalanced distribution networks, while the established IEEE
 distribution test feeders are not distributed under open licences.
 
-This Task Force fills that gap by defining a shared **mathematical model** and
-**data model** for four-wire distribution-system OPF, so that benchmark problems
-can be exchanged, compared, and reproduced across tools. This repository is the
-canonical, version-controlled home of that specification and its JSON Schema — the
-successor to the earlier LaTeX/PDF *Mathematical Model and Data Model* document.
+This Task Force fills that gap by defining a shared **data specification**
+for four-wire distribution-system OPF, including an explicit **mathematical
+model** and corresponding **data schema** so that benchmark problems can be
+exchanged, compared, and reproduced across tools. This repository is the
+canonical, version-controlled home of that data specification.
 
-The models deliberately target the features universally required for distribution
-OPF — 1-to-4-wire lines with explicit neutral and earth (no Kron reduction), meshed
-and electrically parallel branches, and perfect or impedance grounding — expressed
-in SI units and serialised as JSON against an accompanying schema.
+The data specification deliberately targets the features universally required for
+distribution OPF - 1-to-4-wire lines with explicit neutral and earth (no Kron
+reduction), meshed and electrically parallel branches, and perfect or impedance
+grounding — expressed in SI units and serialised as JSON against an accompanying
+schema.
 
 ## Contributing
 
@@ -69,14 +90,14 @@ definitions, and the accompanying JSON Schema — is licensed under
 **By submitting a pull request, you agree to license your contribution under the
 same CC BY 4.0 terms.**
 
-(Benchmark **datasets** built against this specification are a separate concern and
-are licensed independently — each inherits the licence of its upstream source,
-recorded in its `meta.license` field.)
+(**Network cases** built against this specification are a separate
+concern and are licensed independently — each inherits the licence of its
+upstream source, recorded in its `meta.license` field.)
 
 ## Citation
 
 The specification is versioned and not static; please cite the specific version
-(git tag) you used. Benchmark cases carry original-source attribution in their
+(git tag) you used. Network cases carry original-source attribution in their
 metadata — cite those sources when using specific networks.
 
 ## Building locally

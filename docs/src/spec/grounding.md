@@ -33,7 +33,7 @@ equations. A bus whose terminals are all ungrounded needs no grounding data.
 | Load | never | Grounding is a bus property or a shunt |
 | Generator | never | Grounding is a bus property or a shunt |
 | Capacitor | never | Grounding is a bus property or a shunt |
-| Transformer | never | Winding neutral grounding via `r/x_neutral_*` is *internal*; external grounding is a bus/shunt |
+| Transformer | never | Grounding is a bus property or a shunt |
 | Switch | never | Switches are not grounded |
 | Bus terminal | **optional** | `perfectly_grounded_terminals` for perfect grounding; a shunt for impedance grounding |
 | Line | **always (implicit)** | A non-zero shunt admittance passes current to ground |

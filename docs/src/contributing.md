@@ -14,7 +14,7 @@ Corrections, clarifications, and new content are all welcome.
 
 !!! note "Governance"
     Governance has been designed to be lightweight to encourage contributions
-    and community-building. It is expected governance arrangements will evolve
+    and community-building. It is expected that governance arrangements will evolve
     in future as community needs change.
 
 The specification is maintained by **project maintainers** — members of the
@@ -93,7 +93,7 @@ significant time to agree and ratify. This includes:
   changing its units, optionality, or meaning.
 - **The JSON Schema** — any change to the schema, which must stay in lock-step
   with the documented field names. A field rename is not complete until the prose,
-  the tables, the worked example, and the schema all agree.
+  the tables, the worked example, and the schema are consistent.
 - **Mathematical model** — adding, removing, or changing constraints, bounds,
   objectives, or the sets/notation they rely on.
 - **Supported values** — changing the permitted configurations, string
@@ -129,7 +129,7 @@ alternatives, and to keep it faithful to real distribution-system physics.
   single-phase / triplex connections must all have a defined meaning.
 
 - **Grounding assumptions made explicit.** Grounding is always explicit and
-  general — perfect, through an impedance, or ungrounded — and never assumed.
+  general, i.e., perfect, or through an impedance, or ungrounded, and never assumed,
   Neutral and earth conductors stay explicit without Kron reduction.
 
 - **Respect object semantics.** It is preferred for each object to mean one
@@ -144,7 +144,7 @@ alternatives, and to keep it faithful to real distribution-system physics.
   choose one (a continuously differentiable form is preferred) and document it;
   alternatives may be *mentioned* but are not normative.
 
-- **The nodal contract is voltages and currents.** The interface between a device
+- **The formulation is based on relationships between voltages and currents.** The interface between a device
   and the network is the complex bus voltage and the complex current injected at
   its terminals; nodal balance (KCL) is enforced in currents. Device models may
   introduce power variables or other internal variables for their own
@@ -170,7 +170,7 @@ alternatives, and to keep it faithful to real distribution-system physics.
   primitives (for example, transformers as idealised winding pairs plus series
   impedance) over introducing bespoke, monolithic models.
 
-## Conventions
+## Contributing Guidelines
 
 - **Keep the prose, tables, worked example, and JSON Schema in agreement.** The
   field names in the text are normative; they must match the schema exactly.

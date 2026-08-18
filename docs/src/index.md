@@ -60,7 +60,7 @@ Per-element data models and equations.
 
 - [Modelling notes & FAQ](spec/faq.md)
 - [Nomenclature](spec/nomenclature.md)
-- [References & further reading](spec/references.md)
+- [References](spec/references.md)
 - [Glossary](glossary.md)
 
 ## Contributing

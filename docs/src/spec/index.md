@@ -94,7 +94,7 @@ Start with the **foundations**:
 Then the **components** (start with [Buses](bus.md) and [Lines](line.md)), the
 [Objective and feasibility](objective.md) formulation, and the
 [Document metadata](metadata.md). The [Modelling notes & FAQ](faq.md) collects
-recurring case-building questions, and [References & further reading](references.md)
+recurring case-building questions, and [References](references.md)
 points to the textbooks and papers behind the model.
 
 ## Self-containment

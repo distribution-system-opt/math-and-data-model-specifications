@@ -56,19 +56,26 @@ Open `docs/build/index.html` to preview. To also build the PDF, set
 `DOCS_PDF=true` (see the [README](https://github.com/distribution-system-opt/math-and-data-model-specifications#building-the-pdf)
 for the two system tools that requires).
 
-## Types of change and review expectations
+## Types of change and review expectations: impact on the specification contract
 
-Not all contributions carry the same weight. This specification is developed by
-the IEEE PES Task Force on Benchmarking Multiconductor OPF (BMOPF) for
-Distribution Systems, and parts of it are **normative**:
+The data specification defines a _contract_, a community-agreed, consistent
+definition of data format and corresponding meaning. This contract enables
+datasets and tools to be built that depend on the specification, and is based on
+a series of **normative** aspects:
 - the data model field names,
 - the mathematical constraints,
-- and the accompanying **JSON Schema**;
+- and the accompanying **JSON Schema**.
 
-together these define a contract that datasets and tools depend on.
+The community that has agreed these normative aspects (and all of the
+specification) is the IEEE PES Task Force on Benchmarking Multiconductor Optimal
+Power Flow (BMOPF).
 
-The review a pull request receives scales with how much of that contract it
-affects.
+Not all contributions to this specification will carry the same weight, because
+they may not affect any of the contract, or they may have a substantial effect
+on all end-users of the specification.
+
+Therefore, the review a pull request receives scales with how much of the
+contract it affects.
 
 ### Editorial / minor changes — fast track
 
@@ -111,10 +118,10 @@ When in doubt about which tier a change falls into, open an issue and ask.
 
 Normative contributions are judged against the principles below. They exist to
 keep the specification a single, coherent reference rather than a collection of
-alternatives, and to keep it faithful to real distribution-system physics.
+alternatives, and to keep it faithful to real distribution system physics.
 
 - **State of the art.** Models must be consistent with contemporary
-  distribution-system modelling and accepted physics and engineering practice.
+  distribution system modelling and accepted physics and engineering practice.
   A proposed model should be defensible against the current literature.
 
 - **Do not avoid nonlinearity.** The reference model captures the true physics,
@@ -170,7 +177,7 @@ alternatives, and to keep it faithful to real distribution-system physics.
   primitives (for example, transformers as idealised winding pairs plus series
   impedance) over introducing bespoke, monolithic models.
 
-## Contributing Guidelines
+## Contributing guidelines
 
 - **Keep the prose, tables, worked example, and JSON Schema in agreement.** The
   field names in the text are normative; they must match the schema exactly.
@@ -215,7 +222,7 @@ changes has accumulated that warrants a release, maintainers **tag a version**.
 - The **specification** and the **JSON Schema** are versioned independently. We
   expect the specification to be tagged more often than the schema — editorial
   and explanatory changes advance the specification without moving the schema,
-  while a contract change advances both.
+  while a [contract](#Types-of-change-and-review-expectations:-impact-on-the-specification-contract) change advances both.
 - The full documentation history is retained: every tagged version stays
   browsable through the site's version selector, so earlier releases remain
   citable.
@@ -230,7 +237,7 @@ distinct `schema-vMAJOR.MINOR.PATCH` prefix (e.g. `schema-v1.0.0`), so a schema
 bump neither collides with nor masquerades as a specification documentation
 version. Only `v*` tags trigger a documentation deployment.
 
-## Become a Maintainer
+## Become a maintainer
 
 The Task Force accepts nominations to become a maintainer.
 
@@ -248,7 +255,7 @@ Plus, a minimum of three of the following:
 - contributing to identifying and addressing specification issues (opened as well-scoped issues)
 - completion of PRs to improve the specification, schema, or corresponding documentation
 - review of others' PRs against the present specification, schema, or documentation
-- a track record of development in the field of multiconductor distribution network
+- a track record of development in the field of multiconductor distribution systems
   modelling and analysis (publications, prior standards work, industry deployment)
 - development of open-source tools demonstrating and building on BMOPF outputs
   (solvers, parsers, visualization, validation, etc.)

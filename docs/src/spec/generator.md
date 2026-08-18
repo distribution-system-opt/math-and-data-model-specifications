@@ -20,9 +20,7 @@ A generator is an entry of the top-level `generator` object, keyed by its string
 | `i_max` | number[] | A | | Per-conductor current-magnitude limit (incl. optional neutral entry) |
 | `cost` | number[] | \$/kWh | | Per-phase linear generation cost |
 
-Only the `WYE` configuration is supported for generators. Delta and single-phase
-generation should be modelled another way — e.g. as separate wye or single-phase
-injections via loads (negative loads).
+Only the `WYE` configuration is supported for generators.
 
 ## 2. Input symbols
 

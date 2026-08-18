@@ -1,8 +1,12 @@
 # Document metadata
 
 Every case may carry a top-level `meta` object providing provenance, licensing, and
-versioning. It is optional for backward compatibility, but conformant writers should
-populate it. This is a *data-model* page — `meta` carries no OPF variables or
+versioning. It is optional for backward compatibility.
+
+**Suggestion:** populate the `meta` object where possible — provenance, licensing, and
+versioning information helps downstream consumers of the dataset.
+
+This is a *data-model* page — `meta` carries no OPF variables or
 constraints. Symbols are defined in [Notation](notation.md).
 
 ## The `meta` object

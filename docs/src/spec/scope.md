@@ -8,7 +8,7 @@ content.
 
 Distribution networks are unbalanced: single-phase loads, untransposed lines, and
 single-phase laterals mean the phases cannot be collapsed to a positive-sequence
-equivalent without losing the physics. A faithful optimal power flow (OPF) for
+equivalent without losing the physics. An optimal power flow (OPF) for
 distribution must therefore reason at the level of **individual conductors**.
 
 At the same time, the range of utility problems posed as network-constrained
@@ -89,8 +89,8 @@ every possible device. In this version:
 
 ## Out of scope
 
-The format is a practical, lightweight model for OPF research — it does not aim to replace
+The format is a model for OPF research — it does not aim to replace
 the Common Information Model (CIM), and it does not prescribe solver software. Its OPF
 formulation was inspired by [PowerModelsDistribution](references.md)'s `IVRENPowerModel`,
-but has been generalized well beyond it — native JSON data, the full set of element
-configurations above, and careful grounding.
+but extends it — native JSON data, the full set of element
+configurations above, and explicit grounding.

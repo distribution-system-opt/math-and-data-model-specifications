@@ -47,7 +47,10 @@ JSON has only ordered lists of real numbers, so:
 
 Convert conventional power-systems quantities to SI before writing them. To allow exact
 cross-checks against tools that use other units (e.g. degrees), give constants to **at
-least 10 significant figures**, ideally full floating-point precision.
+least 10 significant figures**.
+
+**Suggestion:** use full floating-point precision where available, so the conversion
+itself does not introduce rounding error beyond what the source value already carries.
 
 | Quantity | Conventional | SI | Example → JSON |
 |----------|--------------|----|----------------|

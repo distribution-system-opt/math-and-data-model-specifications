@@ -18,7 +18,11 @@ Systems**:
 - The **BMOPF network cases**. These are data instances which conform to the
   BMOPF data specification. Network cases are presently work-in-progress.
 
-The data specification is split across two resources:
+An JSON file representing a distribution system which meets the data
+specification is described as a _network model_. The _BMOPF networks cases_ are
+the subset of network models which are curated by the BMOPF Task Force.
+
+The BMOPF data specification is split across two resources:
 - **This site** as the main data specification, capturing **data
   semantics and math model** and **further information** aspects,
   consisting of further subsections of [foundations](#foundations),

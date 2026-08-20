@@ -1,7 +1,7 @@
 # Grounding
 
-Grounding is the subtle heart of a four-wire model: the neutral and earth are explicit,
-and how each element connects to ground determines the return paths for current. This
+In a four-wire model, the neutral and earth are explicit, and how each element connects
+to ground determines the return paths for current. This
 page consolidates the grounding model that the component pages apply locally. Symbols
 are defined in [Notation](notation.md).
 

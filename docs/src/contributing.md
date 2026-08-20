@@ -190,6 +190,10 @@ alternatives, and to keep it faithful to real distribution system physics.
   credit to foundational works and the sharing of community-accepted resources.
   More general resources and tutorials can be shared elsewhere in the BMOPF
   ecosystem.
+- The JSON schema should use "description" fields. These descriptions should be
+  concise, with the purpose to remind a reader of the item in the schema,
+  it should not attempt to replace or stand-in for the full description (which
+  is reserved for this main data specification site).
 - A factual, dispassionate style is preferred; the goal is clarity and so
   subjective language should be avoided. For strong opinions or known insights:
   these can be written but explicitly flagged as suggestions. (E.g., rather than

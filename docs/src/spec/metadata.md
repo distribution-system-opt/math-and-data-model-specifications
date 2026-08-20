@@ -1,8 +1,12 @@
 # Document metadata
 
 Every case may carry a top-level `meta` object providing provenance, licensing, and
-versioning. It is optional for backward compatibility, but conformant writers should
-populate it. This is a *data-model* page — `meta` carries no OPF variables or
+versioning. It is optional for backward compatibility.
+
+**Suggestion:** populate the `meta` object where possible — provenance, licensing, and
+versioning information helps downstream consumers of the dataset.
+
+This is a *data-model* page — `meta` carries no OPF variables or
 constraints. Symbols are defined in [Notation](notation.md).
 
 ## The `meta` object
@@ -18,17 +22,17 @@ constraints. Symbols are defined in [Notation](notation.md).
 | `license` | string | SPDX identifier (e.g. `CC-BY-4.0`) or an `https://` URI to the licence |
 | `frequency` | number (Hz) | Nominal system frequency — **check-only** (validated against `line_geometry`/linecode derivation frequency; never rescales) |
 | `authors` | object[] | Ordered authors — see below |
-| `sources` | object[] | Upstream data references — see below |
-| `generator` | object | Tool that wrote the file — see below |
+| `data_sources` | object[] | Upstream data references — see below |
+| `case_study_generator` | object | Tool that wrote the file — see below |
 | `provenance` | object | Free-form conversion/audit notes written by tooling |
 
 **`authors[]`**: `name`, `email`, `orcid` (bare hyphenated form `XXXX-XXXX-XXXX-XXXX`,
 without the `https://orcid.org/` prefix).
 
-**`sources[]`**: `name`, `url` (dereferenceable `https://`), `format` (e.g. `OpenDSS`,
+**`data_sources[]`**: `name`, `url` (dereferenceable `https://`), `format` (e.g. `OpenDSS`,
 `PMD-JSON`, `MATPOWER`), `doi`, `version`.
 
-**`generator`**: `tool`, `version`.
+**`case_study_generator`**: `tool`, `version`.
 
 ## Conformance notes
 
@@ -57,10 +61,10 @@ without the `https://orcid.org/` prefix).
     "authors": [
       { "name": "A. Researcher", "email": "a@example.org", "orcid": "0000-0001-9534-2265" }
     ],
-    "sources": [
+    "data_sources": [
       { "name": "ENWL LVNS dataset", "url": "https://www.enwl.co.uk/lvns", "format": "OpenDSS" }
     ],
-    "generator": { "tool": "example-writer", "version": "0.1.0" }
+    "case_study_generator": { "tool": "example-writer", "version": "0.1.0" }
   },
   "bus": { "...": {} },
   "line": { "...": {} }

@@ -35,7 +35,7 @@ const PAGES = [
     "Reference" => [
         "Modelling notes & FAQ"         => "spec/faq.md",
         "Nomenclature"                  => "spec/nomenclature.md",
-        "References & further reading"  => "spec/references.md",
+        "References"                    => "spec/references.md",
         "Glossary"                      => "glossary.md",
     ],
     "Project" => [
@@ -50,8 +50,8 @@ const PDF_EXCLUDED_SECTIONS = ["Project"]
 
 pdf_pages() = filter(p -> !(p isa Pair && first(p) in PDF_EXCLUDED_SECTIONS), PAGES)
 
-const SITENAME = "Distribution System Model Specification"
-const AUTHORS  = "Frederik Geth and contributors"
+const SITENAME = "Distribution System Model and Data Specification"
+const AUTHORS  = "IEEE Task Force on Benchmarking Multiconductor OPF for Distribution Systems"
 
 # Build the PDF whenever we're on CI, or locally when DOCS_PDF=true is set.
 const BUILD_PDF = get(ENV, "CI", nothing) == "true" || get(ENV, "DOCS_PDF", "false") == "true"

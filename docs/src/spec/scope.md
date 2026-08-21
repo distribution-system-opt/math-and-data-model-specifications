@@ -8,7 +8,7 @@ content.
 
 Distribution networks are unbalanced: single-phase loads, untransposed lines, and
 single-phase laterals mean the phases cannot be collapsed to a positive-sequence
-equivalent without losing the physics. A faithful optimal power flow (OPF) for
+equivalent without losing the physics. An optimal power flow (OPF) for
 distribution must therefore reason at the level of **individual conductors**.
 
 At the same time, the range of utility problems posed as network-constrained
@@ -59,8 +59,7 @@ The specification covers the common branch and nodal elements, with these capabi
 - **Conductors:** 1- to 4-wire lines with full mutual coupling; explicit neutral and earth
   (no Kron reduction); perfect grounding and grounding through impedance.
 - **Branch elements:** [lines](line.md), [switches](switch.md), and galvanically-isolated
-  [transformers](transformer.md) (single-phase, centre-tap, wye–delta, delta–wye,
-  n-winding).
+  [transformers](transformer.md) (single-phase, centre-tap, wye–delta, delta–wye).
 - **Nodal elements:** [loads](load.md) (constant-power and voltage-dependent ZIP/exponential),
   [generators](generator.md), [shunts](shunt.md), [capacitors](capacitor.md),
   and [voltage sources](source.md).
@@ -75,23 +74,23 @@ every possible device. In this version:
 - A **single voltage source** (one reference bus).
 - **Snapshot** solves — no inter-temporal coupling (no storage state-of-charge
   dynamics, no OLTC time-domain control).
-- Transformer **saturation** and detailed frequency-dependent effects are not modelled
-  (a no-load magnetising shunt *is* supported).
+- Transformer **saturation**, magnetising/core losses, tap-changing, and detailed
+  frequency-dependent effects are not modelled (the turns ratio is fixed by nameplate
+  voltages — see [Transformers](transformer.md)); winding-neutral grounding is external
+  to the element, like every other component (see [Grounding](grounding.md)).
 - The default objective is linear generation/dispatch cost; quadratic cost terms are not
   included.
 
 !!! note "Relaxations beyond the original PDF"
-    Several restrictions listed in the older Task Force PDF have been lifted in this
+    Two restrictions listed in the older Task Force PDF have been lifted in this
     implementation and are documented as first-class features here: voltage-dependent
-    (ZIP/exponential) **loads**; **inline per-line impedance/admittance** matrices as an
-    alternative to a linecode; the general **n-winding** transformer; a magnetising
-    **no-load shunt** and internal **neutral grounding**; and **continuous tap**
-    optimisation. Each carries a reconciliation note on its page.
+    (ZIP/exponential) **loads**; and **inline per-line impedance/admittance** matrices
+    as an alternative to a linecode. Each carries a reconciliation note on its page.
 
 ## Out of scope
 
-The format is a practical, lightweight model for OPF research — it does not aim to replace
+The format is a model for OPF research — it does not aim to replace
 the Common Information Model (CIM), and it does not prescribe solver software. Its OPF
 formulation was inspired by [PowerModelsDistribution](references.md)'s `IVRENPowerModel`,
-but has been generalized well beyond it — native JSON data, the full set of element
-configurations above, and careful grounding.
+but extends it — native JSON data, the full set of element
+configurations above, and explicit grounding.

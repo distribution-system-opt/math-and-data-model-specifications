@@ -22,8 +22,10 @@ A shunt is an entry of the top-level `shunt` object, keyed by its string ID $h$.
 | `G_k_j`, `B_k_j` | $\textcolor{brown}{\mathbf{Y}_{h}} = \mathbf{G} + \textcolor{brown}{j}\mathbf{B}$ | admittance matrix (S), row-first entries |
 
 The matrix is stored row-first: entry $(k,j)$ is field `G_k_j` / `B_k_j`. Ground is
-never indexed (its voltage is zero); zero-filled rows/columns should be removed by
-trimming the terminal map.
+never indexed (its voltage is zero).
+
+**Suggestion:** trim zero-filled rows/columns from the terminal map for a more
+compact representation.
 
 ## 3. Variables
 

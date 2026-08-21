@@ -1,7 +1,7 @@
 # Grounding
 
-Grounding is the subtle heart of a four-wire model: the neutral and earth are explicit,
-and how each element connects to ground determines the return paths for current. This
+In a four-wire model, the neutral and earth are explicit, and how each element connects
+to ground determines the return paths for current. This
 page consolidates the grounding model that the component pages apply locally. Symbols
 are defined in [Notation](notation.md).
 
@@ -33,7 +33,7 @@ equations. A bus whose terminals are all ungrounded needs no grounding data.
 | Load | never | Grounding is a bus property or a shunt |
 | Generator | never | Grounding is a bus property or a shunt |
 | Capacitor | never | Grounding is a bus property or a shunt |
-| Transformer | never | Winding neutral grounding via `r/x_neutral_*` is *internal*; external grounding is a bus/shunt |
+| Transformer | never | Grounding is a bus property or a shunt |
 | Switch | never | Switches are not grounded |
 | Bus terminal | **optional** | `perfectly_grounded_terminals` for perfect grounding; a shunt for impedance grounding |
 | Line | **always (implicit)** | A non-zero shunt admittance passes current to ground |

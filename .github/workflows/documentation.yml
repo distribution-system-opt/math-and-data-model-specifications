@@ -38,6 +38,17 @@ jobs:
 
       - uses: julia-actions/cache@v2
 
+      # tectonic's TeX package bundle isn't part of the Julia depot cached
+      # above, so without this it re-downloads from a shared public relay on
+      # every run, which gets rate-limited (HTTP 429) under GitHub Actions'
+      # shared runner IPs.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/Tectonic
+          key: tectonic-bundle-${{ runner.os }}
+          restore-keys: |
+            tectonic-bundle-${{ runner.os }}-
+
       - name: Install documentation dependencies
         run: julia --project=docs -e 'using Pkg; Pkg.instantiate()'
 

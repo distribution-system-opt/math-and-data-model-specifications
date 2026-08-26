@@ -163,8 +163,7 @@ $\textcolor{red}{\mathbf{z}^{\min}},\textcolor{red}{\mathbf{z}^{\max}}$:
 ```
 
 The upper (circle) bound is convex; a non-zero lower bound is non-convex. Component
-$k$ reads $(\textcolor{red}{z^{\min}_k})^2 \le \mathfrak{R}(\textcolor{blue}{z_k})^2 + \mathfrak{I}(\textcolor{blue}{z_k})^2 \le (\textcolor{red}{z^{\max}_k})^2$,
-i.e. `vr^2 + vi^2` in the code.
+$k$ reads $(\textcolor{red}{z^{\min}_k})^2 \le \mathfrak{R}(\textcolor{blue}{z_k})^2 + \mathfrak{I}(\textcolor{blue}{z_k})^2 \le (\textcolor{red}{z^{\max}_k})^2$.
 
 This is the **engineering-bound** idiom. It is distinct from a **cartesian bound**,
 which constrains a variable's own real/imaginary components with a box
@@ -274,7 +273,7 @@ configuration: $d f\in\mathcal{R}^{D}$ for loads, $g f\in\mathcal{R}^{G}$ for ge
 
 **Ground** is a single $0\text{ V}$ reference. Terminals listed in a bus's
 `perfectly_grounded_terminals` form the ground mapping
-$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$; their voltage is
+$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$ have their voltage 
 fixed to zero. Lines and shunts always carry an implicit ground connection (their
 shunt admittance is defined to ground). See [Grounding](grounding.md) for the full model.
 

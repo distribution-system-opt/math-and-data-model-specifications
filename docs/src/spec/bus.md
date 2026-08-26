@@ -1,7 +1,7 @@
 # Buses
 
-A **bus** is a set of electrical terminals sharing a location. It owns the network's
-voltage variables and is where Kirchhoff's current law is enforced. Parts 1–5 state
+A **bus** is a set of electrical terminals sharing a location. The network's
+voltage variables are defined per bus, and it is here that Kirchhoff's current law is enforced. Parts 1–5 state
 the foundational (physics) model. Symbols are defined in [Notation](notation.md).
 
 ## 1. Data model

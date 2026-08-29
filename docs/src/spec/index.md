@@ -14,7 +14,7 @@
 
 ## Purpose
 
-This is the mathematical and data-model specification for four-wire distribution
+This is the mathematical and data-model specification for (up-to-)four-wire distribution
 system optimal power flow (OPF), developed by the IEEE PES Task Force on
 Benchmarking Multiconductor OPF (BMOPF) for Distribution Systems. It is the
 version-controlled successor to the LaTeX/PDF *Mathematical Model and Data Model*
@@ -40,19 +40,19 @@ where to find the data fields, the physics, and the bounds.
 |------|---------------------|
 | **1. Data model** | Which JSON fields describe this component, with types, units, and required/optional status. |
 | **2. Input symbols** | The mathematical symbol each field maps to (a *parameter*). |
-| **3. Variables** | The unknowns this component introduces (a *variable*). |
-| **4. Equality constraints** | The device physics — what the component *is*. |
+| **3. Variables** | The unknowns this component introduces (an optimization *variable*). |
+| **4. Equality constraints** | The physical laws that define the *behaviour* of the component. |
 | **5. Inequality constraints** | The bounds, split into **cartesian variable bounds** (box bounds on a variable's own components) and **engineering bounds** (physically meaningful magnitude/angle limits). |
 
-The **cartesian vs engineering** split (part 5) is deliberate. A *cartesian bound*
-constrains the real and imaginary components of a decision variable directly — a
-rectangle in the complex plane, cheap and convex, used mainly to bound the search.
+The **cartesian vs engineering** split in the **Inequality constraints** is deliberate. 
+A *cartesian bound* constrains the real and imaginary components of a decision variable directly 
+— a (convex) rectangle in the complex plane, used mainly to bound the search.
 An *engineering bound* constrains a quantity an engineer cares about — a voltage
 magnitude, a thermal current, a sequence-component unbalance — and is generally a
-circle (quadratic) or an angle sector (bilinear). Conflating the two hides which
-limits are physical and which are numerical hygiene.
+circle (quadratic) or an angle sector (bilinear). Conflating the two would hide which
+limits enforce a physical limit and which serve numerical purposes.
 
-The foundational model is stated in **complex phasors**. A solver typically works in
+The mathematical model is stated in **complex phasors**. A solver typically works in
 **rectangular real** variables — each complex equation split into its real and
 imaginary parts, each complex variable becoming two real variables — but that
 realisation is a downstream implementation choice and is not part of this
@@ -72,8 +72,8 @@ not enforced); constraints are always active for the elements present.
 | **Power bounds** | Generator P·Q box + apparent-power circle; transformer rating; line apparent power | [Generators](generator.md#Engineering-bounds), [Transformers](transformer.md#Engineering-bounds) |
 | **KVL / Ohm's law** | Line series drop + π-shunt | [Lines](line.md#4.-Equality-constraints) |
 | **KCL** | Nodal current balance | [Buses](bus.md#Kirchhoff's-current-law) |
-| **Device behaviour** | Load & generator power; transformer winding pairs; switch state; shunt/capacitor admittance current | [Loads](load.md), [Generators](generator.md), [Transformers](transformer.md), [Switches](switch.md), [Shunts](shunt.md), [Capacitors](capacitor.md) |
-| **Reference / grounding** | Voltage-source fixing; perfect & impedance grounding | [Voltage sources](source.md), [Grounding](grounding.md) |
+| **Device behaviour** | Load & generator power; control mode; transformer winding pairs; switch state; shunt/capacitor admittance current | [Loads](load.md), [Generators](generator.md), [Transformers](transformer.md), [Switches](switch.md), [Shunts](shunt.md), [Capacitors](capacitor.md) |
+| **Reference / grounding** | Voltage-source fixing; perfect, floating or impedance (electrode) grounding | [Voltage sources](source.md), [Grounding](grounding.md) |
 
 ## Reading order
 
@@ -83,13 +83,12 @@ Start with the **foundations**:
    the design choices behind it.
 2. **[Notation](notation.md)** — typography (variables vs parameters, real vs complex),
    the complex-phasor symbols and their rectangular realisation, transform matrices, the
-   element-wise bound idiom, and the set/topology machinery used on every later page.
+   element-wise bound idiom, and the set/topology convention used on every later page.
 3. **[Data input formatting](data-format.md)** — units, how complex numbers and matrices
    are encoded in JSON, and required-vs-optional field semantics.
-4. **[Grounding](grounding.md)** — the common-reference ground model that the component
-   pages apply locally.
-5. **[Worked example](example.md)** — every set constructed from one small network, to
-   make the abstract machinery concrete.
+4. **[Grounding](grounding.md)** — the common-reference ground model that the components apply locally.
+5. **[Worked example](example.md)** — every set constructed for one small network, to
+   practically illustrate the abstraction.
 
 Then the **components** (start with [Buses](bus.md) and [Lines](line.md)), the
 [Objective and feasibility](objective.md) formulation, and the
@@ -100,4 +99,5 @@ points to the textbooks and papers behind the model.
 ## Self-containment
 
 This section links only within itself, so the whole `spec/` folder can be moved to
-another repository without dangling references.
+another repository without dangling references. 
+**Please preserve this feature if you wish to contribute**.

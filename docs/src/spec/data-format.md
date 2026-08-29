@@ -24,7 +24,7 @@ data model carries no unit fields — units are fixed by the field, per this tab
 | Cost rate | US dollar per kilowatt-hour | \$/kWh |
 
 **Non-SI exception.** One quantity uses a customary unit for industry familiarity:
-**cost rate** in \$/kWh (there is no SI unit of currency; 1 kWh $= 3.6\times10^6$ J).
+**cost rate** in \$/kWh introduces two non-SI units for industry familiarity: currency(\$, which has no SI equivalent) and time in hours (1 kWh $= 3.6\times10^6$ J, whereas the SI base unit for energy is the Joule).
 
 Per-unit normalisation is a solver-internal convenience and is **out of scope** here —
 no per-unit quantity appears in the data model.
@@ -108,7 +108,7 @@ a case may classify roles once for the whole network in an optional top-level
 "terminal_conventions": { "phase": ["a", "b", "c"], "neutral": ["n"] }
 ```
 
-When present the block is **authoritative** — labels are matched exactly, including
+When present, the block is **authoritative** — labels are matched exactly, including
 case — and is always emitted on export. The role lists must be disjoint; the ground
 reference stays implicit. When the block is **absent**, roles are inferred: a terminal
 `n`/`N` is the neutral; terminal `"4"` is the neutral when the bus terminal set is

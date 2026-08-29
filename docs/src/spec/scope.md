@@ -8,7 +8,7 @@ content.
 
 Distribution networks are unbalanced: single-phase loads, untransposed lines, and
 single-phase laterals mean the phases cannot be collapsed to a positive-sequence
-equivalent without losing the physics. An optimal power flow (OPF) for
+equivalent without losing physical details or accuracy. An optimal power flow (OPF) for
 distribution networks must therefore reason at the level of **individual conductors**.
 
 At the same time, the range of utility problems posed as network-constrained
@@ -17,30 +17,31 @@ dynamic operating envelopes, optimal droop settings. Yet there is little standar
 few openly-licensed unbalanced network models exist, so papers rely on ad-hoc modified
 cases and results are hard to compare. This specification, with its companion data
 library, provides a **common, openly-licensed model** so approaches can be compared
-directly — the distribution analogue of transmission-side benchmark libraries.
+directly — the distribution analogue of transmission-side benchmark libraries such as [pglib](https://github.com/power-grid-lib/pglib-opf).
 
 ## Scope: beyond classical OPF
 
-Although "OPF" names this document, the goal is broader than minimising generation cost.
+Although "OPF" names multiple sections of this document, the goal is broader than 
+minimising generation cost.
 The unifying requirement of the target problems is **an accurate conductor-level
-representation of an unbalanced network subject to a selectable set of bounds** — not any
-one objective. Bounded cost minimisation is a convenient, solver-comparable
+representation of an unbalanced network subject to a selectable set of bounds**, i.e., it is not
+constrained to one single objective. Bounded cost minimisation is a convenient, solver-comparable
 starting point. With fixed demand and one uniform non-negative price on every
 real-power injection, minimizing total injection is equivalent to minimizing
 real losses. It does not make the nonconvex feasible set or optimum unique. The same physics
 underpins maximum load delivery, conservation voltage reduction, dynamic operating
 envelopes, and state estimation.
 
-This is why **bounds are optional throughout the data model**: different formulations
+This is why **bounds are optional throughout the data model**: different problems 
 activate different subsets of the feasible region. The specification is a reusable
-foundation, not infrastructure for a single problem.
+foundation, and not specialised for a single problem class.
 
 ## Design choices
 
 - **SI units.** All physical quantities in SI (see [Data input formatting](data-format.md)),
   so the data model commits to no per-unit base. Per-unit is a solver-internal convenience,
   out of scope here.
-- **JSON + schema.** Parseable from any language; key–value structure lets extensions add
+- **JSON schema.** Parseable from any programming language; key–value structure lets extensions add
   nested entries without breaking readers. A JSON Schema provides basic structural checks.
 - **Real numbers, not complex.** Every complex quantity is a pair of real fields, and the
   model solves in real variables — for cross-language compatibility (see [Notation](notation.md)).
@@ -68,10 +69,10 @@ The specification covers the common branch and nodal elements, with these capabi
 
 ## Present limitations
 
-The model deliberately targets features universally required for distribution networks OPF, not
-every possible device. In this version:
+The model deliberately targets features universally required for distribution network OPF, not
+every possible problem specification. In this version:
 
-- A **single voltage source** (one reference bus).
+- Only a **single voltage source** (one reference bus) is supported.
 - **Snapshot** solves — no inter-temporal coupling (no storage state-of-charge
   dynamics, no OLTC time-domain control).
 - Transformer **saturation**, magnetising/core losses, tap-changing, and detailed

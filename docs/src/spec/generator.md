@@ -18,7 +18,7 @@ A generator is an entry of the top-level `generator` object, keyed by its string
 | `q_min`, `q_max` | number[] | var | | Per-phase reactive-power bounds |
 | `s_max` | number[] | VA | | Per-phase apparent-power rating |
 | `i_max` | number[] | A | | Per-conductor current-magnitude limit (incl. optional neutral entry) |
-| `cost` | number[] | \$/kWh | | Per-phase linear generation cost |
+| `cost` | number[] | \$/kWh | ✔ | Per-phase linear generation cost |
 
 Only the `WYE` configuration is supported for generators.
 

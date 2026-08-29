@@ -9,7 +9,7 @@ content.
 Distribution networks are unbalanced: single-phase loads, untransposed lines, and
 single-phase laterals mean the phases cannot be collapsed to a positive-sequence
 equivalent without losing physical details or accuracy. An optimal power flow (OPF) for
-distribution must therefore reason at the level of **individual conductors**.
+distribution networks must therefore reason at the level of **individual conductors**.
 
 At the same time, the range of utility problems posed as network-constrained
 optimisation has grown — power flow, state estimation, volt-var control, DER scheduling,
@@ -69,7 +69,7 @@ The specification covers the common branch and nodal elements, with these capabi
 
 ## Present limitations
 
-The model deliberately targets features universally required for distribution OPF, not
+The model deliberately targets features universally required for distribution network OPF, not
 every possible problem specification. In this version:
 
 - Only a **single voltage source** (one reference bus) is supported.

@@ -3,8 +3,8 @@
 Welcome to the data specification of the four-wire distribution-system optimal power
 flow (OPF) model.
 
-This site is the canonical, version-controlled home of
-the specification: every page is plain Markdown that evolves through pull requests.
+This site is the canonical, version-controlled home of the specification. Every page
+is Markdown, and the specification evolves through pull requests.
 
 !!! tip "Download as PDF"
     The complete specification is also available as a single, print-ready

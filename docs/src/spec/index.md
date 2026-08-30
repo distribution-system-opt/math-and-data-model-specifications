@@ -9,16 +9,13 @@
     ([Buses](bus.md), [Lines](line.md), [Switches](switch.md), [Loads](load.md),
     [Generators](generator.md), [Shunts](shunt.md), [Capacitors](capacitor.md),
     [Voltage sources](source.md), [Transformers](transformer.md)); and the
-    [Objective and feasibility](objective.md) formulation. Remaining work is
-    refinement and Task-Force review rather than new components.
+    [Objective and feasibility](objective.md) formulation.
 
 ## Purpose
 
-This is the mathematical and data-model specification for (up-to-)four-wire distribution
+This is the mathematical and data-model specification for (up-to-) four-wire distribution
 system optimal power flow (OPF), developed by the IEEE PES Task Force on
-Benchmarking Multiconductor OPF (BMOPF) for Distribution Systems. It is the
-version-controlled successor to the LaTeX/PDF *Mathematical Model and Data Model*
-document, and evolves through pull requests rather than by editing a PDF.
+Benchmarking Multiconductor OPF (BMOPF) for Distribution Systems.
 
 Two principles govern every page:
 
@@ -26,10 +23,10 @@ Two principles govern every page:
    and data-model field names on these pages, together with the JSON Schema, form
    the normative contract that datasets and tools implement.
 
-2. **Everything is in SI.** Voltages in volts, currents in amperes, impedances in
+2. **SI units are used in place of per-unit.** Voltages in volts, currents in amperes, impedances in
    ohms, admittances in siemens, powers in watts/var/VA, angles in radians. Per-unit
-   scaling is a numerical convenience a solver may apply internally; it is **out
-   of scope** for this specification, and no per-unit quantity appears here.
+   scaling may be applied by solvers internally but is **out
+   of scope** of this specification.
 
 ## How each component page is organised
 
@@ -44,7 +41,7 @@ where to find the data fields, the physics, and the bounds.
 | **4. Equality constraints** | The physical laws that define the *behaviour* of the component. |
 | **5. Inequality constraints** | The bounds, split into **cartesian variable bounds** (box bounds on a variable's own components) and **engineering bounds** (physically meaningful magnitude/angle limits). |
 
-The **cartesian vs engineering** split in the **Inequality constraints** is deliberate. 
+The **cartesian vs engineering** split in the **inequality constraints** is deliberate. 
 A *cartesian bound* constrains the real and imaginary components of a decision variable directly 
 — a (convex) rectangle in the complex plane, used mainly to bound the search.
 An *engineering bound* constrains a quantity an engineer cares about — a voltage
@@ -61,7 +58,7 @@ specification.
 ## Model summary
 
 The complete feasible set at a glance — the objective, every bound, and every device
-constraint, with the page that defines each. Bounds are optional (an absent bound is
+constraint, with the page that defines each. Bounds are optional (absent bounds are
 not enforced); constraints are always active for the elements present.
 
 | Category | Item | Page |

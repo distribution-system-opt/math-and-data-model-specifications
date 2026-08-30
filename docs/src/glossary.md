@@ -4,10 +4,6 @@ A quick reference for the terms and abbreviations used throughout the
 specification. Symbols and mathematical notation are defined on the
 [Notation](spec/notation.md) page.
 
-!!! note "Work in progress"
-    This glossary is a stub. Entries are added as terms are introduced across
-    the specification — contributions welcome (see [Contributing](contributing.md)).
-
 ## Terms
 
 Four-wire model

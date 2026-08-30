@@ -82,12 +82,6 @@ every possible problem specification. In this version:
 - The default objective is linear generation/dispatch cost; quadratic cost terms are not
   included.
 
-!!! note "Relaxations beyond the original PDF"
-    Two restrictions listed in the older Task Force PDF have been lifted in this
-    implementation and are documented as first-class features here: voltage-dependent
-    (ZIP/exponential) **loads**; and **inline per-line impedance/admittance** matrices
-    as an alternative to a linecode. Each carries a reconciliation note on its page.
-
 ## Out of scope
 
 The format is a model for OPF research — it does not aim to replace

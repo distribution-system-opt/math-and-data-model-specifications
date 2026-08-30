@@ -65,7 +65,15 @@ power, and 1000 converts the kVA rating to VA.
 
 ## My line impedances are sequence components only — can I convert them to wire coordinates?
 
-Yes. Sequence-component impedances convert to phase (wire) coordinates through the
+It is possible convert sequence components to _phase_ component matrices (i.e., to define a
+3-by-3 matrix linking the voltages and currents of phases `"1","2","3"`). If the distribution
+system this is modelling has a three-wire construction, then this transformation is exact.
+However, if Kron reduction (see [glossary](glossary.md)) has been applied to the neutral
+of a four-wire system to convert to a three-phase representation, it is not possible to
+revert back to the four-wire system's 4-by-4 impedance matrix without additional information.
+
+### Converting from sequence impedance values to three-phase impedances matrices
+Sequence-component impedances convert to phase coordinates through the
 Fortescue transform $\textcolor{brown}{\mathbf{F}}$ (defined in [Notation](notation.md)).
 Writing sequence voltages and currents as $\textcolor{blue}{\mathbf{U}^{\text{sym}}_i}=\textcolor{brown}{\mathbf{F}}\,\textcolor{blue}{\mathbf{U}_i}[\mathcal{P}]$
 and $\textcolor{blue}{\mathbf{I}^{\text{sym,s}}_{\ell ij}}=\textcolor{brown}{\mathbf{F}}\,\textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}}[\mathcal{P}]$,

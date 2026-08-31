@@ -2,8 +2,7 @@
 
 A **generator** injects a *dispatchable* power at a bus — active and reactive power
 lie within bounds rather than being fixed (a fixed injection is modelled as a negative
-load). It shares the load's bilinear power form.
-Symbols are defined in [Notation](notation.md).
+load). Symbols are defined in [Notation](notation.md).
 
 ## 1. Data model
 

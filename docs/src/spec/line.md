@@ -20,9 +20,9 @@ matrices scaled by `length`) *or* inline absolute matrices.
 | `terminal_map_to` | string[] | – | ✔ | Conductor→terminal map at `bus_to`, $\textcolor{purple}{\mathbf{N}_{\ell j}}$ |
 | `linecode` | string | – | (one-of) | Linecode ID (per-metre matrices) |
 | `length` | number | m | (with `linecode`) | Line length $\textcolor{red}{L_\ell}$ |
-| `R_series_k_j`, `X_series_k_j` | number | Ω | (one-of) | Inline **absolute** series impedance entries |
-| `G_from_k_j`, `B_from_k_j` | number | S | | Inline from-side shunt admittance entries |
-| `G_to_k_j`, `B_to_k_j` | number | S | | Inline to-side shunt admittance entries |
+| `R_series_p_q`, `X_series_p_q` | number | Ω | (one-of) | Inline **absolute** series impedance entries |
+| `G_from_p_q`, `B_from_p_q` | number | S | | Inline from-side shunt admittance entries |
+| `G_to_p_q`, `B_to_p_q` | number | S | | Inline to-side shunt admittance entries |
 | `i_max` | number[] | A | | Per-conductor current-magnitude limit (overrides linecode) |
 | `s_max` | number[] | VA | | Per-conductor apparent-power limit (overrides linecode) |
 
@@ -35,9 +35,9 @@ A `linecode` $c$ stores **per-metre** matrices shared across lines of the same t
 
 | Field | Type | Unit | Req. | Description |
 |-------|------|:----:|:----:|-------------|
-| `R_series_k_j`, `X_series_k_j` | number | Ω/m | ✔ | Per-metre series impedance $\mathfrak{R},\mathfrak{I}(\textcolor{brown}{\mathbf{Z}^{\text{s}}_c})$ |
-| `G_from_k_j`, `G_to_k_j` | number | S/m | | Per-metre shunt conductance |
-| `B_from_k_j`, `B_to_k_j` | number | S/m | | Per-metre shunt susceptance |
+| `R_series_p_q`, `X_series_p_q` | number | Ω/m | ✔ | Per-metre series impedance $\mathfrak{R},\mathfrak{I}(\textcolor{brown}{\mathbf{Z}^{\text{s}}_c})$ |
+| `G_from_p_q`, `G_to_p_q` | number | S/m | | Per-metre shunt conductance |
+| `B_from_p_q`, `B_to_p_q` | number | S/m | | Per-metre shunt susceptance |
 | `i_max` | number[] | A | | Per-conductor current limit $\textcolor{red}{\mathbf{I}^{\max}_c}$ |
 | `s_max` | number[] | VA | | Per-conductor apparent-power limit |
 | `source` | string | – | | Free-text provenance note for the impedance/admittance matrices (e.g. `fem`, `datasheet`, `import`); descriptive metadata only, no effect on the electrical model |

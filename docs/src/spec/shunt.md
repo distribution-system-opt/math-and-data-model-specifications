@@ -1,8 +1,8 @@
 # Shunts
 
 A **shunt** is a fixed admittance connected between a set of bus terminals (and,
-implicitly, ground). It models capacitor banks, grounding impedances, and similar
-passive elements. Symbols are defined in [Notation](notation.md).
+implicitly, ground). Grounding impedances should be modelled as a shunt.
+Symbols are defined in [Notation](notation.md).
 
 ## 1. Data model
 
@@ -24,8 +24,8 @@ A shunt is an entry of the top-level `shunt` object, keyed by its string ID $h$.
 The matrix is stored row-first: entry $(k,j)$ is field `G_k_j` / `B_k_j`. Ground is
 never indexed (its voltage is zero).
 
-**Suggestion:** trim zero-filled rows/columns from the terminal map for a more
-compact representation.
+**Suggestion:** define the `terminal_map` only for the necessary
+terminals to avoid zero-padded matrices and a more compact representation.
 
 ## 3. Variables
 
@@ -42,11 +42,8 @@ The current drawn into the shunt at its terminals is linear in the bus voltage:
 
 This current is the shunt's contribution to KCL at bus $i$ (leaving the bus toward
 the admittance/ground). Examples: a single-entry $\textcolor{brown}{Y_{h,nn}}$ on
-terminal $n$ grounds the neutral through an impedance; a delta pattern
-$\textcolor{brown}{Y_{\text{cap}}}\,\textcolor{red}{\mathbf{M}^{\Delta}}$ on
-$\{a,b,c\}$ models a delta capacitor bank.
+terminal $n$ grounds the neutral through an impedance.
 
 ## 5. Inequality constraints
 
-**None.** With a fixed admittance the current follows the voltage; a current limit
-would risk trivial infeasibility and is not imposed.
+**None.**

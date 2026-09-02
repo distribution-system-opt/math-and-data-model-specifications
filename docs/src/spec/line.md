@@ -127,23 +127,6 @@ are the contributions this line makes to KCL at buses $i$ and $j$ (see
 
 ## 5. Inequality constraints
 
-### Cartesian variable bounds
-
-A **box** may be placed on the series-current variable
-$\textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}}$ to bound the search. Because the
-engineering limit constrains the *total* (terminal) current, the box on the series
-part is the limit inflated by the worst-case shunt contribution $\rho_k$ on that row:
-
-```math
-|\mathfrak{R}(\textcolor{blue}{I^{\text{s}}_{\ell ij,k}})| \le \textcolor{red}{I^{\max}_{\ell ij,k}} + \rho_k,
-\qquad
-|\mathfrak{I}(\textcolor{blue}{I^{\text{s}}_{\ell ij,k}})| \le \textcolor{red}{I^{\max}_{\ell ij,k}} + \rho_k,
-```
-
-with $\rho_k \le \sum_{j'} |\textcolor{brown}{Y^{\text{sh}}_{\ell ij,kj'}}|\,\textcolor{red}{U^{\max}_{i,j'}}$
-from the endpoint voltage caps. This is a solver-conditioning aid; it is implied by
-the engineering bound below.
-
 ### Engineering bounds
 
 **Thermal current limit** on the **terminal current**, at both ends, for all
@@ -162,9 +145,19 @@ $\textcolor{blue}{\mathbf{S}_{\ell ij}} = \textcolor{blue}{\mathbf{U}_i}\circ(\t
 \textcolor{blue}{\mathbf{S}_{\ell ij}}\circ(\textcolor{blue}{\mathbf{S}_{\ell ij}})^{*} \le \textcolor{red}{\mathbf{S}^{\max}_{\ell ij}}\!\circ\textcolor{red}{\mathbf{S}^{\max}_{\ell ij}}.
 ```
 
-**Per-line angle difference** (optional `va_diff_min`/`va_diff_max`). For each
-conductor, with $\textcolor{blue}{z}=\textcolor{blue}{U_{i,\cdot}}\,(\textcolor{blue}{U_{j,\cdot}})^{*}=c+\textcolor{brown}{j}s$:
+### Cartesian variable bounds
+
+A **box** may be placed on the series-current variable
+$\textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}}$. (This is a solver-conditioning
+aid implied by the engineering bound.) Because the
+engineering limit constrains the *total* (terminal) current, the box on the series
+part is the limit inflated by the worst-case shunt contribution $\rho_k$ on that row:
 
 ```math
-\tan(\textcolor{red}{\theta^{\Delta,\min}_\ell})\, c \ \le\ s \ \le\ \tan(\textcolor{red}{\theta^{\Delta,\max}_\ell})\, c.
+|\mathfrak{R}(\textcolor{blue}{I^{\text{s}}_{\ell ij,k}})| \le \textcolor{red}{I^{\max}_{\ell ij,k}} + \rho_k,
+\qquad
+|\mathfrak{I}(\textcolor{blue}{I^{\text{s}}_{\ell ij,k}})| \le \textcolor{red}{I^{\max}_{\ell ij,k}} + \rho_k,
 ```
+
+with $\rho_k \le \sum_{j'} |\textcolor{brown}{Y^{\text{sh}}_{\ell ij,kj'}}|\,\textcolor{red}{U^{\max}_{i,j'}}$
+from the endpoint voltage caps. 

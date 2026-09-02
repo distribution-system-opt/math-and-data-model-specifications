@@ -78,6 +78,7 @@ function make_html()
             edit_link  = "main",
             canonical  = "https://distribution-system-opt.github.io/math-and-data-model-specifications",
             inventory_version = "0.1.0",
+            assets     = ["assets/hide-theme-picker.css"],
         ),
         warnonly = [:cross_references, :linkcheck],
         pages    = PAGES,

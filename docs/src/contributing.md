@@ -241,6 +241,13 @@ distinct `schema-vMAJOR.MINOR.PATCH` prefix (e.g. `schema-v1.0.0`), so a schema
 bump neither collides with nor masquerades as a specification documentation
 version. Only `v*` tags trigger a documentation deployment.
 
+**Where the schema lives.** The canonical JSON Schema documents are released
+from the [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema)
+repository, which carries the `schema-v*` tags and one immutable directory per
+version. A normative change therefore lands as two pull requests that must be
+merged together: one here for the prose, tables and worked example, and one
+there for the schema.
+
 ## Become a maintainer
 
 The Task Force accepts nominations to become a maintainer.

@@ -48,12 +48,6 @@ ground:
 \textcolor{blue}{U_{i,n}} = 0.
 ```
 
-### Slack current injection
-
-The slack current enters KCL at the phase terminals, with its return at the neutral:
-$+\textcolor{blue}{I_{s,k}}$ at phase $t_k$, and $-\sum_k\textcolor{blue}{I_{s,k}}$ at
-the neutral.
-
 ### Injected power
 
 The complex power injected at phase terminal $p$ is

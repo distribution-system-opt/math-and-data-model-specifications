@@ -7,7 +7,8 @@ listed under [Data input formatting](data-format.md#Permissible-strings-and-stri
 and the element sets, topology, connectivity, and terminal mappings are collected in
 [Notation → Sets and indices](notation.md#Sets-and-indices).
 
-Matrix dimensions $n\times n$ have $1 \le n \le 4$ for a four-wire, three-phase network.
+Matrix dimensions $n\times n$ have $1 \le n \le 4$; per-phase vector lengths have
+$1 \le n \le 3$ (excluding the neutral).
 
 ## Complex-valued variables
 
@@ -55,6 +56,8 @@ Matrix dimensions $n\times n$ have $1 \le n \le 4$ for a four-wire, three-phase 
 | $\mathbf{U}^{012,\min}_i,\ \mathbf{U}^{012,\max}_i$ | V | $3\times1$ | Bus $i$ symmetrical-component magnitude bounds |
 | $\mathbf{I}^{\max}_{\ell ij}$ | A | $4\times1$ | Line $\ell$ current-magnitude upper bound |
 | $\mathbf{S}^{\max}_{\ell ij}$ | VA | $4\times1$ | Line $\ell$ apparent-power upper bound |
-| $\mathbf{P}^{\min}_g,\ \mathbf{P}^{\max}_g$ | W | $3\times1$ | Generator $g$ active-power bounds |
-| $\mathbf{Q}^{\min}_g,\ \mathbf{Q}^{\max}_g$ | var | $3\times1$ | Generator $g$ reactive-power bounds |
+| $\mathbf{P}^{\min}_g,\ \mathbf{P}^{\max}_g$ | W | $n\times1$ | Generator $g$ active-power bounds |
+| $\mathbf{Q}^{\min}_g,\ \mathbf{Q}^{\max}_g$ | var | $n\times1$ | Generator $g$ reactive-power bounds |
+| $\mathbf{c}_g$ | \$/kWh | $n\times1$ | Generator $g$ per-phase dispatch cost |
+| $\mathbf{c}_s$ | \$/kWh | $n\times1$ | Voltage source $s$ per-phase dispatch cost |
 | $\ell_l$ | m | scalar | Line length |

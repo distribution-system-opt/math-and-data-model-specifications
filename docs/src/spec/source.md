@@ -18,7 +18,7 @@ string ID $s$.
 | `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{s}}$ (phase terminals) |
 | `v_magnitude` | number[] | V | ✔ | Per-terminal voltage magnitude |
 | `v_angle` | number[] | rad | ✔ | Per-terminal voltage angle |
-| `cost` | number[] | \$/kWh | ✔ | Per-phase linear dispatch cost |
+| `cost` | number[] | \$/kWh |   | Per-phase linear dispatch cost |
 
 ## 2. Input symbols
 

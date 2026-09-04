@@ -34,8 +34,7 @@ W to kW (so that the value of the objective is then in $).
 ### Sign convention
 
 Here, $P_{g,p}$ and $P_{s,p}$ are the power **injected into the network** by the
-element, uniformly across generators and voltage source (each stamps $+I$ into KCL).
-Therefore:
+element across generators and voltage source. Therefore:
 
 - a **positive** cost minimises that element's injection;
 - a **negative** cost maximises it.

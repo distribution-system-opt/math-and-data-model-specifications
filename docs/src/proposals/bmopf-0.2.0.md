@@ -2,7 +2,7 @@
 
 !!! note "Proposed material, subject to Task Force review"
     This supplement accompanies the `propose-bmopf-0.2.0` schema branch.
-    PowerIO v0.11.0 is preparing an implementation of a pinned proposal.
+    PowerIO v0.11.0 is preparing an implementation of draft BMOPF 0.2.
     That implementation does not constitute Task Force ratification. The
     accepted component pages retain their current status.
 
@@ -168,3 +168,33 @@ may relocate proposed-only physics to `extras`, with diagnostics. A consumer
 that ignores those extensions is not computationally equivalent. Producer
 provenance pins a proposal commit and schema digest; the Task Force retains
 control of ratification and the eventual `schema-v0.2.0` tag.
+
+## Voltage-source injections and energy prices
+
+This supplement incorporates the proposed naming and ordering in
+[the voltage-source and objective update](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
+and [the coordinated data update](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
+The shared modelling choices remain subject to Task Force review.
+
+Define generator and ideal voltage-source currents as injections into the bus.
+Their contributions therefore have the opposite sign from load currents and
+currents leaving the bus into lines, switches, shunts and transformer windings.
+An ideal voltage source fixes each stated terminal voltage; its independently
+solved terminal currents enforce KCL. This includes a fixed neutral terminal.
+Generator connection constraints must not impose a zero-neutral-current or
+zero-sum-current restriction on an ideal voltage source.
+
+The proposed `energy_cost_rate` vector uses $/kWh. Generator and IBR entries
+follow phase order. Voltage-source entries follow the entire `terminal_map`,
+including any neutral. With injection power `p` in W and duration `d` in hours,
+the linear energy cost is `d * sum(energy_cost_rate * p) / 1000`. A one-hour
+interval is a calculation convention, not an implicit conversion of W to kWh.
+A 1000 W injection at 0.10 $/kWh for one hour costs $0.10.
+
+The schema accepts the deprecated per-phase `cost` spelling for compatibility.
+A source's legacy vector expands to terminal order with zero rates for nonphase
+terminals. Both spellings must agree after this expansion when both are present.
+PowerIO v0.11.0 retains these prices through typed source records, generation-2
+IR, and the C and Julia bindings. Its draft BMOPF 0.2 writer uses the proposed
+name. Retaining an objective coefficient does not imply that every downstream
+calculation optimizes that objective.

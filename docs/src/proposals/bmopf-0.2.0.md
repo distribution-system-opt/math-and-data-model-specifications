@@ -76,6 +76,37 @@ Negative `b_no_load` gives lagging magnetizing current. Zero leakage impedance
 does not by itself eliminate a stated core shunt: ideal coupling and core loss
 are separate parts of the equivalent circuit.
 
+### A core shunt on an explicit winding
+
+The optional `no_load_shunt` object specifies `{winding, g, b}`. The winding
+index is one-based, and each coil on that winding receives `g + j b` siemens
+at its terminal voltage. It cannot coexist with `g_no_load` or `b_no_load`.
+Existing fields retain their from-side meaning, while the explicit object
+supports equipment whose exciting branch lies on a different physical winding.
+
+For coil incidence row `c` and bus-terminal voltage vector `v`, the contribution
+is
+
+```math
+u = c v, \qquad Y_0 = c^T (g + j b)c,
+\qquad S_0 = (g - j b)|u|^2.
+```
+
+Contributions add across the selected winding's coils. For a centre tap,
+winding 2 spans the first secondary terminal to the centre terminal and winding
+3 spans the centre terminal to the last secondary terminal. The shunt remains
+an ordinary terminal branch when a fixed tap changes; a producer deriving
+admittance from nameplate percentages must account for that tap explicitly.
+
+OpenDSS places its exciting branch on winding 2. PowerIO uses
+`g = loss_percent / 100 * S_base / (n_phase * U_coil^2)` and
+`b = -imag_percent / 100 * S_base / (n_phase * U_coil^2)`, with the actual tapped
+coil voltage. A WYE coil uses the phase-to-neutral base; a DELTA coil uses the
+phase-to-phase base. Referring that branch through a ratio to the other side
+of a nonzero leakage network changes its equations and is not a lossless
+conversion. The paired schema conformance packet records six direct OpenDSS
+admittance comparisons for these conventions.
+
 ## Regulators and n-winding equipment
 
 A regulator has a regulation ratio rather than a nameplate-ratio multiplier.

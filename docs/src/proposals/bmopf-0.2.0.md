@@ -1,7 +1,8 @@
-# BMOPF 0.2.0 proposal supplement
+# PowerIO integration additions to draft BMOPF 0.2
 
 !!! note "Proposed material, subject to Task Force review"
-    This supplement accompanies the `propose-bmopf-0.2.0` schema branch.
+    This supplement builds on Matt Deakin's [source and objective proposal](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
+    and accompanies the `propose-bmopf-0.2.0` schema branch.
     PowerIO v0.11.0 is preparing an implementation of draft BMOPF 0.2.
     That implementation does not constitute Task Force ratification. The
     accepted component pages retain their current status.
@@ -18,8 +19,11 @@ field definitions and these proposed interpretations.
 Equipment identity is its table key. Bus and element terminal maps establish
 ordered conductors. A line connects matching positions in its two maps, not
 matching spelling. Matrix entries use one-based positions in that order.
-Explicit terminal role lists are disjoint and case-sensitive. The historical
-neutral-name inference applies only when those lists are absent.
+Terminal naming and role conventions remain under discussion in
+[Matt Deakin's data-format update](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/26).
+No particular labels are made canonical here. PowerIO retains existing role
+metadata and applies its documented compatibility rules when old datasets omit
+it; those reader rules do not settle the Task Force's role taxonomy.
 
 Bus phase-to-ground bounds remain per-phase vectors in volts. The neutral has
 its own `vn_max`; unequal phase bounds cannot be replaced by their first value
@@ -137,7 +141,7 @@ and magnetizing terms add their corresponding losses and voltage drops.
 | Wire data and line geometry | Conductor order and derivation provenance; frequency and earth-model assumptions must match the compiled linecode |
 | DC network tables | Signed terminal-to-ground voltages, conductor resistances, grounding and converter coupling |
 | Named time profiles | Multipliers attached to named numeric fields; state selection precedes a snapshot calculation |
-| Source and IBR costs | Per-phase cost arrays matching the equipment terms already named in the objective |
+| IBR cost data | Optional per-phase prices retained for downstream calculations; the base source/generator objective remains defined by the source and objective proposal |
 
 These descriptions do not prescribe one solver implementation. A snapshot
 solver must require a selected time state, and an AC-only solver must reject
@@ -169,32 +173,24 @@ that ignores those extensions is not computationally equivalent. Producer
 provenance pins a proposal commit and schema digest; the Task Force retains
 control of ratification and the eventual `schema-v0.2.0` tag.
 
-## Voltage-source injections and energy prices
+## Compatibility with the source and objective proposal
 
-This supplement incorporates the proposed naming and ordering in
-[the voltage-source and objective update](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
-and [the coordinated data update](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
-The shared modelling choices remain subject to Task Force review.
+The [source](../spec/source.md), [generator](../spec/generator.md),
+[bus](../spec/bus.md) and [objective](../spec/objective.md) pages from
+[Matt Deakin's PR #36](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
+define the injected-power sign, slack currents, `energy_cost_rate`, and the
+one-hour objective. This supplement adds no alternative definitions or duration
+parameter. Further changes to those definitions belong in that PR and its
+[paired schema change](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
 
-Define generator and ideal voltage-source currents as injections into the bus.
-Their contributions therefore have the opposite sign from load currents and
-currents leaving the bus into lines, switches, shunts and transformer windings.
-An ideal voltage source fixes each stated terminal voltage; its independently
-solved terminal currents enforce KCL. This includes a fixed neutral terminal.
-Generator connection constraints must not impose a zero-neutral-current or
-zero-sum-current restriction on an ideal voltage source.
+PowerIO v0.11.0 follows the per-phase ordering in the source and generator pages.
+Voltage-source magnitudes and angles still include all stated terminals; the
+energy-price vector omits neutral terminals. The draft schema retains `cost` as
+a deprecated alias with the same values and phase order, so existing datasets
+remain readable. If both spellings occur, they must agree. Fresh draft output
+uses `energy_cost_rate`.
 
-The proposed `energy_cost_rate` vector uses $/kWh. Generator and IBR entries
-follow phase order. Voltage-source entries follow the entire `terminal_map`,
-including any neutral. With injection power `p` in W and duration `d` in hours,
-the linear energy cost is `d * sum(energy_cost_rate * p) / 1000`. A one-hour
-interval is a calculation convention, not an implicit conversion of W to kWh.
-A 1000 W injection at 0.10 $/kWh for one hour costs $0.10.
-
-The schema accepts the deprecated per-phase `cost` spelling for compatibility.
-A source's legacy vector expands to terminal order with zero rates for nonphase
-terminals. Both spellings must agree after this expansion when both are present.
-PowerIO v0.11.0 retains these prices through typed source records, generation-2
-IR, and the C and Julia bindings. Its draft BMOPF 0.2 writer uses the proposed
-name. Retaining an objective coefficient does not imply that every downstream
-calculation optimizes that objective.
+Additional integration evidence covers IR persistence, typed source prices in
+C and Julia, and relocation to `extras.voltage_source` when explicitly writing
+0.1.0. Optional IBR prices extend the data model for capable downstream
+calculations; they do not change the source/generator objective in PR #36.

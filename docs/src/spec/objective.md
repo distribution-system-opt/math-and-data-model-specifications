@@ -20,7 +20,7 @@ the upstream (e.g., transmission) grid) and every phase:
 ```
 
 where $\textcolor{red}{c_{g,p}}$ and $\textcolor{red}{c_{s,p}}$ (currency/kWh,
-from each element's per-phase `cost` array — see
+from each element's per-phase `energy_cost_rate` array — see
 [Generators](generator.md#1.-Data-model) and
 [Voltage sources](source.md#1.-Data-model)) are the energy price of phase $p$
 for generator $g\in\mathcal{G}$ and voltage source $s\in\mathcal{S}$
@@ -36,9 +36,9 @@ W to kW (so that the value of the objective is then in $).
 Here, $P_{g,p}$ and $P_{s,p}$ are the power **injected into the network** by the
 element across generators and voltage source. Therefore:
 
-- a **positive** cost minimises that element's injection;
-- a **negative** cost maximises it.
+- a **positive** energy cost rate minimises that element's injection;
+- a **negative** energy cost rate maximises it.
 
 The voltage source is *not* special: for the slack, positive injection means importing
-from the grid, so a positive source cost is the grid import price (and export, a
+from the grid, so a positive source energy cost rate is the grid import price (and export, a
 negative injection, is credited at the same price).

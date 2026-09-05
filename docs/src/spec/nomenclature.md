@@ -58,6 +58,6 @@ $1 \le n \le 3$ (excluding the neutral).
 | $\mathbf{S}^{\max}_{\ell ij}$ | VA | $4\times1$ | Line $\ell$ apparent-power upper bound |
 | $\mathbf{P}^{\min}_g,\ \mathbf{P}^{\max}_g$ | W | $n\times1$ | Generator $g$ active-power bounds |
 | $\mathbf{Q}^{\min}_g,\ \mathbf{Q}^{\max}_g$ | var | $n\times1$ | Generator $g$ reactive-power bounds |
-| $\mathbf{c}_g$ | \$/kWh | $n\times1$ | Generator $g$ per-phase dispatch cost |
-| $\mathbf{c}_s$ | \$/kWh | $n\times1$ | Voltage source $s$ per-phase dispatch cost |
+| $\mathbf{c}_g$ | \$/kWh | $n\times1$ | Generator $g$ per-phase energy cost rate |
+| $\mathbf{c}_s$ | \$/kWh | $n\times1$ | Voltage source $s$ per-phase energy cost rate |
 | $\ell_l$ | m | scalar | Line length |

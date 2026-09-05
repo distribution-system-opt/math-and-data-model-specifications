@@ -18,7 +18,7 @@ string ID $s$.
 | `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{s}}$ (phase terminals) |
 | `v_magnitude` | number[] | V | ✔ | Per-terminal voltage magnitude |
 | `v_angle` | number[] | rad | ✔ | Per-terminal voltage angle |
-| `cost` | number[] | \$/kWh |   | Per-phase linear dispatch cost |
+| `energy_cost_rate` | number[] | \$/kWh |   | Per-phase linear dispatch cost |
 
 ## 2. Input symbols
 
@@ -26,7 +26,7 @@ string ID $s$.
 |-------|:------:|-------|
 | `v_magnitude` | $\textcolor{red}{\lvert\mathbf{U}^{s}_{s}\rvert}$ | per terminal |
 | `v_angle` | $\textcolor{red}{\boldsymbol{\theta}^{s}_{s}}$ | per terminal |
-| `cost` | $\textcolor{red}{\mathbf{c}_{s}}$ | per phase |
+| `energy_cost_rate` | $\textcolor{red}{\mathbf{c}_{s}}$ | per phase |
 
 ## 3. Variables
 
@@ -57,8 +57,8 @@ The complex power injected at phase terminal $p$ is
 = P_{s,p} + \textcolor{brown}{j}\,Q_{s,p}.
 ```
 
-The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `cost` field
-to compute this source's contribution to total dispatch cost.
+The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost_rate` field
+(and appropriate constant scaling coefficients) to compute the source's contribution to total dispatch cost.
 
 ## 5. Inequality constraints
 

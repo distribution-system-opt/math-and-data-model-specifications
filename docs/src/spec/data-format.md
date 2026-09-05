@@ -21,10 +21,10 @@ data model carries no unit fields — units are fixed by the field, per this tab
 | Conductance, susceptance | siemens | S |
 | Resistance, reactance | ohm | Ω |
 | Angle | radian | rad |
-| Cost rate | US dollar per kilowatt-hour | \$/kWh |
+| Energy cost rate | US dollar per kilowatt-hour | \$/kWh |
 
 **Non-SI exception.** One quantity uses a customary unit for industry familiarity:
-**cost rate** in \$/kWh introduces two non-SI units for industry familiarity: currency(\$, which has no SI equivalent) and time in hours (1 kWh $= 3.6\times10^6$ J, whereas the SI base unit for energy is the Joule).
+**energy cost rate** in \$/kWh introduces two non-SI units for industry familiarity: currency(\$, which has no SI equivalent) and time in hours (1 kWh $= 3.6\times10^6$ J, whereas the SI base unit for energy is the Joule).
 
 Per-unit normalisation is a solver-internal convenience and is **out of scope** here —
 no per-unit quantity appears in the data model.

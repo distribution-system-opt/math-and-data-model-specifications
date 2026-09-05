@@ -76,21 +76,25 @@ reference bus (detailed on the future *Voltage sources* page).
 ![Kirchhoff's current law at a bus terminal: the signed currents of all incident elements sum to zero.](assets/kcl_example.svg)
 
 At each terminal, the currents of all incident elements sum to zero (sign
-convention: into the bus positive):
+convention: out of the bus is positive on the equation left hand side):
 
 ```math
 \underbrace{\sum_{\ell ij\in\mathcal{T}^{L}}\!\textcolor{blue}{\mathbf{I}_{\ell ij}}}_{\text{lines}}
 + \underbrace{\sum_{xij\in\mathcal{T}^{X}}\!\textcolor{blue}{\mathbf{I}_{x ij}}}_{\text{transformers}}
 + \underbrace{\sum_{wij\in\mathcal{T}^{W}}\!\textcolor{blue}{\mathbf{I}_{w ij}}}_{\text{switches}}
 + \underbrace{\sum_{di\in\mathcal{C}^{D}}\!\textcolor{blue}{\mathbf{I}_{d}}}_{\text{loads}}
-- \underbrace{\sum_{gi\in\mathcal{C}^{G}}\!\textcolor{blue}{\mathbf{I}_{g}}}_{\text{generators}}
 + \underbrace{\sum_{hi\in\mathcal{C}^{H}}\!\textcolor{blue}{\mathbf{I}_{h}}}_{\text{shunts}}
++ \underbrace{\sum_{\kappa i\in\mathcal{C}^{K}}\!\textcolor{blue}{\mathbf{I}_{\kappa}}}_{\text{capacitors}}
+- \underbrace{\sum_{gi\in\mathcal{C}^{G}}\!\textcolor{blue}{\mathbf{I}_{g}}}_{\text{generators}}
+- \underbrace{ \textcolor{blue}{\mathbf{I}_{s}}}_{\text{voltage source}}
 = \mathbf{0}.
 ```
 
-This holds at every terminal except where the bus is voltage-source-fixed or
-grounded (there the terminal voltage is set directly, and the balancing current is a
-free variable rather than a constraint).
+This holds at every terminal except for grounded terminals (for which the
+balancing current is a free variable rather than a constraint). Note that
+the current at the voltage source is otherwise unconstrained, and so the bus
+connected to the voltage source acts as a slack bus for the whole system being
+modelled.
 
 ## 5. Inequality constraints
 

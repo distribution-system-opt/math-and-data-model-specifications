@@ -13,7 +13,7 @@ constraints. Symbols are defined in [Notation](notation.md).
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `$schema` | string (URI) | URI of the JSON Schema this file was validated against |
+| `$schema` | string (URI) | `$id` of the JSON Schema document this file was validated against, released from [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema) |
 | `version` | string | Version of this **dataset** (not the schema) |
 | `title` | string | Human-readable dataset name (distinct from the machine-readable root `name`) |
 | `description` | string | Free-text notes or caveats |
@@ -38,6 +38,13 @@ without the `https://orcid.org/` prefix).
 
 - `$schema` follows the JSON Schema `$schema` keyword convention; it should be a
   versioned, dereferenceable URI (a floating reference to `main` is acceptable in draft).
+  The canonical schema documents live in the
+  [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema)
+  repository, one immutable directory per version, so the URI has the form
+  `https://raw.githubusercontent.com/distribution-system-opt/dsopt-schema/main/schema/bmopf/<version>/bmopf.schema.json`.
+  A reader selects the schema version from this field. The value in the example
+  below stays a placeholder until a schema version is released from that
+  repository.
 - Dates must be UTC and should include a time component (`THH:MM:SSZ`); a date-only
   value is permitted when the time is unknown.
 - `license` should be a URI when the licence needs specific attribution language beyond

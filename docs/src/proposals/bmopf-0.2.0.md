@@ -1,14 +1,17 @@
-# PowerIO integration additions to draft BMOPF 0.2
+# Proposed BMOPF v0.2.0: additional field semantics
 
 !!! note "Proposed material, subject to Task Force review"
     This supplement builds on Matt Deakin's [source and objective proposal](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
     and accompanies the `propose-bmopf-0.2.0` schema branch.
-    PowerIO v0.11.0 is preparing an implementation of draft BMOPF 0.2.
-    That implementation does not constitute Task Force ratification. The
+    It contributes to a versioned BMOPF v0.2.0, subject to Task Force approval.
+    Findings from developing a reference implementation in PowerIO v0.11.0
+    provide compatibility and numerical evidence for that review. The
     accepted component pages retain their current status.
 
 The proposal makes equipment data already encountered in interchange files
-explicit and checks the resulting contract in a reference consumer. The
+explicit and checks the resulting contract through implementation evidence.
+The [contribution record](https://github.com/distribution-system-opt/dsopt-schema/blob/propose-bmopf-0.2.0/docs/contributors.md)
+credits the preceding schema, specification and review work. The
 [schema proposal](https://github.com/distribution-system-opt/dsopt-schema/tree/propose-bmopf-0.2.0)
 contains exact field definitions, a worked feeder, a field inventory and
 structural/semantic tests. The additions below require paired review of those
@@ -167,7 +170,7 @@ repair before numerical use. New semantic rejection checks name inconsistent
 versions, role lists, dimensions, references and bounds.
 
 PowerIO distinguishes source-byte preservation, typed conversion, generation-2
-IR storage, profile emission and computational support. Explicit legacy output
+IR storage, schema-version selection and computational support. Explicit legacy output
 may relocate proposed-only physics to `extras`, with diagnostics. A consumer
 that ignores those extensions is not computationally equivalent. Producer
 provenance pins a proposal commit and schema digest; the Task Force retains
@@ -190,7 +193,7 @@ a deprecated alias with the same values and phase order, so existing datasets
 remain readable. If both spellings occur, they must agree. Fresh draft output
 uses `energy_cost_rate`.
 
-Additional integration evidence covers IR persistence, typed source prices in
+Additional implementation evidence covers IR persistence, typed source prices in
 C and Julia, and relocation to `extras.voltage_source` when explicitly writing
 0.1.0. Optional IBR prices extend the data model for capable downstream
 calculations; they do not change the source/generator objective in PR #36.

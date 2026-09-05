@@ -1,90 +1,44 @@
-# Objective and feasibility
+# Objective
 
-The component pages define the network's variables and constraints — the *feasible
-set*. This page defines what is optimised over it: the **objective**, and the
-**feasibility relaxation** used to diagnose networks that have no feasible point.
-Unlike the component pages this is a *formulation* page, not a data object. Symbols are
-defined in [Notation](notation.md).
+The component pages define the network's variables and constraints, i.e., the *feasible
+set*. This page defines what is optimised over that feasible set: the **objective**.
+Symbols are defined in [Notation](notation.md).
 
-## Objective
-
-The default snapshot objective minimises total **active-power dispatch cost
-rate**, summed over every dispatchable element (generators, the voltage source,
-IBRs) and every phase:
+The default objective minimises total **active-power dispatch cost**,
+in $. This is summed over every dispatchable element (generators and voltage source;
+with the power injected by the voltage source representing electricity drawn from
+the upstream (e.g., transmission) grid) and every phase:
 
 ```math
-\min \; \sum_{e} \sum_{k} \textcolor{red}{c_{e,k}}\; P_{e,k}/1000,
+\min \;
+\frac{\textcolor{red}{\Delta_T}}{1000}
+\left(
+\underbrace{\sum_{g\in\mathcal{G}} \sum_{p} \textcolor{red}{c_{g,p}}\; P_{g,p}}_{\text{generators}}
+\;+\;
+\underbrace{\sum_{s\in\mathcal{S}} \sum_{p} \textcolor{red}{c_{s,p}}\; P_{s,p}}_{\text{voltage source}},
+\right)
 ```
 
-where $\textcolor{red}{c_{e,k}}$ (currency/kWh, from each element's per-phase
-`cost` array) is the energy price of phase $k$, and $P_{e,k}$ is that phase's
-injected active power in watts — the same bilinear expression the element defines
-($P_{e,k}=\Delta v^r\,c^r + \Delta v^i\,c^i$). The factor $1/1000$ converts W to
-kW, so this snapshot objective is a cost **rate** in currency/h. For a
-multi-period monetary objective, multiply every snapshot rate by its duration in
-hours before summing.
+where $\textcolor{red}{c_{g,p}}$ and $\textcolor{red}{c_{s,p}}$ (currency/kWh,
+from each element's per-phase `energy_cost_rate` array — see
+[Generators](generator.md#1.-Data-model) and
+[Voltage sources](source.md#1.-Data-model)) are the energy price of phase $p$
+for generator $g\in\mathcal{G}$ and voltage source $s\in\mathcal{S}$
+respectively, and $P_{g,p}$, $P_{s,p}$ are that phase's injected active power
+in watts, as defined in [Generators §4](generator.md#4.-Equality-constraints)
+and [Voltage sources §4](source.md#4.-Equality-constraints). The constant factor
+$\textcolor{red}{\Delta_T}$ accounts for the duration of the snapshot analysis
+(with fixed value 1 hr) and the factor of 1000 converts power injections from
+W to kW (so that the value of the objective is then in $).
 
 ### Sign convention
 
-$P_{e,k}$ is the power **injected into the network** by the element, uniformly across
-generators, IBRs, and the voltage source (each stamps $+I$ into KCL). Therefore:
+Here, $P_{g,p}$ and $P_{s,p}$ are the power **injected into the network** by the
+element across generators and voltage source. Therefore:
 
-- a **positive** cost minimises that element's injection;
-- a **negative** cost maximises it.
+- a **positive** energy cost rate minimises that element's injection;
+- a **negative** energy cost rate maximises it.
 
 The voltage source is *not* special: for the slack, positive injection means importing
-from the grid, so a positive source cost is the grid import price (and export, a
-negative injection, is credited at the same price). Maximising system exports is a
-positive slack cost with free DERs.
-
-The cost is **linear** in the dispatch and is added exactly — there is no
-polynomial/quadratic term. A `cost` must be a per-phase vector; a scalar is rejected.
-
-## Feasibility relaxation
-
-A constant-power OPF can be **infeasible**: the load/generation specification may be
-irreconcilable with the network physics. To diagnose such cases, a
-feasibility-relaxed variant adds an **elastic slack current** and minimises it, instead
-of cost.
-
-### Elastic slack
-
-At every ungrounded, non-source terminal a free slack current
-$\textcolor{blue}{s_{i,p}}=s^r_{i,p}+\textcolor{brown}{j}\,s^i_{i,p}$ is added directly
-into that terminal's KCL:
-
-```math
-\kappa^{\Re}_{i,p} + s^r_{i,p} = 0, \qquad \kappa^{\Im}_{i,p} + s^i_{i,p} = 0.
-```
-
-Where a slack pair is present, it can absorb any residual in that terminal's KCL.
-This does **not** guarantee that the complete relaxed NLP is feasible or that a
-local solver will converge: fixed source voltages, hard bounds, device equalities,
-or terminals without slacks can still conflict.
-
-### Objective
-
-The cost objective is replaced by the squared magnitude ($\ell_2^2$) of all slack
-injections:
-
-```math
-\min \; \sum_{i,p} \big( (s^r_{i,p})^2 + (s^i_{i,p})^2 \big).
-```
-
-### Interpretation
-
-The relaxation retains the standard OPF's hard constraints — voltage bounds,
-bus/line angle limits, and every device current limit — while enlarging the
-feasible set only through the nodal-current slacks. Consequently, for a
-successfully converged solve:
-
-- An independently residual-checked **zero-slack** point demonstrates numerical
-  feasibility under the represented loading and constraints.
-- **Non-zero** slack at a locally optimal relaxed point identifies where that
-  solve paid to violate KCL and by how much current. It is diagnostic evidence,
-  not a proof that the original nonconvex problem has no zero-slack solution.
-- Voltages still respect their hard bounds. When those hard constraints remain
-  mutually consistent, an unreachable operating bound commonly surfaces as
-  residual current. Contradictory hard constraints can instead leave even the
-  relaxed problem infeasible (for example, a fixed source voltage contradicting
-  a bound on the same terminal).
+from the grid, so a positive source energy cost rate is the grid import price (and export, a
+negative injection, is credited at the same price).

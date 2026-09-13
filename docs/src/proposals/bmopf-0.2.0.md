@@ -9,7 +9,7 @@
     accepted component pages retain their current status.
 
 The proposal makes equipment data already encountered in interchange files
-explicit and checks the resulting contract through implementation evidence.
+explicit and checks the proposed definitions through implementation evidence.
 The [contribution record](https://github.com/distribution-system-opt/dsopt-schema/blob/propose-bmopf-0.2.0/docs/contributors.md)
 credits the preceding schema, specification and review work. The
 [schema proposal](https://github.com/distribution-system-opt/dsopt-schema/tree/propose-bmopf-0.2.0)
@@ -137,7 +137,7 @@ and magnetizing terms add their corresponding losses and voltage drops.
 
 ## Other proposed equipment and controls
 
-| Addition | Contract requiring review |
+| Addition | Definitions requiring review |
 |---|---|
 | Inverter-based resources | Phase power/cost limits, conductor current limits, topology, filter impedance and optional DC coupling |
 | Control profiles | Explicit voltage/power reference, units and ordered breakpoints for Volt-VAr, Volt-Watt and power-factor laws |
@@ -197,3 +197,24 @@ Additional implementation evidence covers IR persistence, typed source prices in
 C and Julia, and relocation to `extras.voltage_source` when explicitly writing
 0.1.0. Optional IBR prices extend the data model for capable downstream
 calculations; they do not change the source/generator objective in PR #36.
+
+## Baseline, dependencies, and contributions
+
+The [historical v0.1.0 baseline](https://github.com/distribution-system-opt/dsopt-schema/blob/baseline/bmopf-0.1.0/docs/baseline-0.1.0.md)
+records the Task Force schema with unchanged validation rules. This supplement
+and schema PR #2 propose changes above it; they do not declare a schema release.
+The baseline credits Matt Deakin's initial schema and alignment work,
+Frederik Geth's schema development and review-driven changes, and Samuel
+Talkington's port and versioned import.
+
+Matt's source/objective PR #36 remains the prerequisite for this supplement.
+The energy-price spelling and units are still discussed in
+[issue #17](https://github.com/distribution-system-opt/math-and-data-model-specifications/issues/17)
+and the [paired resources PR #21](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
+The current proposed spelling does not establish consensus on final units.
+Terminal-role questions remain in PR #26 and issue #27.
+
+The [contributor record](https://github.com/distribution-system-opt/dsopt-schema/blob/propose-bmopf-0.2.0/docs/contributors.md)
+distinguishes authored definitions, integration work, review, and coordination.
+Credits identify the work carried forward, not endorsement of every addition.
+Corrections, narrower proposals, and additional evidence are welcome.

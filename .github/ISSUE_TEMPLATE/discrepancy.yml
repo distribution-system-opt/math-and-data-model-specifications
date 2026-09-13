@@ -1,0 +1,48 @@
+name: Schema or specification discrepancy
+description: Report a mismatch, unclear definition, or validation behavior.
+labels:
+- bug
+body:
+- type: markdown
+  attributes:
+    value: Thanks for helping improve BMOPF. The [contribution guide](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md)
+      explains the existing review process. Links to related issues and PRs help connect the
+      work.
+- type: input
+  id: revision
+  attributes:
+    label: Affected version or revision
+    description: Schema version, specification commit, or documentation URL. State "not sure"
+      if unknown.
+  validations:
+    required: true
+- type: textarea
+  id: location
+  attributes:
+    label: Affected field or page
+    description: Link the field, equation, table, or section.
+  validations:
+    required: true
+- type: textarea
+  id: behavior
+  attributes:
+    label: Expected and observed behavior
+    description: Explain the disagreement and which source supports the expected behavior.
+  validations:
+    required: true
+- type: textarea
+  id: example
+  attributes:
+    label: Small example or reproduction
+    description: A minimal JSON example or short reproduction is usually enough. Include validation
+      output if available.
+  validations:
+    required: false
+- type: textarea
+  id: sources
+  attributes:
+    label: Related work and attribution
+    description: Related issues, PRs, source material, and contributors. Include source licences
+      for reused examples.
+  validations:
+    required: false

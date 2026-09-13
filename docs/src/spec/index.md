@@ -61,9 +61,11 @@ The complete feasible set at a glance — the objective, every bound, and every 
 constraint, with the page that defines each. Bounds are optional (absent bounds are
 not enforced); constraints are always active for the elements present.
 
+**[Amrit: want to confirm we do not have a status feature that turns components on and off. The switch certainly does (`open_switch`). If any element can be switched out, is "always active for the elements present" really accurate?]**
+
 | Category | Item | Page |
 |----------|------|------|
-| **Objective** | Minimise active-power dispatch cost | [Objective](objective.md#Objective) |
+| **Objective** | Minimise active-power dispatch cost **[Amrit: we will for sure move beyond just this objective, so do we want it in the model summary as *the* objective?]** | [Objective](objective.md#Objective) |
 | **Voltage bounds** | Phase-to-ground, -neutral, -phase, sequence, neutral cap, angle | [Buses](bus.md#Engineering-bounds) |
 | **Current bounds** | Line / switch / transformer thermal, generator current | [Lines](line.md#Engineering-bounds), [Switches](switch.md), [Generators](generator.md#Engineering-bounds) |
 | **Power bounds** | Generator P·Q box + apparent-power circle; transformer rating; line apparent power | [Generators](generator.md#Engineering-bounds), [Transformers](transformer.md#Engineering-bounds) |

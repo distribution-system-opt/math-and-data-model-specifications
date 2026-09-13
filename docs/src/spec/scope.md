@@ -59,6 +59,7 @@ The specification covers the common branch and nodal elements, with these capabi
 - **Topology:** meshed networks, electrically parallel branches, radial or looped.
 - **Conductors:** 1- to 4-wire lines with full mutual coupling; explicit neutral and earth
   (no Kron reduction); perfect grounding and grounding through impedance.
+  **[Amrit: are we sticking to a maximum of 4 wires, or are we supporting general n-wire lines? Need to decide.]**
 - **Branch elements:** [lines](line.md), [switches](switch.md), and galvanically-isolated
   [transformers](transformer.md) (single-phase, centre-tap, wye–delta, delta–wye).
 - **Nodal elements:** [loads](load.md) (constant-power and voltage-dependent ZIP/exponential),
@@ -81,6 +82,7 @@ every possible problem specification. In this version:
   to the element, like every other component (see [Grounding](grounding.md)).
 - The default objective is linear generation/dispatch cost; quadratic cost terms are not
   included.
+  **[Amrit: adding a quadratic cost term is trivial. Why are we excluding it? For the current cases we could simply include it with the coefficient set to 0.0.]**
 
 ## Out of scope
 

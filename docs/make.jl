@@ -90,7 +90,7 @@ end
 # PDF build (Documenter's LaTeX backend + tectonic, like JuMP.jl)
 #
 # tectonic is a self-contained TeX engine shipped as a Julia artifact, so no
-# system LaTeX installation is required — on CI or locally it "just works".
+# system LaTeX installation is required. On CI or locally it "just works".
 # LaTeX/tectonic cannot embed SVG images, so we build from a copy of `src/` in
 # which every SVG figure has been rasterised to PDF (via the Rsvg + Cairo JLL
 # stack) and the Markdown image links rewritten to point at the PDF.

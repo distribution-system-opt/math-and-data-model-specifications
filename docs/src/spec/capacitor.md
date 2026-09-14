@@ -1,6 +1,6 @@
 # Capacitors
 
-A **capacitor** is a fixed, nameplate-rated shunt capacitor bank — a special case of
+A **capacitor** is a fixed, nameplate-rated shunt capacitor bank, a special case of
 the [Shunt](shunt.md) whose susceptance is derived from nameplate data (a rated
 reactive power and voltage) rather than given as an explicit admittance matrix. Three
 connection configurations are supported: `WYE`, `DELTA`, and `SINGLE_PHASE`. Symbols
@@ -27,12 +27,12 @@ $\kappa$.
 | `v_nom` | $\textcolor{red}{V^{\text{nom}}_\kappa}$ | line-to-line (`WYE`/`DELTA`) or across-element (`SINGLE_PHASE`) |
 
 The bank is assumed balanced: a single element susceptance
-$\textcolor{red}{b_\kappa}$ — derived, not input, see [§4](#4.-Equality-constraints) —
+$\textcolor{red}{b_\kappa}$ (derived, not input, see [§4](#4.-Equality-constraints))
 is stamped identically onto every phase (or phase pair) of the bank.
 
 ## 3. Variables
 
-**None.** Like a shunt, a capacitor introduces no unknown — its current follows from
+**None.** Like a shunt, a capacitor introduces no unknown. Its current follows from
 the bus voltage and its fixed susceptance.
 
 ## 4. Equality constraints
@@ -61,13 +61,13 @@ $\textcolor{red}{\mathbf{B}_\kappa}$ by a reciprocal two-node stamp
 $\textcolor{red}{b_\kappa}\begin{bmatrix}1&-1\\-1&1\end{bmatrix}$, applied once per
 element and accumulated onto shared terminals:
 
-- **`SINGLE_PHASE`** — one stamp across the element's two terminals $[p,\,q]$:
+- **`SINGLE_PHASE`**: one stamp across the element's two terminals $[p,\,q]$:
 
 ```math
 \textcolor{red}{\mathbf{B}_\kappa} = \textcolor{red}{b_\kappa}\begin{bmatrix}1&-1\\-1&1\end{bmatrix}.
 ```
 
-- **`WYE`** — one stamp per phase, between that phase and neutral, on $[a,b,c,n]$:
+- **`WYE`**: one stamp per phase, between that phase and neutral, on $[a,b,c,n]$:
 
 ```math
 \textcolor{red}{\mathbf{B}_\kappa} = \textcolor{red}{b_\kappa}
@@ -79,7 +79,7 @@ element and accumulated onto shared terminals:
 \end{bmatrix}.
 ```
 
-- **`DELTA`** — one stamp per phase pair $(a,b),\,(b,c),\,(c,a)$, on $[a,b,c]$:
+- **`DELTA`**: one stamp per phase pair $(a,b),\,(b,c),\,(c,a)$, on $[a,b,c]$:
 
 ```math
 \textcolor{red}{\mathbf{B}_\kappa} = \textcolor{red}{b_\kappa}
@@ -98,8 +98,8 @@ The bank injects current into KCL at its bus exactly as a shunt would:
 \textcolor{blue}{\mathbf{I}_\kappa} = \textcolor{brown}{j}\,\textcolor{red}{\mathbf{B}_\kappa}\,\textcolor{blue}{\mathbf{U}_i}[\textcolor{purple}{\mathbf{N}_\kappa}].
 ```
 
-The reactive power drawn by each element is voltage-dependent — for a `SINGLE_PHASE`
-capacitor, $Q = \textcolor{red}{b_\kappa}\,|\textcolor{blue}{U}|^2$ — rising and
+The reactive power drawn by each element is voltage-dependent. For a `SINGLE_PHASE`
+capacitor, $Q = \textcolor{red}{b_\kappa}\,|\textcolor{blue}{U}|^2$, rising and
 falling with the square of the terminal voltage, the defining behaviour of a fixed
 capacitor (as opposed to a fixed-power source). At the balanced nominal voltage the
 bank delivers exactly $\textcolor{red}{Q^{\text{rated}}_\kappa}$.

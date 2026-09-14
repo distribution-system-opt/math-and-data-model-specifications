@@ -1,6 +1,6 @@
 # Objective and feasibility
 
-The component pages define the network's variables and constraints — the *feasible
+The component pages define the network's variables and constraints: the *feasible
 set*. This page defines what is optimised over it: the **objective**, and the
 **feasibility relaxation** used to diagnose networks that have no feasible point.
 Unlike the component pages this is a *formulation* page, not a data object. Symbols are
@@ -18,7 +18,7 @@ IBRs) and every phase:
 
 where $\textcolor{red}{c_{e,k}}$ (currency/kWh, from each element's per-phase
 `cost` array) is the energy price of phase $k$, and $P_{e,k}$ is that phase's
-injected active power in watts — the same bilinear expression the element defines
+injected active power in watts, the same bilinear expression the element defines
 ($P_{e,k}=\Delta v^r\,c^r + \Delta v^i\,c^i$). The factor $1/1000$ converts W to
 kW, so this snapshot objective is a cost **rate** in currency/h. For a
 multi-period monetary objective, multiply every snapshot rate by its duration in
@@ -37,7 +37,7 @@ from the grid, so a positive source cost is the grid import price (and export, a
 negative injection, is credited at the same price). Maximising system exports is a
 positive slack cost with free DERs.
 
-The cost is **linear** in the dispatch and is added exactly — there is no
+The cost is **linear** in the dispatch and is added exactly. There is no
 polynomial/quadratic term. A `cost` must be a per-phase vector; a scalar is rejected.
 
 ## Feasibility relaxation
@@ -73,8 +73,8 @@ injections:
 
 ### Interpretation
 
-The relaxation retains the standard OPF's hard constraints — voltage bounds,
-bus/line angle limits, and every device current limit — while enlarging the
+The relaxation retains the standard OPF's hard constraints (voltage bounds,
+bus/line angle limits, and every device current limit) while enlarging the
 feasible set only through the nodal-current slacks. Consequently, for a
 successfully converged solve:
 

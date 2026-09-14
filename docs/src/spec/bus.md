@@ -104,7 +104,7 @@ impose an axis-aligned magnitude-and-angle limit with no operational meaning.
 ### Engineering bounds
 
 Applied at ungrounded, non-source phase terminals (the neutral is excluded from
-phase bounds — its voltage is set by physics, not operational limits).
+phase bounds: its voltage is set by physics, not operational limits).
 
 **Phase-to-ground magnitude.** With $\textcolor{red}{U^{\min}_{i,n}}=0$ and the
 neutral's upper bound supplied by `vn_max`:

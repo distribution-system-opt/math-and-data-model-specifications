@@ -68,11 +68,6 @@ interpretation of an **absent optional** field depends on its kind:
 - **Absent parameter field** ⇒ a **null / zero** value. A missing transformer
   `r_series_from` means that winding resistance is $0\ \Omega$.
 
-This is why bounds are optional throughout the model: different problem formulations
-(cost OPF, maximum load delivery, CVR, state estimation) activate different subsets of
-the feasible region, so the data model lets each bound be present or absent
-independently.
-
 ## Permissible strings and string arrays
 
 Several fields are string-valued. Some are free identifiers; others are restricted to
@@ -90,8 +85,8 @@ an enumeration or must reference terminals declared elsewhere.
 ## Terminal conventions
 
 Terminal identifiers are **strings**; a component's terminal map carries no ordering
-semantics beyond the array order. The canonical written form is `"1"`, `"2"`, `"3"`,
-`"n"`, but the following conventions are recognised on read (case-insensitively):
+semantics beyond the array order. The written form used in specification text is `"1"`, `"2"`, `"3"`,
+`"n"`, but the following conventions are also commonly used:
 
 | Convention | Phases | Neutral |
 |------------|--------|---------|
@@ -102,14 +97,8 @@ semantics beyond the array order. The canonical written form is `"1"`, `"2"`, `"
 
 Because a label alone does not say which conductor is a phase and which is the neutral,
 a case may classify roles once for the whole network in an optional top-level
-`terminal_conventions` block:
+`terminal_conventions` block, for example:
 
 ```json
 "terminal_conventions": { "phase": ["a", "b", "c"], "neutral": ["n"] }
 ```
-
-When present, the block is **authoritative** — labels are matched exactly, including
-case — and is always emitted on export. The role lists must be disjoint; the ground
-reference stays implicit. When the block is **absent**, roles are inferred: a terminal
-`n`/`N` is the neutral; terminal `"4"` is the neutral when the bus terminal set is
-exactly `{1, 2, 3, 4}`; every other terminal is a phase.

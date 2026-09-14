@@ -43,6 +43,14 @@ JSON has only ordered lists of real numbers, so:
 - A **vector** (e.g. `v_min`, `i_max`) is a JSON array, ordered to match the element's
   terminal map or phase order as stated on each component page.
 
+!!! danger "Amrit"
+    Why are the line resistance and reactance fields capitalised (`R_series_k_j`,
+    `X_series_k_j`) while the transformer ones are lowercase (`r_series_from`,
+    `x_series_to`)? The pattern appears to be that capitalised fields are matrix
+    entries with a `_k_j` suffix (lines, linecodes, shunts) and lowercase fields are
+    scalars or arrays. If that is the intended rule, state it here; otherwise pick
+    one casing.
+
 ## Conversion examples
 
 Convert conventional power-systems quantities to SI before writing them. To allow exact

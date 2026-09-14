@@ -28,6 +28,11 @@ is real or complex.
 | $\textcolor{purple}{\mathbf{x}}$ | array of string **parameters** |
 | $\mathcal{X}$ | set |
 
+!!! danger "Amrit"
+    $\mathcal{X}$ is double-booked: it is the generic "set" symbol here and the
+    transformer set in the [Sets and indices](#Sets-and-indices) table below. Pick a
+    different generic symbol.
+
 Operators and accessors:
 
 | Symbol | Meaning |
@@ -77,6 +82,11 @@ with $\mathbf{U}_i^{\Re},\mathbf{U}_i^{\Im}\in\mathbb{R}^{|\mathcal{N}_i|}$ the 
 and imaginary parts (black — real variables), $\mathbf{U}_i^{\text{mag}}$ the
 magnitude and $\boldsymbol{\theta}_i$ the angle.
 
+!!! danger "Amrit"
+    Bus and line indices are typeset red ($\textcolor{red}{i}$, $\textcolor{red}{\ell}$)
+    in this section and the next, but black in the sets table. Indices are not
+    parameters; I suggest black everywhere.
+
 The foundational model on each page is written with the **complex** vectors. The
 implementation solves in the **rectangular real** parts — one variable per part per
 terminal — so every complex equality becomes a pair of real equalities; this
@@ -101,6 +111,18 @@ $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shun
 
 The sign convention throughout is **positive current flows into the bus** at the
 terminal where it is summed by Kirchhoff's current law (KCL).
+
+!!! danger "Amrit"
+    This sentence is **wrong**. Reading the equations on the bus, line, load and shunt
+    pages, the KCL convention is the opposite: **current leaving the bus into the
+    element is positive**. The line series current flows $i\to j$ (leaves bus $i$),
+    the line shunt and shunt-element currents are drawn out of the bus, and the load
+    current with $P^{\text{nom}}>0$ flows out of the bus; all enter KCL with $+$. The
+    generator current is defined as an injection *into* the bus and is the only term
+    entered with $-$. Rewrite this as: "positive current leaves the bus into the
+    element; generators define their current as an injection and enter KCL negated."
+    The earlier sentence ("terminal current flowing into element") already says this
+    correctly.
 
 ## Standard transforms and constants
 
@@ -171,6 +193,16 @@ $\underline{x}\le\mathfrak{R}(\textcolor{blue}{z_k})\le\overline{x}$ (and likewi
 $\mathfrak{I}$) — a rectangle, not a circle. Both appear in part 5 of each component
 page and are kept separate.
 
+!!! danger "Amrit"
+    Can we confirm that **every bound is a real number (or a list of reals) and nothing
+    is complex**? All $\cdot^{\min}$ / $\cdot^{\max}$ symbols across the pages are
+    typeset red (real parameter), so the intent seems right, but the only thing that
+    says so is the colour. Reusing the same letter is confusing: $\textcolor{blue}{\mathbf{U}_i}$
+    is complex while $\textcolor{red}{\mathbf{U}^{\max}_i}$ is a real magnitude vector,
+    and the note above says colour is sometimes dropped in derivations. Suggest stating
+    explicitly here that all bounds are real, and that $\textcolor{red}{\mathbf{z}^{\max}}$
+    bounds the **magnitude** $|\textcolor{blue}{\mathbf{z}}|$, not the complex quantity.
+
 ## Sets and indices
 
 Finite sets collect the network's elements; each element is referenced by a unique
@@ -192,6 +224,15 @@ The **element sets** each collect one kind of network element:
 | $\mathcal{D}$ | loads (demand) | $d$ | |
 | $\mathcal{H}$ | shunts | $h$ | |
 | $\mathcal{K}$ | capacitors | $\kappa$ | |
+
+!!! danger "Amrit"
+    Two index symbols are overloaded on other pages. $\kappa$ is the capacitor index
+    here but the KCL residual $\kappa^{\Re}_{i,p}$ on the
+    [Objective](objective.md#Feasibility-relaxation) page, where it is never defined.
+    $s$ is the source index, the slack current $s_{i,p}$ in the feasibility relaxation,
+    and the superscript in $U^{s}_{s,p}$ on the [Voltage sources](source.md) page.
+    The transformer page also introduces $V^{\sigma}_{x,k}$, $\sigma$ and $b^{\sigma}$
+    that are not defined here.
 
 $\mathcal{N}_i\subseteq\mathcal{N}$ denotes the terminals of bus $i$. (Libraries —
 linecodes, wire data, line geometries — are referenced
@@ -240,6 +281,11 @@ r i \in \mathcal{C}^{V},
 s i \in \mathcal{C}^{S}.
 ```
 
+!!! danger "Amrit"
+    $r i \in \mathcal{C}^{V}$ looks like a leftover: sources are indexed by $s$ with
+    set $\mathcal{S}$, and $\mathcal{C}^{V}$ is not in the overview table below
+    (though $\mathcal{M}^{V}$ is). Drop the $V$/$r$ forms.
+
 This model version permits a single voltage source, so the source bus set
 $\mathcal{I}^{\text{source}}=\{i : si\in\mathcal{C}^{S}\}$ has $|\mathcal{I}^{\text{source}}|=1$.
 
@@ -259,6 +305,9 @@ the network. As a *set*, a terminal mapping is written $\mathcal{M}^{\bullet}$: 
 $d\,z\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $z$
 maps to bus terminal $p$; branch mappings carry an extra bus index ($\ell i z p$).
 
+!!! danger "Amrit"
+    The conductor-order index is $z$ here, but every component page uses $k$. Pick one.
+
 The **neutral terminal** $n$ of a bus is identified by the bus's declaration (an
 explicit neutral field, or a terminal named `"n"`/`"N"`). If a bus has no neutral,
 all its terminals are treated as phases.
@@ -276,6 +325,11 @@ configuration: $d f\in\mathcal{R}^{D}$ for loads, $g f\in\mathcal{R}^{G}$ for ge
 $i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$ have their voltage 
 fixed to zero. Lines and shunts always carry an implicit ground connection (their
 shunt admittance is defined to ground). See [Grounding](grounding.md) for the full model.
+
+!!! danger "Amrit"
+    The first sentence of this paragraph is broken: "Terminals listed in ... form the
+    ground mapping ... have their voltage fixed to zero" needs splitting into two
+    sentences.
 
 ### Overview of derived sets
 
@@ -298,6 +352,11 @@ that indexes each:
 | $\mathcal{M}^{L},\mathcal{M}^{T},\mathcal{M}^{W}$ | branch terminal mappings | $\cdot\,i\,z\,p$ |
 | $\mathcal{M}^{\emptyset}$ | ground terminal mapping | $i p$ |
 | $\mathcal{R}^{D},\ \mathcal{R}^{G}$ | load / generator configurations | $\cdot\,f$ |
+
+!!! danger "Amrit"
+    Branch mappings use $\mathcal{M}^{T}$ for transformers, but the transformer set is
+    $\mathcal{X}$ and $\mathcal{T}$ is reserved for topology. This should be
+    $\mathcal{M}^{X}$.
 
 **Matrices** (e.g. impedance) are stored **row-first** with an underscore delimiter:
 matrix entry $A_{kj}$ is the field `A_k_j`, 1-indexed. So `R_series_1_2` is the

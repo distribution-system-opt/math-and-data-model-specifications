@@ -87,5 +87,5 @@ terminal.
 
 ## 5. Inequality constraints
 
-**None (foundational).** A load has no rating bounds in this model — it is a fixed or
+**None (foundational).** A load has no rating bounds in this model. It is a fixed or
 voltage-dependent power sink.

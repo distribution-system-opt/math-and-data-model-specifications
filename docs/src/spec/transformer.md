@@ -1,7 +1,7 @@
 # Transformers
 
-A **transformer** couples two buses through **galvanically isolated** windings —
-primary and secondary share no conductor, only magnetic flux. Because the winding
+A **transformer** couples two buses through **galvanically isolated** windings.
+Primary and secondary share no conductor, only magnetic flux. Because the winding
 topologies differ qualitatively, each configuration is a distinct data-model object:
 `single_phase`, `center_tap`, `wye_delta`, and `delta_wye`. Every model is built from an
 idealised winding pair plus a series leakage impedance; a magnetising shunt, internal
@@ -17,7 +17,7 @@ Common fields (two-winding subtypes):
 |-------|------|:----:|:----:|-------------|
 | `bus_from`, `bus_to` | string | – | ✔ | Endpoint bus IDs $i$, $j$ |
 | `terminal_map_from`, `terminal_map_to` | string[] | – | ✔ | Conductor→terminal maps (lengths per subtype) |
-| `v_nom_from`, `v_nom_to` | number | V | ✔ | Nominal winding voltages — set the turns ratio |
+| `v_nom_from`, `v_nom_to` | number | V | ✔ | Nominal winding voltages (set the turns ratio) |
 | `s_rating` | number | VA | ✔ | Nameplate apparent-power rating |
 | `r_series_from`, `x_series_from` | number | Ω | | From-winding series leakage (`single_phase`, `center_tap`) |
 | `r_series_to`, `x_series_to` | number | Ω | | To-winding series leakage (`single_phase`, `center_tap`) |
@@ -26,8 +26,8 @@ Common fields (two-winding subtypes):
 
 Terminal-map lengths: `single_phase` 2 + 2; `center_tap` 2 (from) + 3 (to, ordered
 L1/centre/L2); `wye_delta` 4 (wye) + 3 (delta); `delta_wye` 3 (delta) + 4 (wye). For
-`center_tap`, `v_nom_to` is the **half-winding** (leg) voltage — e.g. 120 V for a
-240/120 V service — not the full secondary span.
+`center_tap`, `v_nom_to` is the **half-winding** (leg) voltage, e.g. 120 V for a
+240/120 V service, not the full secondary span.
 
 ## 2. Input symbols
 
@@ -75,8 +75,8 @@ the terminal voltage and $\textcolor{blue}{V^{\text{fr}}_x} = \textcolor{red}{N}
 
 ### Series leakage
 
-Each winding carries a series impedance between its EMF and its terminals (Ohm's law)
-— the model's one loss element, representing copper/leakage loss. Referred to the HV
+Each winding carries a series impedance between its EMF and its terminals (Ohm's law),
+the model's one loss element, representing copper/leakage loss. Referred to the HV
 (from) side and combined,
 $\textcolor{brown}{Z_x}=\textcolor{brown}{Z^{\text{fr}}_x}+\textcolor{red}{N}^2\,\textcolor{brown}{Z^{\text{to}}_x}$,
 the ideal voltage relation becomes
@@ -85,7 +85,7 @@ the ideal voltage relation becomes
 \textcolor{blue}{V^{\text{fr}}_x} - \textcolor{red}{N}\,\textcolor{blue}{V^{\text{to}}_x} = \textcolor{brown}{Z_x}\,\textcolor{blue}{I_{x,\text{fr}}}.
 ```
 
-This combined $\textcolor{brown}{Z_x}$ is what a short-circuit test measures — the
+This combined $\textcolor{brown}{Z_x}$ is what a short-circuit test measures: the
 *series sum* of the two winding leakages, referred to one side; it is not itself a
 separate element. `single_phase` and `center_tap` keep the two leakages as separate
 fields, `r/x_series_from` → $\textcolor{brown}{Z^{\text{fr}}_x}$ and `r/x_series_to` →
@@ -94,7 +94,7 @@ $\textcolor{brown}{Z^{\text{to}}_x}$; `wye_delta` and `delta_wye` instead give a
 (the delta winding is lossless in this model).
 
 !!! note "The per-winding leakage split is under-determined by a short-circuit test"
-    A standard short-circuit test yields only $\textcolor{brown}{Z_x}$ — the *sum* of
+    A standard short-circuit test yields only $\textcolor{brown}{Z_x}$, the *sum* of
     the two winding leakages. Splitting it into $\textcolor{brown}{Z^{\text{fr}}_x}$
     and $\textcolor{brown}{Z^{\text{to}}_x}$ requires an extra convention (OpenDSS
     splits per its winding definitions; a common default is to put it all on one
@@ -106,7 +106,7 @@ split across both windings; wye–delta / delta–wye lump it entirely on the wy
 
 ### Single-phase
 
-One winding pair — the archetypal two-winding transformer. With the combined leakage
+One winding pair, the archetypal two-winding transformer. With the combined leakage
 $\textcolor{brown}{Z_x}=\textcolor{brown}{Z^{\text{fr}}_x}+\textcolor{red}{N}^2\textcolor{brown}{Z^{\text{to}}_x}$
 (see [Series leakage](#Series-leakage) above):
 
@@ -198,7 +198,7 @@ Whether the wye neutral is grounded is external to the transformer (see
 ### Cartesian variable bounds
 
 Optional per-conductor current boxes on the winding-current components, from
-`i_max_from`/`i_max_to` — implied by the current circles below.
+`i_max_from`/`i_max_to`, implied by the current circles below.
 
 ### Engineering bounds
 

@@ -29,7 +29,7 @@ terminals to avoid zero-padded matrices and a more compact representation.
 
 ## 3. Variables
 
-**None.** A shunt introduces no unknown — its current is determined entirely by the
+**None.** A shunt introduces no unknown. Its current is determined entirely by the
 bus voltage and its fixed admittance.
 
 ## 4. Equality constraints

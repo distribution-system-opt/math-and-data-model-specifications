@@ -17,12 +17,12 @@ As one or more **single-phase** loads across the triplex terminals. For a 1 kW l
 across legs `1`–`2` of a triplex bus with `terminal_names` `["1","n","2"]`, define a
 `SINGLE_PHASE` load with `terminal_map` `["1","2"]` and `p_nom` `[1000.0]`. A
 two-terminal `SINGLE_PHASE` map is modelled across exactly those two terminals (here
-line-to-line, 240 V), not phase-to-ground — see [Loads](load.md).
+line-to-line, 240 V), not phase-to-ground. See [Loads](load.md).
 
 ## I converted a wye load to delta with the standard transform and got a different answer. Why?
 
-Because a distribution **wye load is four-wire** — three phase branches to a *neutral
-return* conductor — whereas the textbook delta–wye (Y–Δ) transform assumes a *three-wire*
+Because a distribution **wye load is four-wire** (three phase branches to a *neutral
+return* conductor) whereas the textbook delta–wye (Y–Δ) transform assumes a *three-wire*
 wye with no return (a graph-theoretic star). The transform is **not applicable** to a
 wye-with-neutral load. Model the wye and delta connections directly via the load
 `configuration` field; do not pre-transform.
@@ -63,7 +63,7 @@ power, and 1000 converts the kVA rating to VA.
     automatically when reading source models. The formulas are given here for authors
     constructing data by hand or auditing an import.
 
-## My line impedances are sequence components only — can I convert them to wire coordinates?
+## My line impedances are sequence components only: can I convert them to wire coordinates?
 
 It is possible convert sequence components to _phase_ component matrices (i.e., to define a
 3-by-3 matrix linking the voltages and currents of phases `"1","2","3"`). If the distribution

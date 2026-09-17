@@ -31,7 +31,7 @@ string ID $s$.
 ## 3. Variables
 
 The source injects a **slack current** $\textcolor{blue}{I_{s,k}}$ per phase terminal,
-stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained — it
+stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained. It
 absorbs whatever power balance the network requires, which is what makes this the
 reference bus.
 
@@ -64,7 +64,7 @@ The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost
 
 ### Cartesian variable bounds
 
-**None** — the slack current is free.
+**None.** The slack current is free.
 
 ### Engineering bounds
 

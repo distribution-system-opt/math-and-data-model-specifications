@@ -177,6 +177,14 @@ alternatives, and to keep it faithful to real distribution system physics.
   primitives (for example, transformers as idealised winding pairs plus series
   impedance) over introducing bespoke, monolithic models.
 
+- **Industry-accepted component models are preferred.** If a component has an
+  legacy model available from the industry-grade multiconductor solver OpenDSS,
+  then that model should be preferred as a BMOPF component model, unless
+  there are strong grounds for choosing an alternative formulation. Consistent
+  resuse of these models enables effective benchmarking of underlying power flow
+  physics against OpenDSS as a powerful industry-accepted tool.
+
+
 ## Contributing guidelines
 
 - **Keep the prose, tables, worked example, and JSON Schema in agreement.** The
@@ -203,6 +211,17 @@ alternatives, and to keep it faithful to real distribution system physics.
   optimization problem.")
 - Figures live in `docs/src/spec/assets/` as SVG; they are rasterised
   automatically for the PDF build.
+- The data specification's most important audience is humans and all contributions
+  are reviewed by humans. Please avoid writing which may be perceived as
+  having "slop" characteristics. Contributions developed alongside AI tools
+  are encouraged - and indeed the data specification is structured to be
+  easily parsed by these tools - but the responsibility for Pull Requests lies
+  with the contributor and not the tools they use.
+- The data specification's central audience is graduate-level electrical power
+  engineers. If there is a convention which differs between disciplines, choose
+  the power engineering convention. Do not assume good knowledge of computer
+  science concepts or terminology, and so prefer a more verbose explanation for
+  potentially unfamiliar concepts.
 
 ## Pull request workflow
 

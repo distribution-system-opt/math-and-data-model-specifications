@@ -17,12 +17,12 @@ formulation, are as follows:
   [transformer](transformer.md) winding models and grounding conventions.
 - **W. H. Kersting**, *Distribution System Modeling and Analysis*, CRC Press (4th ed.,
   2017). The standard reference for line/cable impedance (Carson's equations, Kron
-  reduction), transformer connections, and unbalanced power flow — the physics behind
+  reduction), transformer connections, and unbalanced power flow, the physics behind
   the [line](line.md) and [transformer](transformer.md) pages.
 - **T. A. Short**, *Electric Power Distribution Handbook*, CRC Press (2nd ed., 2014). An
   equipment-oriented companion covering feeders, grounding, and protection.
   This has influenced the field names for the [capacitor](capacitor.md) page.
-- **OpenDSS** (EPRI) — a widely used distribution power-flow engine and a common
+- **OpenDSS** (EPRI): a widely used distribution power-flow engine and a common
   source and cross-validation reference for distribution models.
 - **S. Babaeinejadsarookolaee et al.**, "The Power Grid Library for benchmarking AC
   optimal power flow algorithms" (PGLib-OPF), 2019. The transmission-side, positive-

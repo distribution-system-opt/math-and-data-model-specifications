@@ -17,14 +17,14 @@ Corrections, clarifications, and new content are all welcome.
     and community-building. It is expected that governance arrangements will evolve
     in future as community needs change.
 
-The specification is maintained by **project maintainers** — members of the
+The specification is maintained by **project maintainers**, members of the
 IEEE PES BMOPF Task Force who review pull requests and hold merge rights.
 
 Anyone may open issues, join the discussion, and propose changes: the goal is for the
 community to drive the specification's direction, with maintainers reviewing,
 ratifying, and merging.
 
-Maintainers aim to give an **initial response within about 48 hours** — a review
+Maintainers aim to give an **initial response within about 48 hours**: a review
 comment, a question, or a merge, not necessarily a final decision.
 
 Larger normative changes usually take longer to reach consensus (see the review
@@ -77,38 +77,38 @@ on all end-users of the specification.
 Therefore, the review a pull request receives scales with how much of the
 contract it affects.
 
-### Editorial / minor changes — fast track
+### Editorial / minor changes: fast track
 
 Typo fixes, wording and grammar, formatting, broken links, clearer phrasing that
 preserves meaning, and new illustrative examples or FAQ entries that do not
 change the model. These can be reviewed and merged quickly. Open a pull request
-directly — no prior discussion is needed.
+directly. No prior discussion is needed.
 
-### Explanatory / non-normative changes — standard review
+### Explanatory / non-normative changes: standard review
 
 New tutorials, expanded derivations, restructured sections, added figures, and
 notation clarifications that **do not alter any field name, equation, bound, or
 schema constraint**.
 
-### Normative / major changes — Task Force review
+### Normative / major changes: Task Force review
 
 Any change that touches the **contract** requires Task Force review and should
 **start as an issue or discussion before a pull request**, because it can take
 significant time to agree and ratify. This includes:
 
-- **Data model fields** — adding, removing, renaming, or re-typing any field; or
+- **Data model fields**: adding, removing, renaming, or re-typing any field; or
   changing its units, optionality, or meaning.
-- **The JSON Schema** — any change to the schema, which must stay in lock-step
+- **The JSON Schema**: any change to the schema, which must stay in lock-step
   with the documented field names. A field rename is not complete until the prose,
   the tables, the worked example, and the schema are consistent.
-- **Mathematical model** — adding, removing, or changing constraints, bounds,
+- **Mathematical model**: adding, removing, or changing constraints, bounds,
   objectives, or the sets/notation they rely on.
-- **Supported values** — changing the permitted configurations, string
+- **Supported values**: changing the permitted configurations, string
   enumerations, or element subtypes.
 
 For these, expect maintainers to ask for: a clear motivation, the impact on
-existing datasets, a corresponding schema update, and — where a field or value is
-renamed or removed — a migration note and, if warranted, a deprecation path.
+existing datasets, a corresponding schema update, and, where a field or value is
+renamed or removed, a migration note and, if warranted, a deprecation path.
 Contract changes move the schema version; see
 [Versioning and releases](#Versioning-and-releases) below.
 
@@ -128,7 +128,7 @@ alternatives, and to keep it faithful to real distribution system physics.
   including where that is nonlinear or nonconvex (constant-power loads, apparent
   power limits, voltage magnitudes). Convex relaxations, linearisations, and
   lifts to other variable spaces are legitimate *downstream* choices for solvers
-  and studies — they are not baked into the reference formulation.
+  and studies. They are not baked into the reference formulation.
 
 - **Well-defined edge-case behaviour.** Degenerate and limiting configurations
   must be specified, not left implementation-defined. For example, an idealised
@@ -165,7 +165,7 @@ alternatives, and to keep it faithful to real distribution system physics.
 - **Well-posed and objective-agnostic.** Reference problems should be well-posed
   (the default generation-cost objective, for instance, is chosen because it is
   well-posed and typically has a unique solution). The invariant is the network
-  physics, not any particular objective — models should not bake in assumptions
+  physics, not any particular objective. Models should not bake in assumptions
   that only make sense for one problem class.
 
 - **Explicit, SI, and portable data.** The data model uses SI units (no
@@ -183,7 +183,7 @@ alternatives, and to keep it faithful to real distribution system physics.
   field names in the text are normative; they must match the schema exactly.
 - Define symbols on the [Notation](spec/notation.md) page and reuse them; add new
   terms to the [Glossary](glossary.md).
-- Keep pages self-contained — this repository is the canonical home of the
+- Keep pages self-contained. This repository is the canonical home of the
   specification and should not depend on external manuals.
 - [References](spec/references.md) should be added carefully, with a high
   threshold for direct inclusion within the specification; references enable due
@@ -224,7 +224,7 @@ changes has accumulated that warrants a release, maintainers **tag a version**.
 
 - Versioning follows **[semantic versioning](https://semver.org)**.
 - The **specification** and the **JSON Schema** are versioned independently. We
-  expect the specification to be tagged more often than the schema — editorial
+  expect the specification to be tagged more often than the schema. Editorial
   and explanatory changes advance the specification without moving the schema,
   while a [contract](#Types-of-change-and-review-expectations:-impact-on-the-specification-contract) change advances both.
 - The full documentation history is retained: every tagged version stays
@@ -235,7 +235,7 @@ changes has accumulated that warrants a release, maintainers **tag a version**.
   schema version.
 
 **Tag naming.** Specification releases are tagged `vMAJOR.MINOR.PATCH`
-(e.g. `v0.2.2`) — these are the tags the documentation version selector reads,
+(e.g. `v0.2.2`). These are the tags the documentation version selector reads,
 and pushing one publishes that version of the site. JSON Schema releases use a
 distinct `schema-vMAJOR.MINOR.PATCH` prefix (e.g. `schema-v1.0.0`), so a schema
 bump neither collides with nor masquerades as a specification documentation

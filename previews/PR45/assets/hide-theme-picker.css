@@ -1,0 +1,6 @@
+/* The site is forced to the light theme (see assets/themeswap.js), so the
+   settings gear/theme-picker control is hidden rather than left as a dead
+   dark-mode/Catppuccin switcher. */
+#documenter-settings-button {
+  display: none !important;
+}

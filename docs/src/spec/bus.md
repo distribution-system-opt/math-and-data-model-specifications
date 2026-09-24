@@ -78,6 +78,14 @@ reference bus (detailed on the future *Voltage sources* page).
 At each terminal, the currents of all incident elements sum to zero (sign
 convention: out of the bus is positive on the equation left hand side):
 
+!!! danger "Amrit"
+    "Into the bus positive" contradicts the equation below it. Every $+$ term (lines,
+    transformers, switches, loads, shunts) is a current **leaving** the bus into the
+    element, and the generator current, defined on its page as an injection into the
+    bus, is the one term with a $-$. So the convention actually used is **leaving the
+    bus positive**. Fix the wording here and on the [Notation](notation.md#Currents)
+    page so both match the equation.
+
 ```math
 \underbrace{\sum_{\ell ij\in\mathcal{T}^{L}}\!\textcolor{blue}{\mathbf{I}_{\ell ij}}}_{\text{lines}}
 + \underbrace{\sum_{xij\in\mathcal{T}^{X}}\!\textcolor{blue}{\mathbf{I}_{x ij}}}_{\text{transformers}}
@@ -173,3 +181,15 @@ and $\textcolor{blue}{z}=\textcolor{blue}{U_{i,p}}^{*}\textcolor{blue}{U_{i,q}}\
 
 which bounds the angle between the two terminals (faithful while $c>0$, i.e. the
 centred deviation stays within $\pm\pi/2$).
+
+!!! danger "Amrit"
+    The three parameters this constraint needs, $\textcolor{red}{\theta^{\Delta,\min}_i}$,
+    $\textcolor{red}{\theta^{\Delta,\max}_i}$ and the nominal offsets
+    $\textcolor{red}{\theta^{\text{nom}}_{i,p}}$, have **no data field**. They appear in
+    neither the §1 data model table nor the §2 input symbols table on this page, and no
+    angle field exists on any other page except the source's `v_angle`. Either add
+    fields (e.g. `theta_min`, `theta_max` in rad, plus a rule for where
+    $\theta^{\text{nom}}$ comes from: a `theta_nom` array, or the balanced default
+    $0, -2\pi/3, +2\pi/3$), or drop the constraint. The [model summary](index.md#Model-summary)
+    and the [Objective](objective.md#Interpretation) page both list "angle limits" as
+    part of the model, so today they promise something the data cannot supply.

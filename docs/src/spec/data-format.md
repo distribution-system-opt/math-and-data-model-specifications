@@ -8,7 +8,7 @@ Symbols are defined in [Notation](notation.md).
 ## Units
 
 All physical quantities are in **SI**, with two deliberate exceptions noted below. The
-data model carries no unit fields — units are fixed by the field, per this table.
+data model carries no unit fields. Units are fixed by the field, per this table.
 
 | Quantity | Unit | Symbol |
 |----------|------|:------:|
@@ -21,13 +21,13 @@ data model carries no unit fields — units are fixed by the field, per this tab
 | Conductance, susceptance | siemens | S |
 | Resistance, reactance | ohm | Ω |
 | Angle | radian | rad |
-| Cost rate | US dollar per kilowatt-hour | \$/kWh |
+| Energy cost rate | US dollar per kilowatt-hour | \$/kWh |
 
 **Non-SI exception.** One quantity uses a customary unit for industry familiarity:
-**cost rate** in \$/kWh introduces two non-SI units for industry familiarity: currency(\$, which has no SI equivalent) and time in hours (1 kWh $= 3.6\times10^6$ J, whereas the SI base unit for energy is the Joule).
+**energy cost rate** in \$/kWh introduces two non-SI units for industry familiarity: currency(\$, which has no SI equivalent) and time in hours (1 kWh $= 3.6\times10^6$ J, whereas the SI base unit for energy is the Joule).
 
-Per-unit normalisation is a solver-internal convenience and is **out of scope** here —
-no per-unit quantity appears in the data model.
+Per-unit normalisation is a solver-internal convenience and is **out of scope** here.
+No per-unit quantity appears in the data model.
 
 ## Complex numbers, vectors, and matrices
 
@@ -84,7 +84,7 @@ an enumeration or must reference terminals declared elsewhere.
 | Field | Restriction |
 |-------|-------------|
 | `terminal_names` (a bus's conductor names) | Any strings; see the naming conventions below |
-| `configuration` (load / generator / capacitor) | A nodal configuration string: `WYE`, `DELTA`, or `SINGLE_PHASE` (per element support — generators are `WYE` only) |
+| `configuration` (load / generator / capacitor) | A nodal configuration string: `WYE`, `DELTA`, or `SINGLE_PHASE` (per element support: generators are `WYE` only) |
 | `model` (load) | `CONSTANT_POWER`, `CONSTANT_CURRENT`, `CONSTANT_IMPEDANCE`, `ZIP`, `EXPONENTIAL` |
 | `perfectly_grounded_terminals` | Array; every entry must be one of the bus's `terminal_names` |
 | `terminal_map`, `terminal_map_from`, `terminal_map_to` | Array; every entry must be one of the target bus's `terminal_names` |

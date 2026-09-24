@@ -36,7 +36,7 @@ The reverse current $\textcolor{blue}{\mathbf{I}_{w ji}}$ is its negative.
 
 ## 4. Equality constraints
 
-### Closed switch — zero voltage drop
+### Closed switch: zero voltage drop
 
 A closed switch equates the two ends conductor-by-conductor:
 
@@ -45,7 +45,7 @@ A closed switch equates the two ends conductor-by-conductor:
 = \textcolor{blue}{\mathbf{U}_j}[\textcolor{purple}{\mathbf{N}_{w j}}].
 ```
 
-### Open switch — zero current
+### Open switch: zero current
 
 An open switch carries no current and imposes no voltage coupling (the two buses are
 electrically disconnected at these conductors):
@@ -72,8 +72,8 @@ to bound the search. It is implied by the engineering limit below.
 
 ### Engineering bounds
 
-**Thermal current limit** (a switch has no shunt, so both ends carry equal magnitude
-— one constraint suffices):
+**Thermal current limit** (a switch has no shunt, so both ends carry equal magnitude;
+one constraint suffices):
 
 ```math
 \textcolor{blue}{\mathbf{I}_{w ij}}\circ(\textcolor{blue}{\mathbf{I}_{w ij}})^{*}

@@ -27,6 +27,7 @@ string ID $s$.
 | `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{s}}$ (phase terminals) |
 | `v_magnitude` | number[] | V | ✔ | Per-terminal voltage magnitude |
 | `v_angle` | number[] | rad | ✔ | Per-terminal voltage angle |
+| `energy_cost_rate` | number[] | \$/kWh |   | Per-phase linear dispatch cost |
 
 ## 2. Input symbols
 
@@ -34,11 +35,12 @@ string ID $s$.
 |-------|:------:|-------|
 | `v_magnitude` | $\textcolor{red}{\lvert\mathbf{U}^{s}_{s}\rvert}$ | per terminal |
 | `v_angle` | $\textcolor{red}{\boldsymbol{\theta}^{s}_{s}}$ | per terminal |
+| `energy_cost_rate` | $\textcolor{red}{\mathbf{c}_{s}}$ | per phase |
 
 ## 3. Variables
 
 The source injects a **slack current** $\textcolor{blue}{I_{s,k}}$ per phase terminal,
-stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained — it
+stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained. It
 absorbs whatever power balance the network requires, which is what makes this the
 reference bus.
 
@@ -65,11 +67,17 @@ ground:
     neutral to ground, which duplicates the grounding model and prevents a source on a
     bus with an impedance-grounded or floating neutral.
 
-### Slack current injection
+### Injected power
 
-The slack current enters KCL at the phase terminals, with its return at the neutral:
-$+\textcolor{blue}{I_{s,k}}$ at phase $t_k$, and $-\sum_k\textcolor{blue}{I_{s,k}}$ at
-the neutral.
+The complex power injected at phase terminal $p$ is
+
+```math
+\textcolor{blue}{S_{s,p}} = \textcolor{blue}{U_{i,p}}\,(\textcolor{blue}{I_{s,p}})^{*}
+= P_{s,p} + \textcolor{brown}{j}\,Q_{s,p}.
+```
+
+The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost_rate` field
+(and appropriate constant scaling coefficients) to compute the source's contribution to total dispatch cost.
 
 !!! danger "Amrit"
     The direction of $\textcolor{blue}{I_{s,k}}$ is never stated: is it leaving the bus
@@ -81,7 +89,7 @@ the neutral.
 
 ### Cartesian variable bounds
 
-**None** — the slack current is free.
+**None.** The slack current is free.
 
 ### Engineering bounds
 

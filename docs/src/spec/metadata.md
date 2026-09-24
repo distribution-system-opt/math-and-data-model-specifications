@@ -3,10 +3,10 @@
 Every case may carry a top-level `meta` object providing provenance, licensing, and
 versioning. It is optional for backward compatibility.
 
-**Suggestion:** populate the `meta` object where possible — provenance, licensing, and
+**Suggestion:** populate the `meta` object where possible. Provenance, licensing, and
 versioning information helps downstream consumers of the dataset.
 
-This is a *data-model* page — `meta` carries no OPF variables or
+This is a *data-model* page: `meta` carries no OPF variables or
 constraints. Symbols are defined in [Notation](notation.md).
 
 ## The `meta` object
@@ -20,10 +20,10 @@ constraints. Symbols are defined in [Notation](notation.md).
 | `created` | string (ISO 8601) | Creation timestamp, UTC |
 | `modified` | string (ISO 8601) | Last-revision timestamp, UTC |
 | `license` | string | SPDX identifier (e.g. `CC-BY-4.0`) or an `https://` URI to the licence |
-| `frequency` | number (Hz) | Nominal system frequency — **check-only** (validated against `line_geometry`/linecode derivation frequency; never rescales) |
-| `authors` | object[] | Ordered authors — see below |
-| `data_sources` | object[] | Upstream data references — see below |
-| `case_study_generator` | object | Tool that wrote the file — see below |
+| `frequency` | number (Hz) | Nominal system frequency, **check-only** (validated against `line_geometry`/linecode derivation frequency; never rescales) |
+| `authors` | object[] | Ordered authors (see below) |
+| `data_sources` | object[] | Upstream data references (see below) |
+| `case_study_generator` | object | Tool that wrote the file (see below) |
 | `provenance` | object | Free-form conversion/audit notes written by tooling |
 
 **`authors[]`**: `name`, `email`, `orcid` (bare hyphenated form `XXXX-XXXX-XXXX-XXXX`,
@@ -50,7 +50,7 @@ without the `https://orcid.org/` prefix).
 - `license` should be a URI when the licence needs specific attribution language beyond
   an SPDX identifier.
 - Unknown fields may be present; conformant readers must ignore them.
-- `frequency` is a consistency check only — it never defaults or rescales any quantity.
+- `frequency` is a consistency check only. It never defaults or rescales any quantity.
 
 ## Example
 

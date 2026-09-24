@@ -11,7 +11,7 @@ Four-wire model
   conductor are modelled explicitly, with earth as a separate return path.
 
 Galvanically isolated
-: A connection with no direct conductive path between two circuits — power transfers
+: A connection with no direct conductive path between two circuits. Power transfers
   only via magnetic coupling. Transformers in this specification are modelled as
   galvanically isolated winding pairs. See [Transformers](spec/transformer.md).
 
@@ -29,7 +29,7 @@ Nodal admittance matrix (Ybus)
 : The matrix ``\mathbf{Y}`` relating injected currents to node voltages,
   ``\mathbf{I} = \mathbf{Y}\,\mathbf{V}``.
 
-OPF — Optimal Power Flow
+OPF (Optimal Power Flow)
 : An optimisation problem that determines the operating point of a network
   minimising an objective (e.g. cost, losses) subject to physical and
   operational constraints. See [Objective & feasibility](spec/objective.md).

@@ -42,22 +42,22 @@ where to find the data fields, the physics, and the bounds.
 | **5. Inequality constraints** | The bounds, split into **cartesian variable bounds** (box bounds on a variable's own components) and **engineering bounds** (physically meaningful magnitude/angle limits). |
 
 The **cartesian vs engineering** split in the **inequality constraints** is deliberate. 
-A *cartesian bound* constrains the real and imaginary components of a decision variable directly 
-— a (convex) rectangle in the complex plane, used mainly to bound the search.
-An *engineering bound* constrains a quantity an engineer cares about — a voltage
-magnitude, a thermal current, a sequence-component unbalance — and is generally a
+A *cartesian bound* constrains the real and imaginary components of a decision variable directly:
+a (convex) rectangle in the complex plane, used mainly to bound the search.
+An *engineering bound* constrains a quantity an engineer cares about (a voltage
+magnitude, a thermal current, a sequence-component unbalance) and is generally a
 circle (quadratic) or an angle sector (bilinear). Conflating the two would hide which
 limits enforce a physical limit and which serve numerical purposes.
 
 The mathematical model is stated in **complex phasors**. A solver typically works in
-**rectangular real** variables — each complex equation split into its real and
-imaginary parts, each complex variable becoming two real variables — but that
+**rectangular real** variables (each complex equation split into its real and
+imaginary parts, each complex variable becoming two real variables), but that
 realisation is a downstream implementation choice and is not part of this
 specification.
 
 ## Model summary
 
-The complete feasible set at a glance — the objective, every bound, and every device
+The complete feasible set at a glance: the objective, every bound, and every device
 constraint, with the page that defines each. Bounds are optional (absent bounds are
 not enforced); constraints are always active for the elements present.
 
@@ -85,15 +85,15 @@ not enforced); constraints are always active for the elements present.
 
 Start with the **foundations**:
 
-1. **[Background & scope](scope.md)** — why the specification exists, what it covers, and
+1. **[Background & scope](scope.md)**: why the specification exists, what it covers, and
    the design choices behind it.
-2. **[Notation](notation.md)** — typography (variables vs parameters, real vs complex),
+2. **[Notation](notation.md)**: typography (variables vs parameters, real vs complex),
    the complex-phasor symbols and their rectangular realisation, transform matrices, the
    element-wise bound idiom, and the set/topology convention used on every later page.
-3. **[Data input formatting](data-format.md)** — units, how complex numbers and matrices
+3. **[Data input formatting](data-format.md)**: units, how complex numbers and matrices
    are encoded in JSON, and required-vs-optional field semantics.
-4. **[Grounding](grounding.md)** — the common-reference ground model that the components apply locally.
-5. **[Worked example](example.md)** — every set constructed for one small network, to
+4. **[Grounding](grounding.md)**: the common-reference ground model that the components apply locally.
+5. **[Worked example](example.md)**: every set constructed for one small network, to
    practically illustrate the abstraction.
 
 Then the **components** (start with [Buses](bus.md) and [Lines](line.md)), the

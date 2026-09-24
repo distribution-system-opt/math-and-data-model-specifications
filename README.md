@@ -5,10 +5,10 @@
 [![Documentation](https://github.com/distribution-system-opt/math-and-data-model-specifications/actions/workflows/documentation.yml/badge.svg)](https://github.com/distribution-system-opt/math-and-data-model-specifications/actions/workflows/documentation.yml)
 
 > [!WARNING]
-> **Work in progress — not yet validated.** This repository is currently being
+> **Work in progress: not yet validated.** This repository is currently being
 > staged: its content has not yet been validated for consistency with the source
 > specification, and may change without notice. Do not rely on it yet. Once the
-> content has been reviewed and validated, a version will be tagged — until then
+> content has been reviewed and validated, a version will be tagged. Until then
 > there is no released version.
 
 The mathematical and data-model specification for four-wire distribution-system
@@ -70,12 +70,12 @@ canonical, version-controlled home of that data specification.
 The data specification deliberately targets the features universally required for
 distribution OPF - 1-to-4-wire lines with explicit neutral and earth (no Kron
 reduction), meshed and electrically parallel branches, and perfect or impedance
-grounding — expressed in SI units and serialised as JSON against an accompanying
+grounding, expressed in SI units and serialised as JSON against an accompanying
 schema.
 
 ## Contributing
 
-Contributions of all kinds are welcome — corrections, clarifications, new content,
+Contributions of all kinds are welcome: corrections, clarifications, new content,
 and modelling proposals. Anyone can open issues and pull requests; project
 maintainers from the Task Force review and merge. See the
 [Contributing guide](docs/src/contributing.md) for the review tiers, modelling
@@ -83,22 +83,22 @@ principles, governance, and release policy.
 
 ## Licensing
 
-This repository — all specification text, equations, figures, data-model
-definitions, and the accompanying JSON Schema — is licensed under
+This repository (all specification text, equations, figures, data-model
+definitions, and the accompanying JSON Schema) is licensed under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); see [LICENSE](LICENSE).
 
 **By submitting a pull request, you agree to license your contribution under the
 same CC BY 4.0 terms.**
 
 (**Network cases** built against this specification are a separate
-concern and are licensed independently — each inherits the licence of its
+concern and are licensed independently: each inherits the licence of its
 upstream source, recorded in its `meta.license` field.)
 
 ## Citation
 
 The specification is versioned and not static; please cite the specific version
 (git tag) you used. Network cases carry original-source attribution in their
-metadata — cite those sources when using specific networks.
+metadata. Cite those sources when using specific networks.
 
 ## Building locally
 
@@ -131,12 +131,12 @@ during the build.
 
 Two system tools are required for the PDF (already handled in CI):
 
-- **DejaVu fonts** — selected by the Documenter LaTeX template
+- **DejaVu fonts**: selected by the Documenter LaTeX template
   (`brew install --cask font-dejavu`, or `apt install fonts-dejavu`).
-- **Pygments** (`pygmentize`) — for `minted` code highlighting
+- **Pygments** (`pygmentize`): for `minted` code highlighting
   (`brew install pygments`, or `apt install python3-pygments`).
 
-`tectonic` itself needs no installation — it ships as a Julia artifact via
+`tectonic` itself needs no installation. It ships as a Julia artifact via
 `tectonic_jll`.
 
 ## Continuous integration and deployment
@@ -148,14 +148,14 @@ requests. Deployment publishes to the `gh-pages` branch, which GitHub Pages serv
 
 ### Versioned documentation
 
-Historical versions are handled automatically by Documenter's `deploydocs` — no
-extra configuration. Each build lands in its own folder on `gh-pages`, and a
+Historical versions are handled automatically by Documenter's `deploydocs` (no
+extra configuration). Each build lands in its own folder on `gh-pages`, and a
 version selector (top-left of the site) switches between them:
 
-- **`dev`** — always tracks the latest `main`.
-- **`vX.Y.Z`** — one immutable folder per release tag; these are the historical
+- **`dev`**: always tracks the latest `main`.
+- **`vX.Y.Z`**: one immutable folder per release tag; these are the historical
   versions and never change once published.
-- **`stable`** — an alias pointing at the most recent release tag.
+- **`stable`**: an alias pointing at the most recent release tag.
 
 To cut a release, tag a commit on `main` with a semver `v*` tag and push it:
 

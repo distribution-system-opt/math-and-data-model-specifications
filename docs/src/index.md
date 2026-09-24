@@ -40,13 +40,13 @@ Then work through the foundations before diving into individual components.
 
 The shared model that every component page builds on.
 
-- [Overview](spec/index.md) — scope and structure of the specification
-- [Background & scope](spec/scope.md) — what is (and isn't) modelled, and why
-- [Notation](spec/notation.md) — symbols and mathematical conventions
-- [Data input formatting](spec/data-format.md) — how a case is described
-- [Grounding](spec/grounding.md) — neutral, earth, and return paths
-- [Worked example](spec/example.md) — a small four-bus network end to end
-- [Document metadata](spec/metadata.md) — provenance and versioning fields
+- [Overview](spec/index.md): scope and structure of the specification
+- [Background & scope](spec/scope.md): what is (and isn't) modelled, and why
+- [Notation](spec/notation.md): symbols and mathematical conventions
+- [Data input formatting](spec/data-format.md): how a case is described
+- [Grounding](spec/grounding.md): neutral, earth, and return paths
+- [Worked example](spec/example.md): a small four-bus network end to end
+- [Document metadata](spec/metadata.md): provenance and versioning fields
 
 ## Components
 
@@ -69,7 +69,7 @@ Per-element data models and equations.
 
 ## Contributing
 
-Corrections and refinements are welcome — see the [Contributing](contributing.md)
+Corrections and refinements are welcome. See the [Contributing](contributing.md)
 guide. The "Edit on GitHub" link on any page takes you to its source file, and
 every push to `main` rebuilds and publishes this site automatically. Notable
 changes are recorded in the [Changelog](changelog.md).

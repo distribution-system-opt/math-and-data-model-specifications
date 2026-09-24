@@ -7,7 +7,7 @@ are defined in [Notation](notation.md).
 
 ## Ground as a common reference
 
-**Ground is a single $0\text{ V}$ reference** — a "copper plate" shared across the
+**Ground is a single $0\text{ V}$ reference**, a "copper plate" shared across the
 entire network. It is not a per-element node: elements connect to a **bus terminal**,
 and that terminal may (or may not) connect to ground. Because ground is a common
 reference, no separate ground node is indexed in element matrices, and the terminal
@@ -15,11 +15,11 @@ name **`"g"` is reserved** for the common ground across all elements.
 
 ## Two ways a terminal reaches ground
 
-- **Perfect grounding** — a bus terminal listed in `perfectly_grounded_terminals` is
+- **Perfect grounding**: a bus terminal listed in `perfectly_grounded_terminals` is
   pinned to the reference, $\textcolor{blue}{U_{i,p}}=0$. Current can still flow into
   earth there: a free earth-injection current balances the terminal's KCL (see
   [Buses](bus.md#Perfect-grounding)). This is a **bus property**.
-- **Grounding through an impedance** — modelled as a [shunt](shunt.md) (or capacitor)
+- **Grounding through an impedance**: modelled as a [shunt](shunt.md) (or capacitor)
   between the terminal and ground, e.g. a single-entry admittance
   $\textcolor{brown}{Y_{h,nn}}$ on the neutral grounds it through $1/\textcolor{brown}{Y_{h,nn}}$.
 
@@ -42,7 +42,7 @@ equations. A bus whose terminals are all ungrounded needs no grounding data.
 
 The "always" elements (lines, shunts, voltage sources) carry an implicit ground
 connection and need no grounding declaration. The only element that *optionally*
-declares grounding is the **bus** — everything else routes through a bus terminal or is
+declares grounding is the **bus**. Everything else routes through a bus terminal or is
 intrinsic to the element.
 
 ## In the mathematical model
@@ -51,5 +51,5 @@ Perfect grounding contributes the equality $\textcolor{blue}{U_{i,p}}=0$ for eve
 $ip\in\mathcal{M}^{\emptyset}$ (the ground map) and a free earth current so KCL still
 balances. Impedance grounding contributes a linear admittance current
 $\textcolor{brown}{Y}\,\textcolor{blue}{U}$ to KCL, exactly like any [shunt](shunt.md).
-No grounding scheme reduces the conductor matrices — neutrals and earth conductors stay
+No grounding scheme reduces the conductor matrices. Neutrals and earth conductors stay
 explicit, which is what makes this a genuinely four-wire formulation.

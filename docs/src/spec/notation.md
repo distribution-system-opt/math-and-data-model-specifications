@@ -50,7 +50,7 @@ Operators and accessors:
     Colour is applied to **symbol and parameter definitions** and to the headline
     equations, exactly as in the Task Force PDF. In long derivations colour is
     sometimes dropped for legibility; the type of any symbol is always its type at
-    definition. Nothing about the model depends on colour — it is a reading aid.
+    definition. Nothing about the model depends on colour. It is a reading aid.
 
 ## Voltage: complex phasor and its rectangular realisation
 
@@ -79,7 +79,7 @@ The complex vector decomposes into real components in rectangular or polar form:
 ```
 
 with $\mathbf{U}_i^{\Re},\mathbf{U}_i^{\Im}\in\mathbb{R}^{|\mathcal{N}_i|}$ the real
-and imaginary parts (black — real variables), $\mathbf{U}_i^{\text{mag}}$ the
+and imaginary parts (black: real variables), $\mathbf{U}_i^{\text{mag}}$ the
 magnitude and $\boldsymbol{\theta}_i$ the angle.
 
 !!! danger "Amrit"
@@ -88,8 +88,8 @@ magnitude and $\boldsymbol{\theta}_i$ the angle.
     parameters; I suggest black everywhere.
 
 The foundational model on each page is written with the **complex** vectors. The
-implementation solves in the **rectangular real** parts — one variable per part per
-terminal — so every complex equality becomes a pair of real equalities; this
+implementation solves in the **rectangular real** parts, one variable per part per
+terminal, so every complex equality becomes a pair of real equalities; this
 realisation is described in each page's *Implementation* section, not repeated in the
 physics.
 
@@ -190,7 +190,7 @@ $k$ reads $(\textcolor{red}{z^{\min}_k})^2 \le \mathfrak{R}(\textcolor{blue}{z_k
 This is the **engineering-bound** idiom. It is distinct from a **cartesian bound**,
 which constrains a variable's own real/imaginary components with a box
 $\underline{x}\le\mathfrak{R}(\textcolor{blue}{z_k})\le\overline{x}$ (and likewise for
-$\mathfrak{I}$) — a rectangle, not a circle. Both appear in part 5 of each component
+$\mathfrak{I}$): a rectangle, not a circle. Both appear in part 5 of each component
 page and are kept separate.
 
 !!! danger "Amrit"
@@ -234,12 +234,12 @@ The **element sets** each collect one kind of network element:
     The transformer page also introduces $V^{\sigma}_{x,k}$, $\sigma$ and $b^{\sigma}$
     that are not defined here.
 
-$\mathcal{N}_i\subseteq\mathcal{N}$ denotes the terminals of bus $i$. (Libraries —
-linecodes, wire data, line geometries — are referenced
+$\mathcal{N}_i\subseteq\mathcal{N}$ denotes the terminals of bus $i$. (Libraries (linecodes,
+wire data, line geometries) are referenced
 by string id, not collected as topological sets.)
 
 From these, **derived sets** capture how elements attach to buses. There are four
-families — topology, connectivity, terminal mappings, and configurations — summarised
+families: topology, connectivity, terminal mappings, and configurations, summarised
 in one table at the [end of this section](#Overview-of-derived-sets); the prose below
 defines each family, and $\mathcal{T},\mathcal{C},\mathcal{M},\mathcal{R}$ are reserved
 for them (distinct from the element sets above).
@@ -297,9 +297,9 @@ $[\texttt{"a"},\texttt{"b"},\texttt{"c"},\texttt{"n"}]$. Element vectors and mat
 stack in this order. Terminal names are strings; common conventions include
 $\{a,b,c,n\}$, $\{1,2,3,n\}$, and IEC $\{L1,L2,L3,N\}$.
 
-Every element carries a **terminal map** — the string array
+Every element carries a **terminal map**, the string array
 $\textcolor{purple}{\mathbf{N}_{\ell i}}$ (`terminal_map_from`),
-$\textcolor{purple}{\mathbf{N}_{\ell j}}$ (`terminal_map_to`) for a line — listing which
+$\textcolor{purple}{\mathbf{N}_{\ell j}}$ (`terminal_map_to`) for a line, listing which
 of its bus's terminals each conductor connects to, so per-phase properties align across
 the network. As a *set*, a terminal mapping is written $\mathcal{M}^{\bullet}$: a member
 $d\,z\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $z$
@@ -338,7 +338,7 @@ that indexes each:
 
 | Symbol | Represents | Member tuple |
 |:------:|------------|:------------:|
-| $\mathcal{T}^{L\rightarrow},\ \mathcal{T}^{L\leftarrow},\ \mathcal{T}^{L}$ | line topology — forward, reverse, combined | $\ell ij$ |
+| $\mathcal{T}^{L\rightarrow},\ \mathcal{T}^{L\leftarrow},\ \mathcal{T}^{L}$ | line topology: forward, reverse, combined | $\ell ij$ |
 | $\mathcal{T}^{X\rightarrow},\ \mathcal{T}^{X\leftarrow},\ \mathcal{T}^{X}$ | transformer topology | $x ij$ |
 | $\mathcal{T}^{W\rightarrow},\ \mathcal{T}^{W\leftarrow},\ \mathcal{T}^{W}$ | switch topology | $w ij$ |
 | $\mathcal{T}^{\rightarrow},\ \mathcal{T}^{\leftarrow},\ \mathcal{T}$ | network topology (union of the above) | $\cdot\,ij$ |

@@ -90,9 +90,10 @@ element and accumulated onto shared terminals:
 \end{bmatrix}.
 ```
 
-### Current injection
+### Current contribution to KCL
 
-The bank injects current into KCL at its bus exactly as a shunt would:
+The bank's current leaves the bus into the capacitor and enters KCL at its bus with a
+$+$ sign, exactly as a [shunt](shunt.md) current does:
 
 ```math
 \textcolor{blue}{\mathbf{I}_\kappa} = \textcolor{brown}{j}\,\textcolor{red}{\mathbf{B}_\kappa}\,\textcolor{blue}{\mathbf{U}_i}[\textcolor{purple}{\mathbf{N}_\kappa}].

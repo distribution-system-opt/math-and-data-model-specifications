@@ -7,6 +7,15 @@ Symbols are defined in [Notation](notation.md).
 
 ![Voltage source: a fixed line-to-ground voltage reference with a free slack current.](assets/vsource.svg)
 
+!!! danger "Amrit"
+    The figure and the text below describe **different sources**.
+
+    1. **Current direction is reversed.** §3 says the source *injects* a slack current
+       into the bus. The figure draws every $I_{s,k}$ arrow pointing from the bus
+       terminal back into the source, i.e. *leaving* the bus. The figure matches the
+       leaving-the-bus-positive convention the bus KCL actually uses; the text does not.
+    2. **Symbols differ.** The figure uses $U^{\text{ref}}$; the page uses $U^{s}$.
+
 ## 1. Data model
 
 A voltage source is an entry of the top-level `voltage_source` object, keyed by its
@@ -33,7 +42,9 @@ string ID $s$.
 The source injects a **slack current** $\textcolor{blue}{I_{s,k}}$ per phase terminal,
 stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained. It
 absorbs whatever power balance the network requires, which is what makes this the
-reference bus.
+reference bus. Like the generator current, it is an injection into the bus and enters
+the bus KCL with a **minus** sign (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## 4. Equality constraints
 
@@ -48,6 +59,7 @@ ground:
 \textcolor{blue}{U_{i,n}} = 0.
 ```
 
+
 ### Injected power
 
 The complex power injected at phase terminal $p$ is
@@ -59,6 +71,7 @@ The complex power injected at phase terminal $p$ is
 
 The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost_rate` field
 (and appropriate constant scaling coefficients) to compute the source's contribution to total dispatch cost.
+Here current {I_{s,p}} is entering the node {p}.
 
 ## 5. Inequality constraints
 

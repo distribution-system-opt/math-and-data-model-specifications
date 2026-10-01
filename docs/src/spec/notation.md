@@ -26,7 +26,7 @@ is real or complex.
 | $\textcolor{brown}{\mathbf{x}}$ | complex vector/matrix **parameter** |
 | $\textcolor{purple}{x}$ | string **parameter** |
 | $\textcolor{purple}{\mathbf{x}}$ | array of string **parameters** |
-| $\mathcal{X}$ | set |
+| $\mathcal{A}$ | set (calligraphic capitals denote sets; see [Sets and indices](#Sets-and-indices)) |
 
 Operators and accessors:
 
@@ -49,7 +49,7 @@ Operators and accessors:
 
 ## Voltage: complex phasor and its rectangular realisation
 
-The primary voltage quantity at bus $\textcolor{red}{i}$ is a **complex, stacked
+The primary voltage quantity at bus $i$ is a **complex, stacked
 per-terminal vector**. For a four-terminal bus with phases $a,b,c$ and neutral $n$,
 
 ```math
@@ -89,8 +89,8 @@ physics.
 ## Currents
 
 Complex current vectors follow the same stacking. The **terminal current flowing
-into element** at its bus is the primary quantity; for a line $\textcolor{red}{\ell}$
-from bus $\textcolor{red}{i}$ toward bus $\textcolor{red}{j}$ it is
+into element** at its bus is the primary quantity; for a line $\ell$
+from bus $i$ toward bus $j$ it is
 $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shunt part
 (see [Lines](line.md)):
 
@@ -99,8 +99,12 @@ $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shun
 = \textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}} + \textcolor{blue}{\mathbf{I}^{\text{sh}}_{\ell ij}}.
 ```
 
-The sign convention throughout is **positive current flows into the bus** at the
-terminal where it is summed by Kirchhoff's current law (KCL).
+The sign convention throughout is **positive current leaves the bus into the
+element** at the terminal where it is summed by Kirchhoff's current law (KCL). Lines,
+transformers, switches, loads, shunts and capacitors follow this convention directly
+and enter KCL with a $+$ sign. Generators and the voltage source define their current
+as an **injection into the bus**, so they enter KCL negated (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## Standard transforms and constants
 
@@ -146,11 +150,19 @@ zero/positive/negative sequence:
 
 ## The element-wise bound idiom
 
+**All bounds are real.** Every $\cdot^{\min}$ / $\cdot^{\max}$ symbol in this
+specification is a real scalar or a vector of reals, never a complex quantity, and is
+therefore typeset red. A bound reuses the letter of the quantity it limits, so
+$\textcolor{red}{\mathbf{U}^{\max}_i}$ is the real vector bounding the **magnitude**
+$|\textcolor{blue}{\mathbf{U}_i}|$ of the complex voltage, not a complex value. This
+holds even where colour is dropped in a derivation.
+
 Magnitude bounds are written first as a vector inequality on magnitudes, then in an
 equivalent **smooth (quadratic) form** using the Hadamard product $\circ$ and the
 conjugate, which is what the solver receives. For a generic complex vector
 $\textcolor{blue}{\mathbf{z}}$ with real bound vectors
-$\textcolor{red}{\mathbf{z}^{\min}},\textcolor{red}{\mathbf{z}^{\max}}$:
+$\textcolor{red}{\mathbf{z}^{\min}},\textcolor{red}{\mathbf{z}^{\max}}$ on its
+magnitude $|\textcolor{blue}{\mathbf{z}}|$:
 
 ```math
 \textcolor{red}{\mathbf{z}^{\min}} \le |\textcolor{blue}{\mathbf{z}}| \le \textcolor{red}{\mathbf{z}^{\max}}
@@ -233,8 +245,6 @@ g i \in \mathcal{C}^{G},
 \quad
 h i \in \mathcal{C}^{H},
 \quad
-r i \in \mathcal{C}^{V},
-\quad
 \kappa i \in \mathcal{C}^{K},
 \quad
 s i \in \mathcal{C}^{S}.
@@ -256,8 +266,8 @@ $\textcolor{purple}{\mathbf{N}_{\ell i}}$ (`terminal_map_from`),
 $\textcolor{purple}{\mathbf{N}_{\ell j}}$ (`terminal_map_to`) for a line, listing which
 of its bus's terminals each conductor connects to, so per-phase properties align across
 the network. As a *set*, a terminal mapping is written $\mathcal{M}^{\bullet}$: a member
-$d\,z\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $z$
-maps to bus terminal $p$; branch mappings carry an extra bus index ($\ell i z p$).
+$d\,k\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $k$
+maps to bus terminal $p$; branch mappings carry an extra bus index ($\ell i k p$).
 
 The **neutral terminal** $n$ of a bus is identified by the bus's declaration (an
 explicit neutral field, or a terminal named `"n"`/`"N"`). If a bus has no neutral,
@@ -273,9 +283,10 @@ configuration: $d f\in\mathcal{R}^{D}$ for loads, $g f\in\mathcal{R}^{G}$ for ge
 
 **Ground** is a single $0\text{ V}$ reference. Terminals listed in a bus's
 `perfectly_grounded_terminals` form the ground mapping
-$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$ have their voltage 
-fixed to zero. Lines and shunts always carry an implicit ground connection (their
-shunt admittance is defined to ground). See [Grounding](grounding.md) for the full model.
+$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$. Every terminal in
+this mapping has its voltage fixed to zero. Lines and shunts always carry an implicit
+ground connection (their shunt admittance is defined to ground). See
+[Grounding](grounding.md) for the full model.
 
 ### Overview of derived sets
 
@@ -294,8 +305,8 @@ that indexes each:
 | $\mathcal{C}^{H}$ | shunt–bus connectivity | $h i$ |
 | $\mathcal{C}^{K}$ | capacitor–bus connectivity | $\kappa i$ |
 | $\mathcal{I}^{\text{source}}$ | source bus set ($\lvert\cdot\rvert=1$) | $i$ |
-| $\mathcal{M}^{S},\mathcal{M}^{G},\mathcal{M}^{D},\mathcal{M}^{H},\mathcal{M}^{V},\mathcal{M}^{K}$ | nodal terminal mappings | $\cdot\,z\,p$ |
-| $\mathcal{M}^{L},\mathcal{M}^{T},\mathcal{M}^{W}$ | branch terminal mappings | $\cdot\,i\,z\,p$ |
+| $\mathcal{M}^{S},\mathcal{M}^{G},\mathcal{M}^{D},\mathcal{M}^{H},\mathcal{M}^{K}$ | nodal terminal mappings | $\cdot\,k\,p$ |
+| $\mathcal{M}^{L},\mathcal{M}^{X},\mathcal{M}^{W}$ | branch terminal mappings | $\cdot\,i\,k\,p$ |
 | $\mathcal{M}^{\emptyset}$ | ground terminal mapping | $i p$ |
 | $\mathcal{R}^{D},\ \mathcal{R}^{G}$ | load / generator configurations | $\cdot\,f$ |
 

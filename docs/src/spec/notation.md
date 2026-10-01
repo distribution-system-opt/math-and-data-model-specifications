@@ -245,17 +245,10 @@ g i \in \mathcal{C}^{G},
 \quad
 h i \in \mathcal{C}^{H},
 \quad
-r i \in \mathcal{C}^{V},
-\quad
 \kappa i \in \mathcal{C}^{K},
 \quad
 s i \in \mathcal{C}^{S}.
 ```
-
-!!! danger "Amrit"
-    $r i \in \mathcal{C}^{V}$ looks like a leftover: sources are indexed by $s$ with
-    set $\mathcal{S}$, and $\mathcal{C}^{V}$ is not in the overview table below
-    (though $\mathcal{M}^{V}$ is). Drop the $V$/$r$ forms.
 
 This model version permits a single voltage source, so the source bus set
 $\mathcal{I}^{\text{source}}=\{i : si\in\mathcal{C}^{S}\}$ has $|\mathcal{I}^{\text{source}}|=1$.
@@ -273,11 +266,8 @@ $\textcolor{purple}{\mathbf{N}_{\ell i}}$ (`terminal_map_from`),
 $\textcolor{purple}{\mathbf{N}_{\ell j}}$ (`terminal_map_to`) for a line, listing which
 of its bus's terminals each conductor connects to, so per-phase properties align across
 the network. As a *set*, a terminal mapping is written $\mathcal{M}^{\bullet}$: a member
-$d\,z\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $z$
-maps to bus terminal $p$; branch mappings carry an extra bus index ($\ell i z p$).
-
-!!! danger "Amrit"
-    The conductor-order index is $z$ here, but every component page uses $k$. Pick one.
+$d\,k\,p$ of the load mapping $\mathcal{M}^{D}$ says load $d$'s conductor at order $k$
+maps to bus terminal $p$; branch mappings carry an extra bus index ($\ell i k p$).
 
 The **neutral terminal** $n$ of a bus is identified by the bus's declaration (an
 explicit neutral field, or a terminal named `"n"`/`"N"`). If a bus has no neutral,
@@ -293,14 +283,10 @@ configuration: $d f\in\mathcal{R}^{D}$ for loads, $g f\in\mathcal{R}^{G}$ for ge
 
 **Ground** is a single $0\text{ V}$ reference. Terminals listed in a bus's
 `perfectly_grounded_terminals` form the ground mapping
-$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$ have their voltage 
-fixed to zero. Lines and shunts always carry an implicit ground connection (their
-shunt admittance is defined to ground). See [Grounding](grounding.md) for the full model.
-
-!!! danger "Amrit"
-    The first sentence of this paragraph is broken: "Terminals listed in ... form the
-    ground mapping ... have their voltage fixed to zero" needs splitting into two
-    sentences.
+$i p \in \mathcal{M}^{\emptyset}\subset\mathcal{I}\times\mathcal{N}$. Every terminal in
+this mapping has its voltage fixed to zero. Lines and shunts always carry an implicit
+ground connection (their shunt admittance is defined to ground). See
+[Grounding](grounding.md) for the full model.
 
 ### Overview of derived sets
 
@@ -319,15 +305,10 @@ that indexes each:
 | $\mathcal{C}^{H}$ | shunt–bus connectivity | $h i$ |
 | $\mathcal{C}^{K}$ | capacitor–bus connectivity | $\kappa i$ |
 | $\mathcal{I}^{\text{source}}$ | source bus set ($\lvert\cdot\rvert=1$) | $i$ |
-| $\mathcal{M}^{S},\mathcal{M}^{G},\mathcal{M}^{D},\mathcal{M}^{H},\mathcal{M}^{V},\mathcal{M}^{K}$ | nodal terminal mappings | $\cdot\,z\,p$ |
-| $\mathcal{M}^{L},\mathcal{M}^{T},\mathcal{M}^{W}$ | branch terminal mappings | $\cdot\,i\,z\,p$ |
+| $\mathcal{M}^{S},\mathcal{M}^{G},\mathcal{M}^{D},\mathcal{M}^{H},\mathcal{M}^{K}$ | nodal terminal mappings | $\cdot\,k\,p$ |
+| $\mathcal{M}^{L},\mathcal{M}^{X},\mathcal{M}^{W}$ | branch terminal mappings | $\cdot\,i\,k\,p$ |
 | $\mathcal{M}^{\emptyset}$ | ground terminal mapping | $i p$ |
 | $\mathcal{R}^{D},\ \mathcal{R}^{G}$ | load / generator configurations | $\cdot\,f$ |
-
-!!! danger "Amrit"
-    Branch mappings use $\mathcal{M}^{T}$ for transformers, but the transformer set is
-    $\mathcal{X}$ and $\mathcal{T}$ is reserved for topology. This should be
-    $\mathcal{M}^{X}$.
 
 **Matrices** (e.g. impedance) are stored **row-first** with an underscore delimiter:
 matrix entry $A_{kj}$ is the field `A_k_j`, 1-indexed. So `R_series_1_2` is the

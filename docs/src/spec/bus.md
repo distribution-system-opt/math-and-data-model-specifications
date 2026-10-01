@@ -75,16 +75,10 @@ reference bus (detailed on the future *Voltage sources* page).
 
 ![Kirchhoff's current law at a bus terminal: the signed currents of all incident elements sum to zero.](assets/kcl_example.svg)
 
-At each terminal, the currents of all incident elements sum to zero (sign
-convention: out of the bus is positive on the equation left hand side):
-
-!!! danger "Amrit"
-    "Into the bus positive" contradicts the equation below it. Every $+$ term (lines,
-    transformers, switches, loads, shunts) is a current **leaving** the bus into the
-    element, and the generator current, defined on its page as an injection into the
-    bus, is the one term with a $-$. So the convention actually used is **leaving the
-    bus positive**. Fix the wording here and on the [Notation](notation.md#Currents)
-    page so both match the equation.
+At each terminal, the currents of all incident elements sum to zero. The sign
+convention (see [Notation](notation.md#Currents)) is that current **leaving the bus
+into an element is positive**; the generator and voltage-source currents are defined
+as injections into the bus and therefore enter with a minus sign:
 
 ```math
 \underbrace{\sum_{\ell ij\in\mathcal{T}^{L}}\!\textcolor{blue}{\mathbf{I}_{\ell ij}}}_{\text{lines}}

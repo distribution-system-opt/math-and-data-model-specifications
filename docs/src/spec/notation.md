@@ -26,12 +26,7 @@ is real or complex.
 | $\textcolor{brown}{\mathbf{x}}$ | complex vector/matrix **parameter** |
 | $\textcolor{purple}{x}$ | string **parameter** |
 | $\textcolor{purple}{\mathbf{x}}$ | array of string **parameters** |
-| $\mathcal{X}$ | set |
-
-!!! danger "Amrit"
-    $\mathcal{X}$ is double-booked: it is the generic "set" symbol here and the
-    transformer set in the [Sets and indices](#Sets-and-indices) table below. Pick a
-    different generic symbol.
+| $\mathcal{A}$ | set (calligraphic capitals denote sets; see [Sets and indices](#Sets-and-indices)) |
 
 Operators and accessors:
 
@@ -54,7 +49,7 @@ Operators and accessors:
 
 ## Voltage: complex phasor and its rectangular realisation
 
-The primary voltage quantity at bus $\textcolor{red}{i}$ is a **complex, stacked
+The primary voltage quantity at bus $i$ is a **complex, stacked
 per-terminal vector**. For a four-terminal bus with phases $a,b,c$ and neutral $n$,
 
 ```math
@@ -82,11 +77,6 @@ with $\mathbf{U}_i^{\Re},\mathbf{U}_i^{\Im}\in\mathbb{R}^{|\mathcal{N}_i|}$ the 
 and imaginary parts (black: real variables), $\mathbf{U}_i^{\text{mag}}$ the
 magnitude and $\boldsymbol{\theta}_i$ the angle.
 
-!!! danger "Amrit"
-    Bus and line indices are typeset red ($\textcolor{red}{i}$, $\textcolor{red}{\ell}$)
-    in this section and the next, but black in the sets table. Indices are not
-    parameters; I suggest black everywhere.
-
 The foundational model on each page is written with the **complex** vectors. The
 implementation solves in the **rectangular real** parts, one variable per part per
 terminal, so every complex equality becomes a pair of real equalities; this
@@ -99,8 +89,8 @@ physics.
 ## Currents
 
 Complex current vectors follow the same stacking. The **terminal current flowing
-into element** at its bus is the primary quantity; for a line $\textcolor{red}{\ell}$
-from bus $\textcolor{red}{i}$ toward bus $\textcolor{red}{j}$ it is
+into element** at its bus is the primary quantity; for a line $\ell$
+from bus $i$ toward bus $j$ it is
 $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shunt part
 (see [Lines](line.md)):
 
@@ -109,20 +99,12 @@ $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shun
 = \textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}} + \textcolor{blue}{\mathbf{I}^{\text{sh}}_{\ell ij}}.
 ```
 
-The sign convention throughout is **positive current flows into the bus** at the
-terminal where it is summed by Kirchhoff's current law (KCL).
-
-!!! danger "Amrit"
-    This sentence is **wrong**. Reading the equations on the bus, line, load and shunt
-    pages, the KCL convention is the opposite: **current leaving the bus into the
-    element is positive**. The line series current flows $i\to j$ (leaves bus $i$),
-    the line shunt and shunt-element currents are drawn out of the bus, and the load
-    current with $P^{\text{nom}}>0$ flows out of the bus; all enter KCL with $+$. The
-    generator current is defined as an injection *into* the bus and is the only term
-    entered with $-$. Rewrite this as: "positive current leaves the bus into the
-    element; generators define their current as an injection and enter KCL negated."
-    The earlier sentence ("terminal current flowing into element") already says this
-    correctly.
+The sign convention throughout is **positive current leaves the bus into the
+element** at the terminal where it is summed by Kirchhoff's current law (KCL). Lines,
+transformers, switches, loads, shunts and capacitors follow this convention directly
+and enter KCL with a $+$ sign. Generators and the voltage source define their current
+as an **injection into the bus**, so they enter KCL negated (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## Standard transforms and constants
 

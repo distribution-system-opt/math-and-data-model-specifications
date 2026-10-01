@@ -48,13 +48,10 @@ the `WYE` configuration), the injected complex power is
 ```
 
 Current conservation over the generator's terminals gives its KCL contribution
-(injection positive at the phase terminal, return at the neutral).
-
-!!! danger "Amrit"
-    "Injection positive" is true from the generator's side, but at the bus this current
-    enters KCL with a **minus** sign (see [Buses §4](bus.md#Kirchhoff's-current-law)),
-    because the bus convention is leaving-the-bus positive. Say so here, otherwise a
-    reader comparing the two pages sees a sign flip with no explanation.
+(injection positive at the phase terminal, return at the neutral). Because the bus
+convention is leaving-the-bus positive (see [Notation](notation.md#Currents)), this
+injection enters the bus KCL with a **minus** sign (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## 5. Inequality constraints
 

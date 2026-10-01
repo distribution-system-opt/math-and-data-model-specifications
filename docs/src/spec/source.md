@@ -42,7 +42,9 @@ string ID $s$.
 The source injects a **slack current** $\textcolor{blue}{I_{s,k}}$ per phase terminal,
 stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained. It
 absorbs whatever power balance the network requires, which is what makes this the
-reference bus.
+reference bus. Like the generator current, it is an injection into the bus and enters
+the bus KCL with a **minus** sign (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## 4. Equality constraints
 

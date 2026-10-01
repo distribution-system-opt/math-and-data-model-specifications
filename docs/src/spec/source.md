@@ -57,15 +57,6 @@ ground:
 \textcolor{blue}{U_{i,n}} = 0.
 ```
 
-!!! danger "Amrit"
-    Shouldn't the voltage source be defined **between two terminals** of the bus (a
-    phase terminal $p$ and a return terminal $q$, typically the neutral), fixing the
-    difference $U_{i,p} - U_{i,q}$ rather than each terminal's voltage to ground? The
-    bus itself would then be grounded through the normal grounding mechanism
-    (`perfectly_grounded_terminals` or a grounding impedance), and the source would no
-    longer need to force $U_{i,n}=0$ itself. As written, the source hard-wires the
-    neutral to ground, which duplicates the grounding model and prevents a source on a
-    bus with an impedance-grounded or floating neutral.
 
 ### Injected power
 
@@ -78,12 +69,7 @@ The complex power injected at phase terminal $p$ is
 
 The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost_rate` field
 (and appropriate constant scaling coefficients) to compute the source's contribution to total dispatch cost.
-
-!!! danger "Amrit"
-    The direction of $\textcolor{blue}{I_{s,k}}$ is never stated: is it leaving the bus
-    into the source (the convention the bus KCL actually uses) or an injection into the
-    bus like the generator? Source terminals are excluded from KCL so nothing breaks,
-    but the sign of the reported slack power depends on it. Declare it.
+Here current {I_{s,p}} is entering the node {p}.
 
 ## 5. Inequality constraints
 

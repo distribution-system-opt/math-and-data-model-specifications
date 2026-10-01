@@ -150,11 +150,19 @@ zero/positive/negative sequence:
 
 ## The element-wise bound idiom
 
+**All bounds are real.** Every $\cdot^{\min}$ / $\cdot^{\max}$ symbol in this
+specification is a real scalar or a vector of reals, never a complex quantity, and is
+therefore typeset red. A bound reuses the letter of the quantity it limits, so
+$\textcolor{red}{\mathbf{U}^{\max}_i}$ is the real vector bounding the **magnitude**
+$|\textcolor{blue}{\mathbf{U}_i}|$ of the complex voltage, not a complex value. This
+holds even where colour is dropped in a derivation.
+
 Magnitude bounds are written first as a vector inequality on magnitudes, then in an
 equivalent **smooth (quadratic) form** using the Hadamard product $\circ$ and the
 conjugate, which is what the solver receives. For a generic complex vector
 $\textcolor{blue}{\mathbf{z}}$ with real bound vectors
-$\textcolor{red}{\mathbf{z}^{\min}},\textcolor{red}{\mathbf{z}^{\max}}$:
+$\textcolor{red}{\mathbf{z}^{\min}},\textcolor{red}{\mathbf{z}^{\max}}$ on its
+magnitude $|\textcolor{blue}{\mathbf{z}}|$:
 
 ```math
 \textcolor{red}{\mathbf{z}^{\min}} \le |\textcolor{blue}{\mathbf{z}}| \le \textcolor{red}{\mathbf{z}^{\max}}
@@ -174,16 +182,6 @@ which constrains a variable's own real/imaginary components with a box
 $\underline{x}\le\mathfrak{R}(\textcolor{blue}{z_k})\le\overline{x}$ (and likewise for
 $\mathfrak{I}$): a rectangle, not a circle. Both appear in part 5 of each component
 page and are kept separate.
-
-!!! danger "Amrit"
-    Can we confirm that **every bound is a real number (or a list of reals) and nothing
-    is complex**? All $\cdot^{\min}$ / $\cdot^{\max}$ symbols across the pages are
-    typeset red (real parameter), so the intent seems right, but the only thing that
-    says so is the colour. Reusing the same letter is confusing: $\textcolor{blue}{\mathbf{U}_i}$
-    is complex while $\textcolor{red}{\mathbf{U}^{\max}_i}$ is a real magnitude vector,
-    and the note above says colour is sometimes dropped in derivations. Suggest stating
-    explicitly here that all bounds are real, and that $\textcolor{red}{\mathbf{z}^{\max}}$
-    bounds the **magnitude** $|\textcolor{blue}{\mathbf{z}}|$, not the complex quantity.
 
 ## Sets and indices
 
@@ -206,15 +204,6 @@ The **element sets** each collect one kind of network element:
 | $\mathcal{D}$ | loads (demand) | $d$ | |
 | $\mathcal{H}$ | shunts | $h$ | |
 | $\mathcal{K}$ | capacitors | $\kappa$ | |
-
-!!! danger "Amrit"
-    Two index symbols are overloaded on other pages. $\kappa$ is the capacitor index
-    here but the KCL residual $\kappa^{\Re}_{i,p}$ on the
-    [Objective](objective.md#Feasibility-relaxation) page, where it is never defined.
-    $s$ is the source index, the slack current $s_{i,p}$ in the feasibility relaxation,
-    and the superscript in $U^{s}_{s,p}$ on the [Voltage sources](source.md) page.
-    The transformer page also introduces $V^{\sigma}_{x,k}$, $\sigma$ and $b^{\sigma}$
-    that are not defined here.
 
 $\mathcal{N}_i\subseteq\mathcal{N}$ denotes the terminals of bus $i$. (Libraries (linecodes,
 wire data, line geometries) are referenced

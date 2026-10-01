@@ -39,14 +39,14 @@ where to find the data fields, the physics, and the bounds.
 | **2. Input symbols** | The mathematical symbol each field maps to (a *parameter*). |
 | **3. Variables** | The unknowns this component introduces (an optimization *variable*). |
 | **4. Equality constraints** | The physical laws that define the *behaviour* of the component. |
-| **5. Inequality constraints** | The bounds, split into **cartesian variable bounds** (box bounds on a variable's own components) and **engineering bounds** (physically meaningful magnitude/angle limits). |
+| **5. Inequality constraints** | The bounds, split into **cartesian variable bounds** (box bounds on a variable's own components) and **engineering bounds** (physically meaningful magnitude limits). |
 
 The **cartesian vs engineering** split in the **inequality constraints** is deliberate. 
 A *cartesian bound* constrains the real and imaginary components of a decision variable directly:
 a (convex) rectangle in the complex plane, used mainly to bound the search.
 An *engineering bound* constrains a quantity an engineer cares about (a voltage
 magnitude, a thermal current, a sequence-component unbalance) and is generally a
-circle (quadratic) or an angle sector (bilinear). Conflating the two would hide which
+circle (quadratic). Conflating the two would hide which
 limits enforce a physical limit and which serve numerical purposes.
 
 The mathematical model is stated in **complex phasors**. A solver typically works in
@@ -57,29 +57,19 @@ specification.
 
 ## Model summary
 
-The complete feasible set at a glance: the objective, every bound, and every device
-constraint, with the page that defines each. Bounds are optional (absent bounds are
+The complete feasible set at a glance: every bound and every device constraint, with
+the page that defines each. Bounds are optional (absent bounds are
 not enforced); constraints are always active for the elements present.
-
-!!! danger "Amrit"
-    Want to confirm we do not have a status feature that turns components on and off.
-    The switch certainly does (`open_switch`). If any element can be switched out, is
-    "always active for the elements present" really accurate?
 
 | Category | Item | Page |
 |----------|------|------|
-| **Objective** | Minimise active-power dispatch cost | [Objective](objective.md#Objective) |
-| **Voltage bounds** | Phase-to-ground, -neutral, -phase, sequence, neutral cap, angle | [Buses](bus.md#Engineering-bounds) |
+| **Voltage bounds** | Phase-to-ground, -neutral, -phase, sequence, neutral cap | [Buses](bus.md#Engineering-bounds) |
 | **Current bounds** | Line / switch / transformer thermal, generator current | [Lines](line.md#Engineering-bounds), [Switches](switch.md#Engineering-bounds), [Generators](generator.md#Engineering-bounds) |
 | **Power bounds** | Generator P·Q box + apparent-power circle; transformer rating; line apparent power | [Generators](generator.md#Engineering-bounds), [Transformers](transformer.md#Engineering-bounds), [Lines](line.md#Engineering-bounds) |
 | **KVL / Ohm's law** | Line series drop + π-shunt | [Lines](line.md#4.-Equality-constraints) |
 | **KCL** | Nodal current balance | [Buses](bus.md#Kirchhoff's-current-law) |
 | **Device behaviour** | Load & generator power; control mode; transformer winding pairs; switch state; shunt/capacitor admittance current | [Loads](load.md), [Generators](generator.md), [Transformers](transformer.md), [Switches](switch.md), [Shunts](shunt.md), [Capacitors](capacitor.md) |
 | **Reference / grounding** | Voltage-source fixing; perfect, floating or impedance (electrode) grounding | [Voltage sources](source.md), [Grounding](grounding.md) |
-
-!!! danger "Amrit"
-    On the **Objective** row: we will for sure move beyond just this objective, so do we
-    want it in the model summary as *the* objective?
 
 ## Reading order
 

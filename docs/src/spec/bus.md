@@ -164,26 +164,3 @@ phase-to-neutral inputs when a neutral floats, phase-to-ground otherwise:
 ```
 
 Only the positive sequence carries a lower bound.
-
-**Intra-bus angle difference.** For each phase pair $(p,q)$, with a nominal offset
-$\Delta=\textcolor{red}{\theta^{\text{nom}}_{i,q}}-\textcolor{red}{\theta^{\text{nom}}_{i,p}}$
-and $\textcolor{blue}{z}=\textcolor{blue}{U_{i,p}}^{*}\textcolor{blue}{U_{i,q}}\,e^{-\textcolor{brown}{j}\Delta}=c+\textcolor{brown}{j}s$:
-
-```math
-\tan(\textcolor{red}{\theta^{\Delta,\min}_i})\, c \ \le\ s \ \le\ \tan(\textcolor{red}{\theta^{\Delta,\max}_i})\, c,
-```
-
-which bounds the angle between the two terminals (faithful while $c>0$, i.e. the
-centred deviation stays within $\pm\pi/2$).
-
-!!! danger "Amrit"
-    The three parameters this constraint needs, $\textcolor{red}{\theta^{\Delta,\min}_i}$,
-    $\textcolor{red}{\theta^{\Delta,\max}_i}$ and the nominal offsets
-    $\textcolor{red}{\theta^{\text{nom}}_{i,p}}$, have **no data field**. They appear in
-    neither the §1 data model table nor the §2 input symbols table on this page, and no
-    angle field exists on any other page except the source's `v_angle`. Either add
-    fields (e.g. `theta_min`, `theta_max` in rad, plus a rule for where
-    $\theta^{\text{nom}}$ comes from: a `theta_nom` array, or the balanced default
-    $0, -2\pi/3, +2\pi/3$), or drop the constraint. The [model summary](index.md#Model-summary)
-    and the [Objective](objective.md#Interpretation) page both list "angle limits" as
-    part of the model, so today they promise something the data cannot supply.

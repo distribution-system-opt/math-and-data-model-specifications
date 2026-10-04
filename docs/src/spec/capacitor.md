@@ -98,7 +98,7 @@ The bank injects current into KCL at its bus exactly as a shunt would:
 \textcolor{blue}{\mathbf{I}_\kappa} = \textcolor{brown}{j}\,\textcolor{red}{\mathbf{B}_\kappa}\,\textcolor{blue}{\mathbf{U}_i}[\textcolor{purple}{\mathbf{N}_\kappa}].
 ```
 
-The reactive power drawn by each element is voltage-dependent. For a `SINGLE_PHASE`
+The reactive power delivered by each element is voltage-dependent. For a `SINGLE_PHASE`
 capacitor, $Q = \textcolor{red}{b_\kappa}\,|\textcolor{blue}{U}|^2$, rising and
 falling with the square of the terminal voltage, the defining behaviour of a fixed
 capacitor (as opposed to a fixed-power source). At the balanced nominal voltage the

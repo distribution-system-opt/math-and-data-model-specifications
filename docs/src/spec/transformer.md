@@ -34,8 +34,8 @@ L1/centre/L2); `wye_delta` 4 (wye) + 3 (delta); `delta_wye` 3 (delta) + 4 (wye).
 | Field | Symbol | Notes |
 |-------|:------:|-------|
 | `v_nom_from`, `v_nom_to` | $\textcolor{red}{U^{\text{nom}}_i},\ \textcolor{red}{U^{\text{nom}}_j}$ | turns ratio $\textcolor{red}{N}=\textcolor{red}{U^{\text{nom}}_i}/\textcolor{red}{U^{\text{nom}}_j}$ |
-| `r/x_series_from` | $\textcolor{brown}{Z^{\text{fr}}_x}=\textcolor{red}{R^{\text{fr}}_x}+\textcolor{brown}{j}\textcolor{red}{X^{\text{fr}}_x}$ | from-winding leakage |
-| `r/x_series_to` | $\textcolor{brown}{Z^{\text{to}}_x}=\textcolor{red}{R^{\text{to}}_x}+\textcolor{brown}{j}\textcolor{red}{X^{\text{to}}_x}$ | to-winding leakage |
+| `r_series_from`,`x_series_from` | $\textcolor{brown}{Z^{\text{fr}}_x}=\textcolor{red}{R^{\text{fr}}_x}+\textcolor{brown}{j}\textcolor{red}{X^{\text{fr}}_x}$ | from-winding leakage |
+| `r_series_to`,`x_series_to` | $\textcolor{brown}{Z^{\text{to}}_x}=\textcolor{red}{R^{\text{to}}_x}+\textcolor{brown}{j}\textcolor{red}{X^{\text{to}}_x}$ | to-winding leakage |
 | `r_series`, `x_series` | $\textcolor{brown}{Z^{\text{wye}}_x}=\textcolor{red}{R^{\text{wye}}_x}+\textcolor{brown}{j}\textcolor{red}{X^{\text{wye}}_x}$ | wye-side leakage (`wye_delta`/`delta_wye`) |
 | `s_rating` | $\textcolor{red}{S^{\max}_x}$ | nameplate |
 
@@ -88,7 +88,7 @@ the ideal voltage relation becomes
 This combined $\textcolor{brown}{Z_x}$ is what a short-circuit test measures: the
 *series sum* of the two winding leakages, referred to one side; it is not itself a
 separate element. `single_phase` and `center_tap` keep the two leakages as separate
-fields, `r/x_series_from` → $\textcolor{brown}{Z^{\text{fr}}_x}$ and `r/x_series_to` →
+fields, `r_series_from`/`x_series_from` → $\textcolor{brown}{Z^{\text{fr}}_x}$ and `r_series_to`/`x_series_to` →
 $\textcolor{brown}{Z^{\text{to}}_x}$; `wye_delta` and `delta_wye` instead give a single
 `r_series`/`x_series` → $\textcolor{brown}{Z^{\text{wye}}_x}$ on the wye winding only
 (the delta winding is lossless in this model).

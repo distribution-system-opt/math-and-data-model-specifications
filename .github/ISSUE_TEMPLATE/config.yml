@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+- name: Task Force contribution guide
+  url: https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md
+  about: Existing governance, review tiers, modelling principles, licensing and release process.

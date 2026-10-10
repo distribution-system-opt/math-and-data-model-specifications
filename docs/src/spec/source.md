@@ -7,15 +7,6 @@ Symbols are defined in [Notation](notation.md).
 
 ![Voltage source: a fixed line-to-ground voltage reference with a free slack current.](assets/vsource.svg)
 
-!!! danger "Amrit"
-    The figure and the text below describe **different sources**.
-
-    1. **Current direction is reversed.** §3 says the source *injects* a slack current
-       into the bus. The figure draws every $I_{s,k}$ arrow pointing from the bus
-       terminal back into the source, i.e. *leaving* the bus. The figure matches the
-       leaving-the-bus-positive convention the bus KCL actually uses; the text does not.
-    2. **Symbols differ.** The figure uses $U^{\text{ref}}$; the page uses $U^{s}$.
-
 ## 1. Data model
 
 A voltage source is an entry of the top-level `voltage_source` object, keyed by its

@@ -76,9 +76,10 @@ reference bus (detailed on the future *Voltage sources* page).
 ![Kirchhoff's current law at a bus terminal: the signed currents of all incident elements sum to zero.](assets/kcl_example.svg)
 
 At each terminal, the currents of all incident elements sum to zero. The sign
-convention (see [Notation](notation.md#Currents)) is that current **leaving the bus
-into an element is positive**; the generator and voltage-source currents are defined
-as injections into the bus and therefore enter with a minus sign:
+convention used for KCL is that current **leaving the bus
+into an element is positive**. Most components follow this convention, with the
+exception of generator and voltage-source currents (defined
+as injections into the bus, see [Notation](notation.md#Currents)) and therefore enter with a minus sign. KCL is therefore:
 
 ```math
 \underbrace{\sum_{\ell ij\in\mathcal{T}^{L}}\!\textcolor{blue}{\mathbf{I}_{\ell ij}}}_{\text{lines}}

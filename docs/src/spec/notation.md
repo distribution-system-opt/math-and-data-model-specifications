@@ -89,9 +89,9 @@ physics.
 ## Currents
 
 Complex current vectors follow the same stacking. The **terminal current flowing
-into element** at its bus is the primary quantity; for a line $\ell$
+into (or from) an element** at its bus is the primary quantity. For a line $\ell$
 from bus $i$ toward bus $j$ it is
-$\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shunt part
+$\textcolor{blue}{\mathbf{I}_{\ell ij}}$; this current represents both the charging current (through a shunt to ground), $\textcolor{blue}{\mathbf{I}^{\text{sh}}_{\ell ij}}$, and series current, $\textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}}$
 (see [Lines](line.md)):
 
 ```math
@@ -99,10 +99,11 @@ $\textcolor{blue}{\mathbf{I}_{\ell ij}}$, and it splits into a series and a shun
 = \textcolor{blue}{\mathbf{I}^{\text{s}}_{\ell ij}} + \textcolor{blue}{\mathbf{I}^{\text{sh}}_{\ell ij}}.
 ```
 
+### Sense
 The sign convention throughout is **positive current leaves the bus into the
 element** at the terminal where it is summed by Kirchhoff's current law (KCL). Lines,
-transformers, switches, loads, shunts and capacitors follow this convention directly
-and enter KCL with a $+$ sign. Generators and the voltage source define their current
+transformers, switches, loads, shunts and capacitors follow the bus convention directly,
+and therefore enter KCL with a $+$ sign. Generators and the voltage source define their current
 as an **injection into the bus**, so they enter KCL negated (see
 [Buses §4](bus.md#Kirchhoff's-current-law)).
 

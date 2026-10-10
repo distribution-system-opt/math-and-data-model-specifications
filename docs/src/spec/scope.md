@@ -59,6 +59,7 @@ The specification covers the common branch and nodal elements, with these capabi
 - **Topology:** meshed networks, electrically parallel branches, radial or looped.
 - **Conductors:** 1- to 4-wire lines with full mutual coupling; explicit neutral and earth
   (no Kron reduction); perfect grounding and grounding through impedance.
+
 - **Branch elements:** [lines](line.md), [switches](switch.md), and galvanically-isolated
   [transformers](transformer.md) (single-phase, centre-tap, wye–delta, delta–wye).
 - **Nodal elements:** [loads](load.md) (constant-power and voltage-dependent ZIP/exponential),

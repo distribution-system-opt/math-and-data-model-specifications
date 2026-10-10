@@ -75,8 +75,11 @@ reference bus (detailed on the future *Voltage sources* page).
 
 ![Kirchhoff's current law at a bus terminal: the signed currents of all incident elements sum to zero.](assets/kcl_example.svg)
 
-At each terminal, the currents of all incident elements sum to zero (sign
-convention: out of the bus is positive on the equation left hand side):
+At each terminal, the currents of all incident elements sum to zero. The sign
+convention used for KCL is that current **leaving the bus
+into an element is positive**. Most components follow this convention, with the
+exception of generator and voltage-source currents (defined
+as injections into the bus, see [Notation](notation.md#Currents)) and therefore enter with a minus sign. KCL is therefore:
 
 ```math
 \underbrace{\sum_{\ell ij\in\mathcal{T}^{L}}\!\textcolor{blue}{\mathbf{I}_{\ell ij}}}_{\text{lines}}
@@ -162,14 +165,3 @@ phase-to-neutral inputs when a neutral floats, phase-to-ground otherwise:
 ```
 
 Only the positive sequence carries a lower bound.
-
-**Intra-bus angle difference.** For each phase pair $(p,q)$, with a nominal offset
-$\Delta=\textcolor{red}{\theta^{\text{nom}}_{i,q}}-\textcolor{red}{\theta^{\text{nom}}_{i,p}}$
-and $\textcolor{blue}{z}=\textcolor{blue}{U_{i,p}}^{*}\textcolor{blue}{U_{i,q}}\,e^{-\textcolor{brown}{j}\Delta}=c+\textcolor{brown}{j}s$:
-
-```math
-\tan(\textcolor{red}{\theta^{\Delta,\min}_i})\, c \ \le\ s \ \le\ \tan(\textcolor{red}{\theta^{\Delta,\max}_i})\, c,
-```
-
-which bounds the angle between the two terminals (faithful while $c>0$, i.e. the
-centred deviation stays within $\pm\pi/2$).

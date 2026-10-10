@@ -33,7 +33,9 @@ string ID $s$.
 The source injects a **slack current** $\textcolor{blue}{I_{s,k}}$ per phase terminal,
 stacked into $\textcolor{blue}{\mathbf{I}_{s}}$. It is otherwise unconstrained. It
 absorbs whatever power balance the network requires, which is what makes this the
-reference bus.
+reference bus. Like the generator current, it is an injection into the bus and enters
+the bus KCL with a **minus** sign (see
+[Buses §4](bus.md#Kirchhoff's-current-law)).
 
 ## 4. Equality constraints
 
@@ -48,6 +50,7 @@ ground:
 \textcolor{blue}{U_{i,n}} = 0.
 ```
 
+
 ### Injected power
 
 The complex power injected at phase terminal $p$ is
@@ -59,6 +62,7 @@ The complex power injected at phase terminal $p$ is
 
 The [Objective](objective.md) multiplies $P_{s,p}$ by the per-phase `energy_cost_rate` field
 (and appropriate constant scaling coefficients) to compute the source's contribution to total dispatch cost.
+Here current {I_{s,p}} is entering the node {p}.
 
 ## 5. Inequality constraints
 

@@ -7,5 +7,7 @@
 | Maintainer | Naeem Turner Bandele | Latimer Enterprises, USA | naeem627 |
 | Maintainer | Rabayet Sadnan | Pacific Northwest National Laboratory, USA | RabayetSadnan |
 | Maintainer | Rahul Gupta | EPFL, Switzerland | rahulguptaepfl |
+| Maintainer | Robert Ferrando | Los Alamos National Laboratory, USA | ferrandor |
+| Maintainer | Samuel Talkington | University of Michigan / Harvard University, USA | samtalki |
 | Maintainer | Sleiman Mhanna | University of Melbourne, Australia | SleimanMhanna |
 | Maintainer | Tomislav Antic | University of Zagreb, Croatia | tomislavantic |

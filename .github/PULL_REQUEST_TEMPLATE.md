@@ -1,48 +1,54 @@
-<!--
-Thanks for contributing! See the Contributing guide for full details:
-https://distribution-system-opt.github.io/math-and-data-model-specifications/contributing/
--->
-
 ## Summary
 
-<!-- What does this PR change, and why? -->
+Purpose, affected behavior, and the concrete changes proposed.
 
-## Type of change
+## Review tier
 
-<!-- Check one. See "Types of change and review expectations" in the Contributing guide. -->
+The [existing contribution guide](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md) defines these tiers.
 
-- [ ] **Editorial / minor** - typo, wording/grammar, formatting, broken link, or a
-      clarifying example/FAQ entry that does not change the model.
-- [ ] **Explanatory / non-normative** - new tutorial, expanded derivation,
-      restructuring, figure, or notation clarification that does **not** alter
-      any field name, equation, bound, or schema constraint.
-- [ ] **Normative / major** - changes the data model fields, the mathematical
-      model, the JSON Schema, or supported values.
+- [ ] Editorial / minor: wording, links, or examples without changing definitions.
+- [ ] Explanatory / non-normative: tooling, tests, or organization without changing definitions.
+- [ ] Normative / major: fields, units, supported values, validation rules, or mathematics.
 
-### If this is a normative / major change
+## Version and compatibility
 
-- [ ] A prior issue or discussion exists and reached rough consensus:
-      <!-- link the issue here -->
-- [ ] The prose, tables, worked example, and JSON Schema have all been updated
-      to agree with each other.
-- [ ] Existing datasets' impact has been considered, and a migration note /
-      deprecation path is included if a field or value was renamed or removed.
-- [ ] The change is consistent with the [Modelling principles](../docs/src/contributing.md#modelling-principles).
+Affected schema/specification versions, source revisions, and impact on existing
+datasets. Include migration or deprecation notes for renamed or removed fields.
+Mark this section not applicable for editorial changes.
 
-## Checklist
+## Related work and dependencies
 
-- [ ] I have read [CONTRIBUTING.md](../docs/src/contributing.md).
-- [ ] I built the docs locally and confirmed the change renders correctly
-      (`julia --project=docs docs/make.jl`).
-- [ ] New or reused symbols are defined on the
-      [Notation](../docs/src/spec/notation.md) page; new terms are added to the
-      [Glossary](../docs/src/glossary.md).
-- [ ] Writing follows the [house style](../docs/src/contributing.md#conventions):
-      factual and dispassionate, with any opinion or preference explicitly
-      flagged as such.
-- [ ] I agree to license this contribution under the repository's
-      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+Prior issue or discussion, related PRs, paired schema/specification changes,
+base branch, and intended merge order. Ordinary PRs start from `main`; a stacked
+PR identifies its prerequisite explicitly. Record open questions and the actual
+discussion status without implying agreement that has not been reached.
 
-## Related issues
+For normative changes:
 
-<!-- e.g. Closes #123 -->
+- [ ] Prior discussion and its outcome are linked.
+- [ ] Prose, tables, worked examples, schema, symbols and equations agree, or unresolved differences are identified for review.
+- [ ] Compatibility and the relevant modelling principles have been considered.
+
+## Validation
+
+Commands and results, including limitations. `julia --project=docs docs/make.jl`; link the CI documentation preview. State any checks deferred to CI and why.
+
+Distinguish structural validation, semantic checks, numerical evidence, and
+Task Force network-case acceptance. Neither CI nor an implementation release
+constitutes ratification.
+
+## Contributions and sources
+
+Credit authored or adapted material with links to its source commits/PRs and
+licences. Credit discussion, review, and coordination separately. Human
+`Co-authored-by: Name <email>` trailers belong on commits incorporating the work;
+use the contributor's verified Git identity and preserve trailers when squashing.
+Credit does not imply endorsement of the whole proposal.
+
+## Review questions
+
+Specific questions and unresolved choices for Task Force feedback.
+
+## Licence
+
+- [ ] Contributions use [CC BY 4.0](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/LICENSE); reused material retains its source attribution and applicable licence.

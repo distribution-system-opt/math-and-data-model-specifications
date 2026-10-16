@@ -1,0 +1,24 @@
+name: Question or clarification
+description: Ask about the schema, specification, or contribution process.
+labels:
+- question
+body:
+- type: markdown
+  attributes:
+    value: Thanks for helping improve BMOPF. The [contribution guide](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md)
+      explains the existing review process. Links to related issues and PRs help connect the
+      work.
+- type: textarea
+  id: question
+  attributes:
+    label: Question
+    description: Describe the clarification that would help.
+  validations:
+    required: true
+- type: textarea
+  id: context
+  attributes:
+    label: Context and related reading
+    description: Relevant pages, versions, examples, or existing discussions, if available.
+  validations:
+    required: false

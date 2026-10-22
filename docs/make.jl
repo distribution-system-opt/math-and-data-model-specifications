@@ -38,6 +38,9 @@ const PAGES = [
         "References"                    => "spec/references.md",
         "Glossary"                      => "glossary.md",
     ],
+    "Proposals" => [
+        "BMOPF 0.2.0" => "proposals/bmopf-0.2.0.md",
+    ],
     "Project" => [
         "Contributing"                  => "contributing.md",
         "Changelog"                     => "changelog.md",
@@ -46,7 +49,7 @@ const PAGES = [
 
 # Sections that document the project/site itself rather than the specification;
 # excluded from the printed PDF so it reads as a clean standalone document.
-const PDF_EXCLUDED_SECTIONS = ["Project"]
+const PDF_EXCLUDED_SECTIONS = ["Project", "Proposals"]
 
 pdf_pages() = filter(p -> !(p isa Pair && first(p) in PDF_EXCLUDED_SECTIONS), PAGES)
 

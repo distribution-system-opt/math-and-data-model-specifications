@@ -12,7 +12,7 @@ A bus is an entry of the top-level `bus` object, keyed by its string ID $i$.
 |-------|------|:----:|:----:|-------------|
 | `terminal_names` | string[] | – | ✔ | Ordered terminal names $\textcolor{purple}{\mathbf{N}_i}$ |
 | `perfectly_grounded_terminals` | string[] | – | | Terminals fixed to $0\text{ V}$ |
-| `v_min`, `v_max` | number[] | V | | Phase-to-ground magnitude bounds, one per phase terminal |
+| `vpg_min`, `vpg_max` | number[] | V | | Phase-to-ground magnitude bounds, one per phase terminal |
 | `vn_max` | number | V | | Neutral-to-ground magnitude cap |
 | `vpn_min`, `vpn_max` | number[] | V | | Phase-to-neutral magnitude bounds, one per phase |
 | `vpp_min`, `vpp_max` | number[] | V | | Phase-to-phase magnitude bounds, one per phase pair |
@@ -28,7 +28,7 @@ enforced.
 | Field | Symbol | Notes |
 |-------|:------:|-------|
 | `terminal_names` | $\textcolor{purple}{\mathbf{N}_i}$ | stacking order for all bus vectors |
-| `v_min`, `v_max` | $\textcolor{red}{\mathbf{U}^{\min}_i},\ \textcolor{red}{\mathbf{U}^{\max}_i}$ | per phase, to ground |
+| `vpg_min`, `vpg_max` | $\textcolor{red}{\mathbf{U}^{\min}_i},\ \textcolor{red}{\mathbf{U}^{\max}_i}$ | per phase, to ground |
 | `vn_max` | $\textcolor{red}{U^{\max}_{i,n}}$ | scalar, neutral to ground |
 | `vpn_min`, `vpn_max` | $\textcolor{red}{\mathbf{U}^{Y,\min}_i},\ \textcolor{red}{\mathbf{U}^{Y,\max}_i}$ | per phase, to neutral |
 | `vpp_min`, `vpp_max` | $\textcolor{red}{\mathbf{U}^{\Delta,\min}_i},\ \textcolor{red}{\mathbf{U}^{\Delta,\max}_i}$ | per phase pair |

@@ -4,13 +4,6 @@
 [![Docs: dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://distribution-system-opt.github.io/math-and-data-model-specifications/dev/)
 [![Documentation](https://github.com/distribution-system-opt/math-and-data-model-specifications/actions/workflows/documentation.yml/badge.svg)](https://github.com/distribution-system-opt/math-and-data-model-specifications/actions/workflows/documentation.yml)
 
-> [!WARNING]
-> **Work in progress: not yet validated.** This repository is currently being
-> staged: its content has not yet been validated for consistency with the source
-> specification, and may change without notice. Do not rely on it yet. Once the
-> content has been reviewed and validated, a version will be tagged. Until then
-> there is no released version.
-
 The mathematical and data-model specification for four-wire distribution-system
 optimal power flow (OPF), developed by the IEEE PES Task Force on Benchmarking
 Multiconductor OPF for Distribution Systems and published as a

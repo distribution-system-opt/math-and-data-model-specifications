@@ -1,0 +1,64 @@
+name: Proposed schema or mathematical change
+description: Start discussion of fields, units, supported values, or mathematics.
+labels:
+- enhancement
+body:
+- type: markdown
+  attributes:
+    value: Thanks for helping improve BMOPF. The [contribution guide](https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md)
+      explains the existing review process. Links to related issues and PRs help connect the
+      work.
+- type: input
+  id: revision
+  attributes:
+    label: Affected version or revision
+    description: Schema version, specification commit, or documentation URL. State "not sure"
+      if unknown.
+  validations:
+    required: true
+- type: textarea
+  id: motivation
+  attributes:
+    label: Motivation and intended use
+    description: Describe the need and the smallest change that addresses it.
+  validations:
+    required: true
+- type: textarea
+  id: definitions
+  attributes:
+    label: Proposed definitions
+    description: Identify fields, units, optionality, equations, or supported values that
+      would change.
+  validations:
+    required: true
+- type: textarea
+  id: compatibility
+  attributes:
+    label: Effect on existing data and implementations
+    description: Describe compatibility, migration, and any questions that remain open.
+  validations:
+    required: true
+- type: textarea
+  id: evidence
+  attributes:
+    label: Evidence and modelling questions
+    description: Link relevant references or small examples. Distinguish structural checks,
+      semantic checks, numerical evidence, and case acceptance.
+  validations:
+    required: false
+- type: textarea
+  id: paired_work
+  attributes:
+    label: Paired specification and schema work
+    description: Link existing discussions or PRs in either repository. A proposal does not
+      need an implementation or a paired PR before discussion.
+  validations:
+    required: false
+- type: textarea
+  id: sources
+  attributes:
+    label: Related work and attribution
+    description: Related issues, PRs, source material, and contributors. Include source licences
+      for reused examples.
+  validations:
+    required: false

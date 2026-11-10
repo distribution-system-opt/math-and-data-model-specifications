@@ -13,7 +13,7 @@ constraints. Symbols are defined in [Notation](notation.md).
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `$schema` | string (URI) | `$id` of the JSON Schema document this file was validated against, released from [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema) |
+| `$schema` | string (URI) | The canonical `$id` of the JSON Schema document this file conforms to, released from [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema); from 0.2.0 the schema fixes the value, so it is an identifier, not a download location |
 | `version` | string | Version of this **dataset** (not the schema) |
 | `title` | string | Human-readable dataset name (distinct from the machine-readable root `name`) |
 | `description` | string | Free-text notes or caveats |
@@ -21,6 +21,7 @@ constraints. Symbols are defined in [Notation](notation.md).
 | `modified` | string (ISO 8601) | Last-revision timestamp, UTC |
 | `license` | string | SPDX identifier (e.g. `CC-BY-4.0`) or an `https://` URI to the licence |
 | `frequency` | number (Hz) | Nominal system frequency, **check-only** (validated against `line_geometry`/linecode derivation frequency; never rescales) |
+| `crs` | string | Coordinate reference system of every `geo` field (bus Points, line LineStrings) as an authority code such as `EPSG:4326`; absent means WGS84, longitude then latitude. Proposed in 0.2.0 |
 | `authors` | object[] | Ordered authors (see below) |
 | `data_sources` | object[] | Upstream data references (see below) |
 | `case_study_generator` | object | Tool that wrote the file (see below) |
@@ -36,15 +37,17 @@ without the `https://orcid.org/` prefix).
 
 ## Conformance notes
 
-- `$schema` follows the JSON Schema `$schema` keyword convention; it should be a
-  versioned, dereferenceable URI (a floating reference to `main` is acceptable in draft).
-  The canonical schema documents live in the
-  [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema)
-  repository, one immutable directory per version, so the URI has the form
-  `https://raw.githubusercontent.com/distribution-system-opt/dsopt-schema/main/schema/bmopf/<version>/bmopf.schema.json`.
-  A reader selects the schema version from this field. The value in the example
-  below stays a placeholder until a schema version is released from that
-  repository.
+- `$schema` follows the JSON Schema `$schema` keyword convention and carries the
+  schema's canonical `$id`, which has the form
+  `https://raw.githubusercontent.com/distribution-system-opt/dsopt-schema/main/schema/bmopf/<version>/bmopf.schema.json`
+  (one immutable directory per version in the
+  [`dsopt-schema`](https://github.com/distribution-system-opt/dsopt-schema) repository).
+  A reader selects the schema version from this field and recognises a document by
+  it; it does not need to allow-list the places a producer fetched the schema from.
+  A producer that wants the exact bytes it validated against to be retrievable
+  records the schema commit and digest in `provenance`. (Reference-implementation
+  experience: per-producer archive URLs in `$schema` made valid documents fail
+  intake at other tools; see BMOPFTools #487.)
 - Dates must be UTC and should include a time component (`THH:MM:SSZ`); a date-only
   value is permitted when the time is unknown.
 - `license` should be a URI when the licence needs specific attribution language beyond

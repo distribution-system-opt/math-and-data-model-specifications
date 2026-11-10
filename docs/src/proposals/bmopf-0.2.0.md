@@ -28,9 +28,14 @@ No particular labels are made canonical here. PowerIO retains existing role
 metadata and applies its documented compatibility rules when old datasets omit
 it; those reader rules do not settle the Task Force's role taxonomy.
 
-Bus phase-to-ground bounds remain per-phase vectors in volts. The neutral has
-its own `vn_max`; unequal phase bounds cannot be replaced by their first value
-or their average. WYE load powers describe phase-to-neutral sub-loads, and
+Bus phase-to-ground bounds remain per-phase vectors in volts, under the 0.1.1
+names `vpg_min`/`vpg_max` adopted after [issue #51](https://github.com/distribution-system-opt/math-and-data-model-specifications/issues/51)
+(`v_min`/`v_max` was ambiguous between phase-to-ground and phase-to-neutral).
+The neutral has its own `vn_max`; unequal phase bounds cannot be replaced by
+their first value or their average. One review question remains: the 0.1.0 and
+0.1.1 schema texts say "one entry per bus terminal", while the [bus page](../spec/bus.md)
+and the 0.2.0 schema say one entry per phase terminal with the neutral bounding
+through `vn_max`; the proposal follows the bus page. WYE load powers describe phase-to-neutral sub-loads, and
 DELTA powers describe phase-pair sub-loads. Voltage-source terminal-voltage
 arrays include every fixed terminal. These orderings agree with the current
 bus, load and voltage-source component pages.
@@ -39,6 +44,31 @@ Linecode matrices use ohm/m and S/m; inline line matrices use ohm and S for the
 complete line. The case must select one impedance source. Power, voltage and
 current values remain absolute SI quantities. Producer version, dataset version
 and schema version are independent metadata.
+
+`meta.$schema` is the schema's canonical `$id` and nothing else; the 0.2.0 schema
+fixes it with `const`. Identity and retrieval are separate questions: a producer
+records the schema commit and digest it validated against in `meta.provenance`.
+The reference implementations showed why. PowerIO 0.11 stamped an immutable
+archive URL of its own so the exact bytes were retrievable, BMOPFTools accepted
+`meta.$schema` values from an allow-list, and valid documents then failed intake
+over a string ([BMOPFTools #487](https://github.com/frederikgeth/BMOPFTools.jl/issues/487));
+every new producer revision would have needed a new alias in every consumer.
+
+### Geometry
+
+`bus.*.geo` is a GeoJSON Point and `line.*.geo` a GeoJSON LineString from
+`bus_from` through any bends to `bus_to`; `meta.crs` names one coordinate
+reference system for the document (`EPSG:4326`, longitude then latitude, when
+absent). Geometry is descriptive: no constraint reads it, `length` stays the
+electrical length, and a route's geodesic length need not equal it. The shape
+follows [BMOPFTools PR 258](https://github.com/frederikgeth/BMOPFTools.jl/pull/258)
+and the form PowerIO already reads. PowerIO 0.11 had to write the same data as a
+FeatureCollection under `extras.geojson`, the one free-form object, because no
+typed slot existed, and each consumer then needed a sideload path (BMOPFTools
+[#486](https://github.com/frederikgeth/BMOPFTools.jl/pull/486)); on a 1,000-bus
+synthetic feeder that layer was 36 % of the file, mostly repeated keys. Switches
+and transformers carry no geometry in this proposal; a renderer places them at
+their buses.
 
 ## Two-winding transformers
 

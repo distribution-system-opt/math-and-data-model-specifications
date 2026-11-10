@@ -1,6 +1,10 @@
+<!-- Pull requests are expected to follow the contributing guide:
+https://github.com/distribution-system-opt/math-and-data-model-specifications/blob/main/docs/src/contributing.md
+For a wording fix, the Summary and the Licence box are enough; delete the rest. -->
+
 ## Summary
 
-Purpose, affected behavior, and the concrete changes proposed.
+What the change is for, what it affects, and what it changes, in a few sentences.
 
 ## Review tier
 
@@ -18,10 +22,12 @@ Mark this section not applicable for editorial changes.
 
 ## Related work and dependencies
 
-Prior issue or discussion, related PRs, paired schema/specification changes,
-base branch, and intended merge order. Ordinary PRs start from `main`; a stacked
-PR identifies its prerequisite explicitly. Record open questions and the actual
-discussion status without implying agreement that has not been reached.
+Link the issue or discussion this comes from and any related PRs. If this PR
+pairs with a change in `dsopt-schema` (the JSON Schema), link it. If this PR
+builds on another PR that has not merged yet (a "stacked" PR), say which one and
+which should merge first; otherwise it starts from `main` and nothing more is
+needed. Describe the discussion as it stands; do not imply agreement that has
+not been reached.
 
 For normative changes:
 
@@ -31,7 +37,10 @@ For normative changes:
 
 ## Validation
 
-Commands and results, including limitations. `julia --project=docs docs/make.jl`; link the CI documentation preview. State any checks deferred to CI and why.
+Say what you ran and what happened. For documentation changes that is usually
+the local build, `julia --project=docs docs/make.jl`, or, if you could not build
+locally, say so and point to the CI documentation preview on this PR. For schema
+or example changes, name the validation command and its result.
 
 Distinguish structural validation, semantic checks, numerical evidence, and
 Task Force network-case acceptance. Neither CI nor an implementation release
@@ -39,11 +48,15 @@ constitutes ratification.
 
 ## Contributions and sources
 
-Credit authored or adapted material with links to its source commits/PRs and
-licences. Credit discussion, review, and coordination separately. Human
-`Co-authored-by: Name <email>` trailers belong on commits incorporating the work;
-use the contributor's verified Git identity and preserve trailers when squashing.
-Credit does not imply endorsement of the whole proposal.
+Fill in what applies and delete the rest:
+
+- Work by others that this PR incorporates or adapts: *name*, *link to their commit, PR or comment*, *licence if not CC BY 4.0*
+- Reviewed or discussed by: *names, with links to the discussion*
+- Coordination: *who organised the change, if relevant*
+
+Commits that bring in another person's work carry a `Co-authored-by: Name <email>`
+trailer (the e-mail that person uses on GitHub); keep those trailers if the PR is
+squashed. Being credited does not mean a person endorsed the whole proposal.
 
 ## Review questions
 

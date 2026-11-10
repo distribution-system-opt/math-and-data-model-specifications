@@ -244,17 +244,34 @@ work; a new form does not require a duplicate issue for an existing proposal.
 Questions and editorial fixes do not need a modelling proposal or a full test
 packet.
 
-The PR template records purpose, review tier, versions, compatibility, evidence,
-dependencies, contributions, and open questions. Ordinary changes start from
-`main`. A stacked PR names its prerequisite and base branch, with an explicit
-merge order; after the prerequisite merges, retarget it to `main` and check the
-remaining diff. Paired normative PRs still need coordinated Task Force review.
+The PR template asks for the purpose of the change, its review tier, the
+versions it affects, compatibility notes, evidence, dependencies, credits, and
+open questions. You do not need to fill every section: for a wording fix, the
+summary and the licence box are enough. Every PR is expected to follow this
+guide; the template is there to make that easier, not to add work.
 
-Use commit co-author trailers for incorporated or adapted human-authored work,
-with verified Git identities. PR descriptions separately credit review,
-discussion, and coordination, linking the actual contribution. Preserve human
-trailers in squash messages. A credit is not an assertion of endorsement or
-ratification. Corrections and additional attribution are welcome.
+Most changes start from `main` and depend on nothing else; that is the normal
+case. Two special cases have names you may not have met:
+
+- A **stacked PR** is one that builds on another PR that has not merged yet (its
+  base branch is the other PR's branch rather than `main`). Say which PR it
+  depends on and in which order the two should merge. After the first one
+  merges, change the base of the second back to `main` and check that only your
+  own changes remain in the diff.
+- **Paired PRs** are two PRs that belong together, usually one in this repository
+  (the specification) and one in `dsopt-schema` (the JSON Schema), because a
+  field cannot change in one without the other. Link each from the other. Both
+  still go through the Task Force review described above.
+
+If you incorporate or adapt text, equations, examples or schema that another
+person wrote, add a Git co-author trailer to the commit that brings their work in
+(`Co-authored-by: Name <email>`, with the e-mail address that person uses on
+GitHub). In the PR description, credit people who reviewed, discussed or
+coordinated the change separately from people whose work it contains, and link
+the comment or PR where that contribution happened. If a PR is squashed on
+merge, keep the human trailers in the squash message. Being credited does not
+mean a person endorsed the whole proposal or that the Task Force accepted it.
+Corrections and additional attribution are always welcome.
 
 Validation reports distinguish structure, semantic consistency, numerical
 evidence, and acceptance as a Task Force network case. If a local build is not

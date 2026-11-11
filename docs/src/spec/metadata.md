@@ -21,7 +21,7 @@ constraints. Symbols are defined in [Notation](notation.md).
 | `modified` | string (ISO 8601) | Last-revision timestamp, UTC |
 | `license` | string | SPDX identifier (e.g. `CC-BY-4.0`) or an `https://` URI to the licence |
 | `frequency` | number (Hz) | Nominal system frequency, **check-only** (validated against `line_geometry`/linecode derivation frequency; never rescales) |
-| `crs` | string | Coordinate reference system of every `geo` field (bus Points, line LineStrings) as an authority code such as `EPSG:4326`; absent means WGS84, longitude then latitude. Proposed in 0.2.0 |
+| `crs` | string | Coordinate reference system of every `geo` field (the Points and LineStrings on buses, lines and every other located element) as an authority code such as `EPSG:4326`; absent means WGS84, longitude then latitude. Proposed in 0.2.0 |
 | `authors` | object[] | Ordered authors (see below) |
 | `data_sources` | object[] | Upstream data references (see below) |
 | `case_study_generator` | object | Tool that wrote the file (see below) |

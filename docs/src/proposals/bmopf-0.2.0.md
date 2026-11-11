@@ -31,11 +31,12 @@ it; those reader rules do not settle the Task Force's role taxonomy.
 Bus phase-to-ground bounds remain per-phase vectors in volts, under the 0.1.1
 names `vpg_min`/`vpg_max` adopted after [issue #51](https://github.com/distribution-system-opt/math-and-data-model-specifications/issues/51)
 (`v_min`/`v_max` was ambiguous between phase-to-ground and phase-to-neutral).
-The neutral has its own `vn_max`; unequal phase bounds cannot be replaced by
-their first value or their average. One review question remains: the 0.1.0 and
-0.1.1 schema texts say "one entry per bus terminal", while the [bus page](../spec/bus.md)
-and the 0.2.0 schema say one entry per phase terminal with the neutral bounding
-through `vn_max`; the proposal follows the bus page. WYE load powers describe phase-to-neutral sub-loads, and
+The neutral has its own bound, `vng_max` (neutral-to-ground, named `vn_max`
+before 0.2.0 so that it reads like `vpg`); unequal phase bounds cannot be replaced
+by their first value or their average. The 0.1.0 and 0.1.1 schema texts say "one
+entry per bus terminal", while the [bus page](../spec/bus.md) and the 0.2.0 schema
+say one entry per phase terminal with the neutral bounded by `vng_max`; the Task
+Force confirmed one entry per phase terminal on 2026-11-11. WYE load powers describe phase-to-neutral sub-loads, and
 DELTA powers describe phase-pair sub-loads. Voltage-source terminal-voltage
 arrays include every fixed terminal. These orderings agree with the current
 bus, load and voltage-source component pages.
@@ -66,9 +67,13 @@ and the form PowerIO already reads. PowerIO 0.11 had to write the same data as a
 FeatureCollection under `extras.geojson`, the one free-form object, because no
 typed slot existed, and each consumer then needed a sideload path (BMOPFTools
 [#486](https://github.com/frederikgeth/BMOPFTools.jl/pull/486)); on a 1,000-bus
-synthetic feeder that layer was 36 % of the file, mostly repeated keys. Switches
-and transformers carry no geometry in this proposal; a renderer places them at
-their buses.
+synthetic feeder that layer was 36 % of the file, mostly repeated keys. Every
+other element with a place on the map may also carry `geo`, so no tool needs a
+side channel for it: single-bus elements (sources, loads, generators, inverters,
+shunts, capacitors, and the DC bus, load, source and grounding) take a Point and
+are otherwise drawn at their bus; switches, every transformer type and DC branches
+take a Point for their site or a LineString from their first bus to their last.
+Any `geo` may carry a GeoJSON `bbox`. All of it is optional.
 
 ## Two-winding transformers
 

@@ -13,7 +13,7 @@ A bus is an entry of the top-level `bus` object, keyed by its string ID $i$.
 | `terminal_names` | string[] | – | ✔ | Ordered terminal names $\textcolor{purple}{\mathbf{N}_i}$ |
 | `perfectly_grounded_terminals` | string[] | – | | Terminals fixed to $0\text{ V}$ |
 | `vpg_min`, `vpg_max` | number[] | V | | Phase-to-ground magnitude bounds, one per phase terminal |
-| `vn_max` | number | V | | Neutral-to-ground magnitude cap |
+| `vng_max` | number | V | | Neutral-to-ground magnitude cap |
 | `vpn_min`, `vpn_max` | number[] | V | | Phase-to-neutral magnitude bounds, one per phase |
 | `vpp_min`, `vpp_max` | number[] | V | | Phase-to-phase magnitude bounds, one per phase pair |
 | `vpos_min`, `vpos_max` | number | V | | Positive-sequence magnitude bounds (three-phase buses) |
@@ -29,7 +29,7 @@ enforced.
 |-------|:------:|-------|
 | `terminal_names` | $\textcolor{purple}{\mathbf{N}_i}$ | stacking order for all bus vectors |
 | `vpg_min`, `vpg_max` | $\textcolor{red}{\mathbf{U}^{\min}_i},\ \textcolor{red}{\mathbf{U}^{\max}_i}$ | per phase, to ground |
-| `vn_max` | $\textcolor{red}{U^{\max}_{i,n}}$ | scalar, neutral to ground |
+| `vng_max` | $\textcolor{red}{U^{\max}_{i,n}}$ | scalar, neutral to ground |
 | `vpn_min`, `vpn_max` | $\textcolor{red}{\mathbf{U}^{Y,\min}_i},\ \textcolor{red}{\mathbf{U}^{Y,\max}_i}$ | per phase, to neutral |
 | `vpp_min`, `vpp_max` | $\textcolor{red}{\mathbf{U}^{\Delta,\min}_i},\ \textcolor{red}{\mathbf{U}^{\Delta,\max}_i}$ | per phase pair |
 | `vpos_min`, `vpos_max` | $\textcolor{red}{U^{1,\min}_i},\ \textcolor{red}{U^{1,\max}_i}$ | positive-sequence magnitude |
@@ -114,7 +114,7 @@ Applied at ungrounded, non-source phase terminals (the neutral is excluded from
 phase bounds: its voltage is set by physics, not operational limits).
 
 **Phase-to-ground magnitude.** With $\textcolor{red}{U^{\min}_{i,n}}=0$ and the
-neutral's upper bound supplied by `vn_max`:
+neutral's upper bound supplied by `vng_max`:
 
 ```math
 \textcolor{red}{\mathbf{U}^{\min}_i}\!\circ\textcolor{red}{\mathbf{U}^{\min}_i}
@@ -122,7 +122,7 @@ neutral's upper bound supplied by `vn_max`:
 \ \le\ \textcolor{red}{\mathbf{U}^{\max}_i}\!\circ\textcolor{red}{\mathbf{U}^{\max}_i}.
 ```
 
-**Neutral-to-ground cap** (`vn_max`, only when the neutral floats):
+**Neutral-to-ground cap** (`vng_max`, only when the neutral floats):
 
 ```math
 |\textcolor{blue}{U_{i,n}}| \le \textcolor{red}{U^{\max}_{i,n}}

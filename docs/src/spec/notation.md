@@ -202,6 +202,7 @@ The **element sets** each collect one kind of network element:
 | $\mathcal{W}$ | switches | $w$ | |
 | $\mathcal{S}$ | voltage sources | $s$ | |
 | $\mathcal{G}$ | generators | $g$ | |
+| $\mathcal{V}$ | inverters (`ibr`, proposed in 0.2.0) | $v$ | |
 | $\mathcal{D}$ | loads (demand) | $d$ | |
 | $\mathcal{H}$ | shunts | $h$ | |
 | $\mathcal{K}$ | capacitors | $\kappa$ | |

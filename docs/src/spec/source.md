@@ -15,7 +15,7 @@ string ID $s$.
 | Field | Type | Unit | Req. | Description |
 |-------|------|:----:|:----:|-------------|
 | `bus` | string | – | ✔ | Host bus ID $i$ |
-| `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{s}}$ (phase terminals) |
+| `terminal_map` | string[] | – | ✔ | Conductor→terminal map $\textcolor{purple}{\mathbf{N}_{s}}$ (phase terminals, and the neutral when it is connected) |
 | `v_magnitude` | number[] | V | ✔ | Per-terminal voltage magnitude |
 | `v_angle` | number[] | rad | ✔ | Per-terminal voltage angle |
 | `energy_cost_rate` | number[] | \$/kWh |   | Per-phase linear dispatch cost |

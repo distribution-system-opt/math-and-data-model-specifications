@@ -4,8 +4,11 @@ A **transformer** couples two buses through **galvanically isolated** windings.
 Primary and secondary share no conductor, only magnetic flux. Because the winding
 topologies differ qualitatively, each configuration is a distinct data-model object:
 `single_phase`, `center_tap`, `wye_delta`, and `delta_wye`. Every model is built from an
-idealised winding pair plus a series leakage impedance; a magnetising shunt, internal
-neutral grounding, and tap-changing are not yet modelled (see
+idealised winding pair plus a series leakage impedance. From 0.2.0 the data can also
+state a no-load (magnetising and core-loss) shunt, a `tap_ratio` with bounds, and
+internal winding-neutral grounding impedances; the
+[0.2.0 supplement](../proposals/bmopf-0.2.0.md#Two-winding-transformers) gives their OPF
+equations where it has them, and the rest are planned 0.2.x formulation pages (see
 [Background & scope](scope.md)). Symbols are defined in [Notation](notation.md).
 
 ## 1. Data model

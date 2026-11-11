@@ -5,9 +5,9 @@ set*. This page defines what is optimised over that feasible set: the **objectiv
 Symbols are defined in [Notation](notation.md).
 
 The default objective minimises total **active-power dispatch cost**,
-in $. This is summed over every dispatchable element (generators and voltage source;
-with the power injected by the voltage source representing electricity drawn from
-the upstream (e.g., transmission) grid) and every phase:
+in $. This is summed over every dispatchable element (generators, inverters and
+voltage source; with the power injected by the voltage source representing electricity
+drawn from the upstream (e.g., transmission) grid) and every phase:
 
 ```math
 \min \;
@@ -15,17 +15,21 @@ the upstream (e.g., transmission) grid) and every phase:
 \left(
 \underbrace{\sum_{g\in\mathcal{G}} \sum_{p} \textcolor{red}{c_{g,p}}\; P_{g,p}}_{\text{generators}}
 \;+\;
+\underbrace{\sum_{v\in\mathcal{V}} \sum_{p} \textcolor{red}{c_{v,p}}\; P_{v,p}}_{\text{inverters}}
+\;+\;
 \underbrace{\sum_{s\in\mathcal{S}} \sum_{p} \textcolor{red}{c_{s,p}}\; P_{s,p}}_{\text{voltage source}},
 \right)
 ```
 
-where $\textcolor{red}{c_{g,p}}$ and $\textcolor{red}{c_{s,p}}$ (currency/kWh,
+where $\textcolor{red}{c_{g,p}}$, $\textcolor{red}{c_{v,p}}$ and $\textcolor{red}{c_{s,p}}$ (currency/kWh,
 from each element's per-phase `energy_cost_rate` array — see
-[Generators](generator.md#1.-Data-model) and
-[Voltage sources](source.md#1.-Data-model)) are the energy price of phase $p$
-for generator $g\in\mathcal{G}$ and voltage source $s\in\mathcal{S}$
-respectively, and $P_{g,p}$, $P_{s,p}$ are that phase's injected active power
-in watts, as defined in [Generators §4](generator.md#4.-Equality-constraints)
+[Generators](generator.md#1.-Data-model),
+[Voltage sources](source.md#1.-Data-model) and, for inverters, the `ibr` table
+[proposed in 0.2.0](../proposals/bmopf-0.2.0.md#Status-of-the-0.2.0-tables)) are the
+energy price of phase $p$ for generator $g\in\mathcal{G}$, inverter $v\in\mathcal{V}$
+and voltage source $s\in\mathcal{S}$ respectively, and $P_{g,p}$, $P_{v,p}$, $P_{s,p}$
+are the active power that phase injects into the network, in watts, as defined in
+[Generators §4](generator.md#4.-Equality-constraints)
 and [Voltage sources §4](source.md#4.-Equality-constraints). The constant factor
 $\textcolor{red}{\Delta_T}$ accounts for the duration of the snapshot analysis
 (with fixed value 1 hr) and the factor of 1000 converts power injections from
@@ -33,8 +37,8 @@ W to kW (so that the value of the objective is then in $).
 
 ### Sign convention
 
-Here, $P_{g,p}$ and $P_{s,p}$ are the power **injected into the network** by the
-element across generators and voltage source. Therefore:
+Here, $P_{g,p}$, $P_{v,p}$ and $P_{s,p}$ are the power **injected into the network** by
+the element across generators, inverters and voltage source. Therefore:
 
 - a **positive** energy cost rate minimises that element's injection;
 - a **negative** energy cost rate maximises it.

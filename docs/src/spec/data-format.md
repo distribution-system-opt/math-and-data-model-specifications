@@ -40,7 +40,7 @@ JSON has only ordered lists of real numbers, so:
 - A **matrix** is stored **row-first** with an underscore-delimited, **1-indexed** key:
   entry $A_{kj}$ is the field `A_k_j`. So `R_series_1_2` is the $(1,2)$ entry of the
   series-resistance matrix, and `G_from_2_2` the $(2,2)$ from-side shunt conductance.
-- A **vector** (e.g. `v_min`, `i_max`) is a JSON array, ordered to match the element's
+- A **vector** (e.g. `vpg_min`, `i_max`) is a JSON array, ordered to match the element's
   terminal map or phase order as stated on each component page.
 
 ## Conversion examples
@@ -60,13 +60,24 @@ itself does not introduce rounding error beyond what the source value already ca
 
 ## Required and optional fields
 
-Each component has required fields (listed with ✔ on its page) and optional ones. The
-interpretation of an **absent optional** field depends on its kind:
+Each component has required fields (listed with ✔ on its page) and optional ones. An
+**absent optional** field takes the default that its schema description or `default`
+keyword states. Only where neither states one does the interpretation depend on the
+field's kind:
 
 - **Absent constraint field** ⇒ that constraint is **unbounded**. A missing voltage
   upper bound means no upper bound is enforced; a missing `i_max` means no thermal limit.
 - **Absent parameter field** ⇒ a **null / zero** value. A missing transformer
   `r_series_from` means that winding resistance is $0\ \Omega$.
+
+Two stated defaults matter because reading them as zero would change the model:
+
+- A transformer winding-neutral impedance pair (`r_neutral_from` with `x_neutral_from`,
+  likewise `_to`, or an n-winding winding's `r_neutral` with `x_neutral`) with both
+  fields absent adds **no** grounding branch, while an explicit zero impedance grounds
+  that neutral solidly.
+- `tap_ratio` and a `single_phase_autotransformer` regulator's `voltage_ratio` default
+  to **1**.
 
 ## Permissible strings and string arrays
 

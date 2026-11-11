@@ -31,9 +31,9 @@ it; those reader rules do not settle the Task Force's role taxonomy.
 Bus phase-to-ground bounds remain per-phase vectors in volts, under the 0.1.1
 names `vpg_min`/`vpg_max` adopted after [issue #51](https://github.com/distribution-system-opt/math-and-data-model-specifications/issues/51)
 (`v_min`/`v_max` was ambiguous between phase-to-ground and phase-to-neutral).
-The neutral has its own bound, `vng_max` (neutral-to-ground, named `vn_max`
-before 0.2.0 so that it reads like `vpg`); unequal phase bounds cannot be replaced
-by their first value or their average. The 0.1.0 and 0.1.1 schema texts say "one
+The neutral has its own bound, `vng_max` (neutral-to-ground; 0.1.x named it
+`vn_max`, and 0.2.0 renames it to read like `vpg`); unequal phase bounds cannot be
+replaced by their first value or their average. The 0.1.0 and 0.1.1 schema texts say "one
 entry per bus terminal", while the [bus page](../spec/bus.md) and the 0.2.0 schema
 say one entry per phase terminal with the neutral bounded by `vng_max`; the Task
 Force confirmed one entry per phase terminal on 2026-11-11. WYE load powers describe phase-to-neutral sub-loads, and
@@ -42,26 +42,38 @@ arrays include every fixed terminal. These orderings agree with the current
 bus, load and voltage-source component pages.
 
 Linecode matrices use ohm/m and S/m; inline line matrices use ohm and S for the
-complete line. The case must select one impedance source. Power, voltage and
+complete line. The case must select one impedance source. Line `s_max`, like
+linecode `s_max`, has one entry per conductor, in `terminal_map_from` order, applied
+at both ends (the 0.1.1 line text said per phase). Power, voltage and
 current values remain absolute SI quantities. Producer version, dataset version
 and schema version are independent metadata.
 
-`meta.$schema` is the schema's canonical `$id` and nothing else; the 0.2.0 schema
-fixes it with `const`. Identity and retrieval are separate questions: a producer
-records the schema commit and digest it validated against in `meta.provenance`.
-The reference implementations showed why. PowerIO 0.11 stamped an immutable
-archive URL of its own so the exact bytes were retrievable, BMOPFTools accepted
-`meta.$schema` values from an allow-list, and valid documents then failed intake
-over a string ([BMOPFTools #487](https://github.com/frederikgeth/BMOPFTools.jl/issues/487));
-every new producer revision would have needed a new alias in every consumer.
+`meta.schema_version` is the document's only version identifier: the release it
+was written against, as `MAJOR.MINOR.PATCH`. It is required, and the 0.2 schema
+accepts any 0.2.x release, because a later release of a line only adds optional
+content. `meta.$schema` is not part of 0.2.0. Documents written before 0.2.0 carry
+no `schema_version`, and a reader identifies a 0.1.x document by its `meta.$schema`.
+Identity and retrieval are separate questions: a producer that writes against an
+untagged schema records its commit and digest in `meta.provenance`. The reference
+implementations showed why the identifier names no URL. PowerIO 0.11 stamped an
+immutable archive URL of its own so the exact bytes were retrievable, BMOPFTools
+accepted `meta.$schema` values from an allow-list, and valid documents then failed
+intake over a string ([BMOPFTools #487](https://github.com/frederikgeth/BMOPFTools.jl/issues/487));
+every new producer revision would have needed a new alias in every consumer. A
+`$schema` fixed to each release's `$id` would have moved the problem to releases:
+every patch release would have rejected every earlier document. The
+[versioning policy](https://github.com/distribution-system-opt/dsopt-schema/blob/propose-bmopf-0.2.0/README.md#versioning-and-compatibility)
+states the full rules.
 
 ### Geometry
 
 `bus.*.geo` is a GeoJSON Point and `line.*.geo` a GeoJSON LineString from
 `bus_from` through any bends to `bus_to`; `meta.crs` names one coordinate
-reference system for the document (`EPSG:4326`, longitude then latitude, when
-absent). Geometry is descriptive: no constraint reads it, `length` stays the
-electrical length, and a route's geodesic length need not equal it. The shape
+reference system for the document (`OGC:CRS84`, WGS84 longitude and latitude, when
+absent). Coordinates are always written x then y, longitude then latitude or easting
+then northing, whatever the authority's own axis order. Geometry is descriptive: no
+constraint reads it, `length` stays the electrical length, and a route's geodesic
+length need not equal it. The shape
 follows [BMOPFTools PR 258](https://github.com/frederikgeth/BMOPFTools.jl/pull/258)
 and the form PowerIO already reads. PowerIO 0.11 had to write the same data as a
 FeatureCollection under `extras.geojson`, the one free-form object, because no
@@ -151,12 +163,18 @@ admittance comparisons for these conventions.
 
 ## Regulators and n-winding equipment
 
-A regulator has a regulation ratio rather than a nameplate-ratio multiplier.
-For the proposed type B convention, `v_to = a v_from` and
-`i_from = -a i_to`; the proposed type A convention reverses the effective ratio.
+A regulator states `voltage_ratio`, with bounds `voltage_ratio_min` and
+`voltage_ratio_max`, rather than a nameplate-ratio multiplier. It is the regulated
+over source voltage (`bus_to` over `bus_from`) for both ANSI types: with `a` the
+voltage ratio, `v_to = a v_from` and `i_from = -a i_to`. `regulator_type` records
+only the hardware arrangement (A or B), which affects how a physical tap position
+maps to a ratio but not what `voltage_ratio` means. The name differs from
+`tap_ratio` because a transformer's `tap_ratio` multiplies the from-side ratio, so
+1.02 lowers the to-side voltage, while a `voltage_ratio` of 1.02 raises it.
 The two relations preserve power with currents positive into the device.
-Open-delta connection codes establish which two phase-pair legs are controlled.
-Their terminal orientation and ratio convention must be checked together.
+Open-delta connection codes establish which two phase-pair legs are controlled,
+and an open-delta regulator states one `voltage_ratio` per leg. Their terminal
+orientation and ratio convention must be checked together.
 
 The `n_winding` subtype holds an ordered list of windings with winding 1 as the
 reference. Each winding retains its connection, nominal coil voltage, rating,
@@ -179,12 +197,34 @@ and magnetizing terms add their corresponding losses and voltage drops.
 | Wire data and line geometry | Conductor order and derivation provenance; frequency and earth-model assumptions must match the compiled linecode |
 | DC network tables | Signed terminal-to-ground voltages, conductor resistances, grounding and converter coupling |
 | Named time profiles | Multipliers attached to named numeric fields; state selection precedes a snapshot calculation |
-| IBR cost data | Optional per-phase prices retained for downstream calculations; the base source/generator objective remains defined by the source and objective proposal |
+| IBR cost data | Optional per-phase `energy_cost_rate`, priced in the [objective](../spec/objective.md) as a generator's is, with the same injected-power sign |
 
 These descriptions do not prescribe one solver implementation. A snapshot
 solver must require a selected time state, and an AC-only solver must reject
 required DC coupling rather than discard it. Retained control data does not
 prove that a control law participated in the solve.
+
+Inverter power factor is signed as in OpenDSS, with P and Q positive when injected:
+`pf > 0` means Q has the same sign as P (both injected or both absorbed), `pf < 0`
+means opposite signs, and `pf = 0` is invalid. A Volt-Watt `p_limits` is
+`[p_low, p_high]`, ordered by value like a Volt-VAr `q_limits`: `p_high` applies at
+or below breakpoint U5 and `p_low` at or above U6. A `PU` active-power limit is per
+unit of the base that `p_ref` names (by default `S_MAX`, the per-phase `s_max`),
+and a `PU` reactive-power limit (`q_unit`) is per unit of the per-phase `s_max`.
+
+## Status of the 0.2.0 tables
+
+For inverters (`ibr`), control profiles (`control_profile`), the DC tables
+(`dc_*`), `time_series`, `wire_data` and `line_geometry`, the meaning of each field
+is normative as the schema states it. Their OPF formulations, apart from the
+inverter term in the [objective](../spec/objective.md), are not yet standardised;
+the [roadmap](https://github.com/distribution-system-opt/dsopt-schema/blob/propose-bmopf-0.2.0/docs/roadmap.md)
+plans them as 0.2.x formulation pages, which add equations without changing what a
+0.2.0 document means. A consumer that does not
+model one of these tables must report it rather than silently drop it.
+
+The steps of a `time_series` profile are independent snapshots: 0.2.0 couples no
+steps, and the objective costs each step as one hour of operation.
 
 ## Exact ideal constraints
 
@@ -218,8 +258,9 @@ The [source](../spec/source.md), [generator](../spec/generator.md),
 [Matt Deakin's PR #36](https://github.com/distribution-system-opt/math-and-data-model-specifications/pull/36)
 define the injected-power sign, slack currents, `energy_cost_rate`, and the
 one-hour objective. This supplement adds no alternative definitions or duration
-parameter. Further changes to those definitions belong in that PR and its
-[paired schema change](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
+parameter; it extends the objective's sum to inverters, which the 0.2.0 schema
+prices as it prices generators. Further changes to those definitions belong in that
+PR and its [paired schema change](https://github.com/distribution-system-opt/bmopf-resources/pull/21).
 
 PowerIO v0.11.0 follows the per-phase ordering in the source and generator pages.
 Voltage-source magnitudes and angles still include all stated terminals; the
@@ -230,8 +271,9 @@ uses `energy_cost_rate`.
 
 Additional implementation evidence covers IR persistence, typed source prices in
 C and Julia, and relocation to `extras.voltage_source` when explicitly writing
-0.1.0. Optional IBR prices extend the data model for capable downstream
-calculations; they do not change the source/generator objective in PR #36.
+0.1.0. Optional IBR prices enter the objective as generator prices do, with the
+same injected-power sign; they leave the source and generator terms of PR #36
+unchanged.
 
 ## Baseline, dependencies, and contributions
 

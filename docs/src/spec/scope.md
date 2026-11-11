@@ -76,10 +76,15 @@ every possible problem specification. In this version:
 - Only a **single voltage source** (one reference bus) is supported.
 - **Snapshot** solves: no inter-temporal coupling (no storage state-of-charge
   dynamics, no OLTC time-domain control).
-- Transformer **saturation**, magnetising/core losses, tap-changing, and detailed
-  frequency-dependent effects are not modelled (the turns ratio is fixed by nameplate
-  voltages, see [Transformers](transformer.md)); winding-neutral grounding is external
-  to the element, like every other component (see [Grounding](grounding.md)).
+- Transformer **saturation** and detailed frequency-dependent effects are not
+  modelled. The [Transformers](transformer.md) page fixes the turns ratio by nameplate
+  voltages and keeps winding-neutral grounding external to the element, like every
+  other component (see [Grounding](grounding.md)). From 0.2.0 the data can also state
+  no-load (core) shunts, a `tap_ratio` with bounds, and winding-neutral grounding
+  impedances; the
+  [0.2.0 supplement](../proposals/bmopf-0.2.0.md#Two-winding-transformers) gives OPF
+  equations for these where it has them (the tapped coil ratio and the core-shunt
+  admittance), and the rest are planned 0.2.x formulation pages.
 - The default objective is linear generation/dispatch cost; quadratic cost terms are not
   included.
 

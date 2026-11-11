@@ -41,8 +41,8 @@ foundation, and not specialised for a single problem class.
 - **SI units.** All physical quantities in SI (see [Data input formatting](data-format.md)),
   so the data model commits to no per-unit base. Per-unit is a solver-internal convenience,
   out of scope here.
-- **JSON schema.** Parseable from any programming language; key–value structure lets extensions add
-  nested entries without breaking readers. A JSON Schema provides basic structural checks.
+- **JSON schema.** Parseable from any programming language; producer-specific data goes in `extras`,
+  and later releases of a schema line add only optional fields. A JSON Schema provides structural checks.
 - **Real numbers, not complex.** Every complex quantity is a pair of real fields, and the
   model solves in real variables, for cross-language compatibility (see [Notation](notation.md)).
 - **Explicit buses.** Buses are a first-class list with their own terminals and bounds,
